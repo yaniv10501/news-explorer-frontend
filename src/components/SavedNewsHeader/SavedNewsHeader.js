@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import './SavedNewsHeader.css';
 import CurrentUserContext from '../../contexts/CurrentUserContext';
 
-function SavedNewsHeader({ result }) {
+function SavedNewsHeader({ result, error }) {
   const { name } = useContext(CurrentUserContext);
   const [savedKeywords, setSavedKeywords] = useState('');
   useEffect(() => {
@@ -66,7 +66,7 @@ function SavedNewsHeader({ result }) {
     <section className="saved-news-header">
       <h2 className="saved-news-header__title">Saved articles</h2>
       <p className="saved-news-header__subtitle">
-        {name}, you have {result && result.length} saved articles
+        {name}, you have {error ? 0 : result.length} saved articles
       </p>
       <p className="saved-news-header__keywords">
         By keywords: <span className="saved-news-header__keywords_span">{savedKeywords}</span>
@@ -77,10 +77,12 @@ function SavedNewsHeader({ result }) {
 
 SavedNewsHeader.propTypes = {
   result: PropTypes.instanceOf(Object),
+  error: PropTypes.instanceOf(Object),
 };
 
 SavedNewsHeader.defaultProps = {
   result: [],
+  error: {},
 };
 
 export default SavedNewsHeader;

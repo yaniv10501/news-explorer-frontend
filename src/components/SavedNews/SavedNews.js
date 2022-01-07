@@ -23,7 +23,7 @@ function SavedNews({ setIsHome }) {
     <>
       <Preloader isLoading={loading} />
       <main className={loading ? 'saved-news saved-news_hidden' : 'saved-news'}>
-        <SavedNewsHeader result={result} />
+        <SavedNewsHeader result={result} error={error} />
         <SavedCardList result={result} error={error} thunkDispatch={thunkDispatch}>
           <div className="news-card__keyword">{}</div>
         </SavedCardList>
