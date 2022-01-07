@@ -17,6 +17,7 @@ import headerBackgroundTablet from '../../images/header-background-tablet.jpg';
 import headerBackgroundMobile from '../../images/header-background-mobile.jpg';
 
 function App() {
+  const [state, thunkDispatch] = useThunkReducer(fetchReducer, initialState);
   const SourceSansProFont = new FontFaceObserver('Source Sans Pro');
   const interFont = new FontFaceObserver('Inter');
   const RobotoFont = new FontFaceObserver('Roboto');
@@ -27,31 +28,41 @@ function App() {
     roboto: false,
     robotoSlab: false,
   };
+  const checkFontsLoaded = () => {
+    const { source, inter, roboto, robotoSlab } = fontsLoaded;
+    if (source && inter && roboto && robotoSlab) {
+      console.log('FontsLoaded');
+      thunkDispatch({ type: 'IMAGES_LOADED' });
+    }
+  };
   SourceSansProFont.load().then(() => {
     fontsLoaded = {
       ...fontsLoaded,
       source: true,
     };
+    checkFontsLoaded();
   });
   interFont.load().then(() => {
     fontsLoaded = {
       ...fontsLoaded,
       inter: true,
     };
+    checkFontsLoaded();
   });
   RobotoFont.load().then(() => {
     fontsLoaded = {
       ...fontsLoaded,
       roboto: true,
     };
+    checkFontsLoaded();
   });
   RobotoSlabFont.load().then(() => {
     fontsLoaded = {
       ...fontsLoaded,
       robotoSlab: true,
     };
+    checkFontsLoaded();
   });
-  const [state, thunkDispatch] = useThunkReducer(fetchReducer, initialState);
   const { loading } = state;
   const headerRef = useRef();
   const homeRef = useRef();
@@ -96,7 +107,7 @@ function App() {
       console.log('FontsLoaded');
       thunkDispatch({ type: 'IMAGES_LOADED' });
     }
-  }, [fontsLoaded.source, fontsLoaded.inter, fontsLoaded.roboto, fontsLoaded.robotoSlab]);
+  }, [fontsLoaded]);
   return (
     <>
       <Preloader isLoading={loading} />
