@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
 import PropTypes from 'prop-types';
-import testArticles from '../../assets/testArticles';
 import './SavedNewsHeader.css';
 import CurrentUserContext from '../../contexts/CurrentUserContext';
 
@@ -9,21 +8,21 @@ function SavedNewsHeader({ result }) {
   const [savedKeywords, setSavedKeywords] = useState('');
   useEffect(() => {
     if (result) {
-      if (testArticles.length === 1) {
-        setSavedKeywords(testArticles[0].keyword);
+      if (result.length === 1) {
+        setSavedKeywords(result[0].keyword);
         return;
       }
-      if (testArticles.length === 2) {
-        if (testArticles[0].keyword === testArticles[1].keyword) {
-          setSavedKeywords(testArticles[0].keyword);
+      if (result.length === 2) {
+        if (result[0].keyword === result[1].keyword) {
+          setSavedKeywords(result[0].keyword);
           return;
         }
-        setSavedKeywords(`${testArticles[0].keyword} and ${testArticles[1].keyword}`);
+        setSavedKeywords(`${result[0].keyword} and ${result[1].keyword}`);
         return;
       }
-      if (testArticles.length === 3) {
+      if (result.length === 3) {
         const keywordsArr = [];
-        testArticles.forEach((article) => {
+        result.forEach((article) => {
           const { keyword } = article;
           if (keywordsArr.indexOf(keyword) === -1) {
             keywordsArr.push(keyword);
@@ -39,9 +38,9 @@ function SavedNewsHeader({ result }) {
         }
         setSavedKeywords(`${keywordsArr[0]}, ${keywordsArr[1]} and ${keywordsArr[2]}`);
       }
-      if (testArticles.length > 3) {
+      if (result.length > 3) {
         const keywordsArr = [];
-        testArticles.forEach((article) => {
+        result.forEach((article) => {
           const { keyword } = article;
           if (keywordsArr.indexOf(keyword) === -1) {
             keywordsArr.push(keyword);
