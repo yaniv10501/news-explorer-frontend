@@ -10,6 +10,15 @@ const initialState = {
   error: null,
 };
 
+const initialPageState = {
+  keyword: null,
+  result: null,
+  loading: true,
+  silentLoading: false,
+  isNothingFound: false,
+  error: null,
+};
+
 const useThunkReducer = (reducer, initState) => {
   const [state, dispatch] = useReducer(reducer, initState);
 
@@ -127,4 +136,12 @@ const getArticles = (dispatch, url, options) =>
 const signIn = (dispatch, url, options) =>
   useFetch(dispatch, url, options).then((response) => console.log(response));
 
-export { useThunkReducer, fetchReducer, initialState, getArticles, signIn, useFetch };
+export {
+  useThunkReducer,
+  fetchReducer,
+  initialState,
+  initialPageState,
+  getArticles,
+  signIn,
+  useFetch,
+};

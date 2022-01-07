@@ -8,7 +8,7 @@ import Footer from '../Footer/Footer';
 import Home from '../Home/Home';
 import CurrentUserContext from '../../contexts/CurrentUserContext';
 import SavedNews from '../SavedNews/SavedNews';
-import { fetchReducer, initialState, useThunkReducer } from '../../utils/fetch';
+import { fetchReducer, initialPageState, useThunkReducer } from '../../utils/fetch';
 import mainApi from '../../utils/MainApi';
 import Preloader from '../Preloader/Preloader';
 import aboutProfile from '../../images/about-profile.jpeg';
@@ -17,7 +17,7 @@ import headerBackgroundTablet from '../../images/header-background-tablet.jpg';
 import headerBackgroundMobile from '../../images/header-background-mobile.jpg';
 
 function App() {
-  const [state, thunkDispatch] = useThunkReducer(fetchReducer, initialState);
+  const [state, thunkDispatch] = useThunkReducer(fetchReducer, initialPageState);
   const { loading } = state;
   const headerRef = useRef();
   const homeRef = useRef();
