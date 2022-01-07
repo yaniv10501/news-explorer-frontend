@@ -126,7 +126,7 @@ function NewsCardList({
               >
                 <div
                   className="news-card__save-button"
-                  onClick={handleArticleSave}
+                  onClick={() => handleArticleSave(article)}
                   onKeyDown={() => {}}
                   role="button"
                   tabIndex={0}
