@@ -38,7 +38,7 @@ function SavedCardList({ result, error, thunkDispatch }) {
   };
   useEffect(() => {
     console.log(result);
-    console.log(error, error.status, error.message);
+    console.log(error, error?.status, error?.message);
   }, [result, error]);
   return (
     <section className="news-card-list">
