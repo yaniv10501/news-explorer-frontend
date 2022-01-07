@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import '../NewsCardList/NewsCardList.css';
 import testArticles from '../../assets/testArticles';
 import { fetchReducer, initialState, useThunkReducer } from '../../utils/fetch';
@@ -6,7 +7,7 @@ import mainApi from '../../utils/MainApi';
 import NewsCard from '../NewsCard/NewsCard';
 import Preloader from '../Preloader/Preloader';
 
-function SavedCardList() {
+function SavedCardList({ articles }) {
   const [state, thunkDispatch] = useThunkReducer(fetchReducer, initialState);
   const { loading } = state;
   console.log(loading);
@@ -25,13 +26,10 @@ function SavedCardList() {
   const handleDeleteClick = (event) => {
     mainApi.deleteArticle(thunkDispatch, event.target.id);
   };
-  useEffect(() => {
-    mainApi.getSavedArticles(thunkDispatch);
-  }, []);
   return (
-    <div className="news-card-list">
+    <section className="news-card-list">
       <ul className="news-card-list__grid">
-        {testArticles.map((article, index) =>
+        {articles.map((article, index) =>
           index > cardAmount ? (
             ''
           ) : (
@@ -72,8 +70,16 @@ function SavedCardList() {
           Show more
         </button>
       </div>
-    </div>
+    </section>
   );
 }
+
+SavedCardList.propTypes = {
+  articles: PropTypes.arrayOf(PropTypes.instanceOf(Object)),
+};
+
+SavedCardList.defaultProps = {
+  articles: [{}],
+};
 
 export default SavedCardList;

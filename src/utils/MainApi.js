@@ -25,7 +25,7 @@ class MainApi {
   getSavedArticles = (dispatch) =>
     useFetch(dispatch, `${this.baseUrl}/articles`, {
       credentials: 'include',
-    }).then((response) => console.log(response));
+    }).then((response) => response);
 
   saveArticle = (dispatch, article, keyword) => {
     const {

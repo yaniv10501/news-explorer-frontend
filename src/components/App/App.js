@@ -5,9 +5,8 @@ import './App.css';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 import Home from '../Home/Home';
-import SavedNewsHeader from '../SavedNewsHeader/SavedNewsHeader';
-import SavedCardList from '../SavedCardList/SavedCardList';
 import CurrentUserContext from '../../contexts/CurrentUserContext';
+import SavedNews from '../SavedNews/SavedNews';
 
 function App() {
   const headerRef = useRef();
@@ -59,18 +58,7 @@ function App() {
           />
           <Route
             path="/saved-news"
-            element={
-              loggedIn ? (
-                <>
-                  <SavedNewsHeader setIsHome={setIsHome} />
-                  <SavedCardList>
-                    <div className="news-card__keyword">{}</div>
-                  </SavedCardList>
-                </>
-              ) : (
-                <Navigate to="/" />
-              )
-            }
+            element={loggedIn ? <SavedNews setIsHome={setIsHome} /> : <Navigate to="/" />}
           />
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
