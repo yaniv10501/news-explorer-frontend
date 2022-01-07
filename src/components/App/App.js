@@ -44,6 +44,7 @@ function App() {
   }, []);
   useEffect(() => {
     if (isHome) {
+      thunkDispatch({ type: 'LOADING' });
       const pageImages = [
         headerBackground,
         headerBackgroundTablet,
