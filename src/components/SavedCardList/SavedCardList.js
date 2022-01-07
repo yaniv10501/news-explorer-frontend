@@ -2,15 +2,13 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import '../NewsCardList/NewsCardList.css';
 import testArticles from '../../assets/testArticles';
-import { fetchReducer, initialState, useThunkReducer } from '../../utils/fetch';
 import mainApi from '../../utils/MainApi';
 import NewsCard from '../NewsCard/NewsCard';
 import Preloader from '../Preloader/Preloader';
+import handleImageLoad from '../../utils/handleImageLoad';
 
-function SavedCardList({ result }) {
-  const [state, thunkDispatch] = useThunkReducer(fetchReducer, initialState);
-  const { loading } = state;
-  console.log(loading);
+function SavedCardList({ result, thunkDispatch }) {
+  let loadingImages = [];
   const [isLoadingMore, setIsLoadingMore] = useState(false);
   const [isShowMoreVisible, setIsShowMoreVisible] = useState(testArticles.length > 3);
   const [cardAmount, setCardAmount] = useState(5);
@@ -26,6 +24,18 @@ function SavedCardList({ result }) {
   const handleDeleteClick = (event) => {
     mainApi.deleteArticle(thunkDispatch, event.target.id);
   };
+  const handleImageLoading = () => {
+    loadingImages = handleImageLoad(
+      result.length,
+      loadingImages,
+      thunkDispatch,
+      isLoadingMore,
+      setIsLoadingMore,
+      setIsShowMoreVisible,
+      cardAmount,
+      5
+    );
+  };
   useEffect(() => {
     console.log(result);
   }, [result]);
@@ -39,7 +49,7 @@ function SavedCardList({ result }) {
               ''
             ) : (
               // eslint-disable-next-line react/no-array-index-key
-              <NewsCard article={article} key={index} handleImageLoad={() => {}}>
+              <NewsCard article={article} key={index} handleImageLoad={handleImageLoading}>
                 <div className="news-card__keyword">{article.keyword}</div>
                 <div
                   className="news-card__delete-button"
@@ -81,6 +91,7 @@ function SavedCardList({ result }) {
 
 SavedCardList.propTypes = {
   result: PropTypes.instanceOf(Object),
+  thunkDispatch: PropTypes.func.isRequired,
 };
 
 SavedCardList.defaultProps = {
