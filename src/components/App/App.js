@@ -36,9 +36,10 @@ function App() {
   useEffect(() => {
     smoothscroll.polyfill();
     mainApi.getUserMe(thunkDispatch).then((response) => {
-      if (response instanceof Error) return;
-      setCurrentUser(response);
-      setLoggedIn(true);
+      if (response.email) {
+        setCurrentUser(response);
+        setLoggedIn(true);
+      }
     });
   }, []);
   useEffect(() => {
@@ -52,7 +53,6 @@ function App() {
       ];
       const pageImagesArrLength = pageImages.length * 2 - 1;
       pageImages.forEach((image) => {
-        console.log(image);
         const img = new Image();
         img.src = image;
         img.decode().finally(() => {
