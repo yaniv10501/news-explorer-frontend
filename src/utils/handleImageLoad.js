@@ -21,6 +21,7 @@ const handleImageLoad = (
   console.log(arrLength, loadingImages.length);
   if (loadingImages.length === arrLength) {
     thunkDispatch({ type: 'IMAGES_LOADED' });
+    if (resultLength < cardAmount) setIsShowMoreVisible(false);
     if (isLoadingMore) {
       const bottomOverlay = document.querySelector('.news-card-list__button-overlay');
       bottomOverlay.classList.remove('news-card-list__button-overlay_loading');
