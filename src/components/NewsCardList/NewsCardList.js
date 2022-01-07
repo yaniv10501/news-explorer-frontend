@@ -81,7 +81,7 @@ function NewsCardList({
       setIsShowMoreVisible(true);
       setCardAmount(2);
       loadingImages = [];
-      if (result.articles) {
+      if (result && result.articles) {
         setArticles(result.articles);
       }
     }
