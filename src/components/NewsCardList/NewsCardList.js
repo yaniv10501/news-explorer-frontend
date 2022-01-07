@@ -17,6 +17,7 @@ function NewsCardList({
 }) {
   let loadingImages = [];
   const [isLoadingMore, setIsLoadingMore] = useState(false);
+  const [articles, setArticles] = useState([]);
   const [isShowMoreVisible, setIsShowMoreVisible] = useState(testArticles.length > 3);
   const [cardAmount, setCardAmount] = useState(2);
   const handleShowMoreClick = () => {
@@ -77,11 +78,15 @@ function NewsCardList({
   };
   useEffect(() => {
     if (isLoadingSearch) {
+      setArticles([]);
       setIsShowMoreVisible(true);
       setCardAmount(2);
       loadingImages = [];
+      if (result.articles) {
+        setArticles(result.articles);
+      }
     }
-  }, [isLoadingSearch]);
+  }, [isLoadingSearch, result.articles]);
   return (
     <section className="news-card-list">
       <Preloader isLoading={isLoadingSearch}>
@@ -109,8 +114,8 @@ function NewsCardList({
             : 'news-card-list__grid'
         }
       >
-        {result &&
-          result.articles.map((article, index) =>
+        {articles.length > 0 &&
+          articles.map((article, index) =>
             index > cardAmount ? (
               ''
             ) : (
