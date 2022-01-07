@@ -26,9 +26,9 @@ function NewsCardList({
     setIsLoadingMore(true);
     setCardAmount(cardAmount + 3);
   };
-  const handleArticleSave = (event) => {
+  const handleArticleSave = (event, article) => {
     if (loggedIn) {
-      mainApi.saveArticle(thunkDispatch, event.target);
+      mainApi.saveArticle(thunkDispatch, article);
       console.log(silentLoading);
       const saveButton = event.target;
       saveButton.classList.toggle('news-card__save-button_active');
@@ -126,7 +126,7 @@ function NewsCardList({
               >
                 <div
                   className="news-card__save-button"
-                  onClick={() => handleArticleSave(article)}
+                  onClick={(event) => handleArticleSave(event, article)}
                   onKeyDown={() => {}}
                   role="button"
                   tabIndex={0}

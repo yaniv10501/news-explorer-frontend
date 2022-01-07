@@ -27,8 +27,8 @@ class MainApi {
       credentials: 'include',
     }).then((response) => console.log(response));
 
-  saveArticle = (dispatch, eventTarget) => {
-    console.log(eventTarget);
+  saveArticle = (dispatch, article) => {
+    console.log(article);
     useFetch(
       dispatch,
       `${this.baseUrl}/articles`,
