@@ -43,7 +43,7 @@ function Home({
           setIsNothingFound={setIsNothingFound}
         />
         {searchActive &&
-          (isNothingFound || error ? (
+          (isNothingFound ? (
             <NothingFound isLoadingSearch={loading} />
           ) : (
             <NewsCardList
