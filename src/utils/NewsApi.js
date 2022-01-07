@@ -13,7 +13,7 @@ class NewsApi {
     useFetch(dispatch, `${this.baseUrl + query}&from=${this.from}&to=${this.to}`).then(
       (response) => {
         if (response.articles && response.articles.length === 0) {
-          dispatch({ type: 'ERROR', payload: { error: new Error('NOTHING_FOUND') } });
+          dispatch({ type: 'NOTHING_FOUND' });
         }
         return response;
       }
