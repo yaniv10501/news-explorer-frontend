@@ -33,8 +33,8 @@ function SavedCardList({ result }) {
     <section className="news-card-list">
       <ul className="news-card-list__grid">
         {result &&
-          result.articles &&
-          result.articles.map((article, index) =>
+          result.length > 0 &&
+          result.map((article, index) =>
             index > cardAmount ? (
               ''
             ) : (
