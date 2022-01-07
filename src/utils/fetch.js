@@ -127,7 +127,7 @@ const fetchReducer = (state, action) => {
   return state;
 };
 
-const useFetch = (dispatch, url, options, silent) => {
+const useFetch = (dispatch, url, options, silent, auth) => {
   if (!silent) {
     dispatch({ type: 'LOADING' });
   }
@@ -144,6 +144,9 @@ const useFetch = (dispatch, url, options, silent) => {
       dispatch({ type: 'RESPONSE', payload: { response: data } });
       return data;
     } catch (error) {
+      if (auth) {
+        return error;
+      }
       dispatch({ type: 'ERROR', payload: { error } });
       return error;
     }

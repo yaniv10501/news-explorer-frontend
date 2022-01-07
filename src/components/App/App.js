@@ -36,8 +36,12 @@ function App() {
   useEffect(() => {
     smoothscroll.polyfill();
     mainApi.getUserMe(thunkDispatch).then((response) => {
-      setCurrentUser(response);
-      setLoggedIn(true);
+      if (response.email) {
+        setCurrentUser(response);
+        setLoggedIn(true);
+      } else {
+        setLoggedIn(false);
+      }
     });
   }, []);
   useEffect(() => {
