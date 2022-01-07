@@ -41,7 +41,7 @@ function App() {
       setLoggedIn(true);
     });
   }, []);
-  useLayoutEffect(() => {
+  useEffect(() => {
     const pageImages = [
       headerBackground,
       headerBackgroundTablet,
@@ -62,6 +62,8 @@ function App() {
         }
       });
     });
+  }, []);
+  useLayoutEffect(() => {
     const SourceSansProFont = new FontFaceObserver('Source Sans Pro');
     const interFont = new FontFaceObserver('Inter');
     const RobotoFont = new FontFaceObserver('Roboto');
