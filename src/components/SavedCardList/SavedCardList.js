@@ -95,7 +95,7 @@ SavedCardList.propTypes = {
 };
 
 SavedCardList.defaultProps = {
-  result: {},
+  result: [],
 };
 
 export default SavedCardList;
