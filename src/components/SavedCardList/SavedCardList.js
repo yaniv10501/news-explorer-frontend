@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import '../NewsCardList/NewsCardList.css';
 import testArticles from '../../assets/testArticles';
@@ -26,6 +26,9 @@ function SavedCardList({ result }) {
   const handleDeleteClick = (event) => {
     mainApi.deleteArticle(thunkDispatch, event.target.id);
   };
+  useEffect(() => {
+    console.log(result);
+  }, [result]);
   return (
     <section className="news-card-list">
       <ul className="news-card-list__grid">
