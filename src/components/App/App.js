@@ -48,15 +48,10 @@ function App() {
     headerBackgroundArray.forEach((image) => {
       console.log(image);
       const img = new Image();
-      img.onLoad = () => {
-        img.decode().finally(() => {
-          console.log('Loaded');
-        });
-      };
+      img.src = image;
       img.decode().finally(() => {
         console.log('Loaded');
       });
-      img.src = image;
     });
     const headerBackgroundImage = new Image();
     headerBackgroundImage.onLoad = () => {
