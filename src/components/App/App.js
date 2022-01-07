@@ -36,26 +36,26 @@ function App() {
     smoothscroll.polyfill();
     mainApi.getUserMe(thunkDispatch).then((response) => {
       console.log(response);
-      const headerBackgroundArray = [
-        headerBackground,
-        headerBackgroundTablet,
-        headerBackgroundMobile,
-      ];
-      headerBackgroundArray.forEach((image) => {
-        const img = new Image();
-        img.onLoad = () => console.log('Loaded');
-        img.src = image;
-      });
-      const img = new Image();
-      img.onload = () => {
-        console.log('Loaded about');
-      };
-      img.src = aboutProfile;
       setCurrentUser(response);
       setLoggedIn(true);
     });
   }, []);
   useLayoutEffect(() => {
+    const headerBackgroundArray = [
+      headerBackground,
+      headerBackgroundTablet,
+      headerBackgroundMobile,
+    ];
+    headerBackgroundArray.forEach((image) => {
+      const img = new Image();
+      img.onLoad = () => console.log('Loaded');
+      img.src = image;
+    });
+    const img = new Image();
+    img.onload = () => {
+      console.log('Loaded about');
+    };
+    img.src = aboutProfile;
     const SourceSansProFont = new FontFaceObserver('Source Sans Pro');
     const interFont = new FontFaceObserver('Inter');
     const RobotoFont = new FontFaceObserver('Roboto');
