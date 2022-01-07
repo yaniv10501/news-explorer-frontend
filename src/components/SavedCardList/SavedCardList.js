@@ -11,7 +11,7 @@ function SavedCardList({ result, thunkDispatch }) {
   let loadingImages = [];
   const [isLoadingMore, setIsLoadingMore] = useState(false);
   const [isShowMoreVisible, setIsShowMoreVisible] = useState(testArticles.length > 3);
-  const [cardAmount, setCardAmount] = useState(0);
+  const [cardAmount, setCardAmount] = useState(5);
   const handleShowMoreClick = () => {
     setIsLoadingMore(true);
     // SetTimeout is used to fake loading time.
@@ -38,9 +38,6 @@ function SavedCardList({ result, thunkDispatch }) {
   };
   useEffect(() => {
     console.log(result);
-    if (result) {
-      setCardAmount(result.length);
-    }
   }, [result]);
   return (
     <section className="news-card-list">

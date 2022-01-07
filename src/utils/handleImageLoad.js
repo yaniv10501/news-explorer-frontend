@@ -10,9 +10,10 @@ const handleImageLoad = (
 ) => {
   loadingImages.push(true);
   let arrLength;
-  const remainingArticles = resultLength - cardAmount + 1;
+  const remainingArticles =
+    resultLength < cardAmount ? resultLength : resultLength - cardAmount + 1;
   if (remainingArticles <= showAmount) {
-    arrLength = remainingArticles + 1;
+    arrLength = remainingArticles;
   }
   if (remainingArticles > showAmount) {
     arrLength = showAmount + 1;
