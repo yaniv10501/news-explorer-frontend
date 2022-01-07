@@ -10,6 +10,7 @@ import SavedNews from '../SavedNews/SavedNews';
 import { fetchReducer, initialState, useThunkReducer } from '../../utils/fetch';
 import mainApi from '../../utils/MainApi';
 import Preloader from '../Preloader/Preloader';
+import aboutProfile from '../../images/about-profile.jpeg';
 
 function App() {
   const [state, thunkDispatch] = useThunkReducer(fetchReducer, initialState);
@@ -31,6 +32,11 @@ function App() {
     smoothscroll.polyfill();
     mainApi.getUserMe(thunkDispatch).then((response) => {
       console.log(response);
+      const img = new Image();
+      img.onload = () => {
+        console.log('imageLoaded');
+      };
+      img.src = aboutProfile;
       setCurrentUser(response);
       setLoggedIn(true);
     });
