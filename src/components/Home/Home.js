@@ -38,7 +38,7 @@ function Home({
       <main className="home" ref={homeRef}>
         <SearchForm setSearchActive={setSearchActive} thunkDispatch={thunkDispatch} />
         {searchActive &&
-          (isNothingFound ? (
+          (isNothingFound && !result ? (
             <NothingFound isLoadingSearch={loading} />
           ) : (
             <NewsCardList
