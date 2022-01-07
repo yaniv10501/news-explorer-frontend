@@ -68,26 +68,31 @@ function App() {
   };
   useEffect(() => {
     smoothscroll.polyfill();
-    mainApi.getUserMe(thunkDispatch).then((response) => {
-      console.log(response);
-      const headerBackgroundArray = [
-        headerBackground,
-        headerBackgroundTablet,
-        headerBackgroundMobile,
-      ];
-      headerBackgroundArray.forEach((image) => {
+    mainApi
+      .getUserMe(thunkDispatch)
+      .then((response) => {
+        console.log(response);
+        const headerBackgroundArray = [
+          headerBackground,
+          headerBackgroundTablet,
+          headerBackgroundMobile,
+        ];
+        headerBackgroundArray.forEach((image) => {
+          const img = new Image();
+          img.onLoad = () => console.log('Loaded');
+          img.src = image;
+        });
         const img = new Image();
-        img.onLoad = () => console.log('Loaded');
-        img.src = image;
+        img.onload = () => {
+          console.log('Loaded about');
+        };
+        img.src = aboutProfile;
+        setCurrentUser(response);
+        setLoggedIn(true);
+      })
+      .catch(() => {
+        thunkDispatch({ type: 'IMAGES_LOADED' });
       });
-      const img = new Image();
-      img.onload = () => {
-        console.log('Loaded about');
-      };
-      img.src = aboutProfile;
-      setCurrentUser(response);
-      setLoggedIn(true);
-    });
   }, []);
   useEffect(() => {
     const { source, inter, roboto, robotoSlab } = fontsLoaded;
