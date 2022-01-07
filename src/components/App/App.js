@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { Route, Routes, Navigate } from 'react-router-dom';
 import smoothscroll from 'smoothscroll-polyfill';
+import FontFaceObserver from 'fontfaceobserver';
 import './App.css';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
@@ -16,6 +17,40 @@ import headerBackgroundTablet from '../../images/header-background-tablet.jpg';
 import headerBackgroundMobile from '../../images/header-background-mobile.jpg';
 
 function App() {
+  const SourceSansProFont = new FontFaceObserver('Source Sans Pro');
+  const interFont = new FontFaceObserver('Inter');
+  const RobotoFont = new FontFaceObserver('Roboto');
+  const RobotoSlabFont = new FontFaceObserver('Roboto-Slab');
+  let fontsLoaded = {
+    source: false,
+    inter: false,
+    roboto: false,
+    robotoSlab: false,
+  };
+  SourceSansProFont.load().then(() => {
+    fontsLoaded = {
+      ...fontsLoaded,
+      source: true,
+    };
+  });
+  interFont.load().then(() => {
+    fontsLoaded = {
+      ...fontsLoaded,
+      inter: true,
+    };
+  });
+  RobotoFont.load().then(() => {
+    fontsLoaded = {
+      ...fontsLoaded,
+      roboto: true,
+    };
+  });
+  RobotoSlabFont.load().then(() => {
+    fontsLoaded = {
+      ...fontsLoaded,
+      robotoSlab: true,
+    };
+  });
   const [state, thunkDispatch] = useThunkReducer(fetchReducer, initialState);
   const { loading } = state;
   const headerRef = useRef();
@@ -47,13 +82,20 @@ function App() {
       });
       const img = new Image();
       img.onload = () => {
-        thunkDispatch({ type: 'IMAGES_LOADED' });
+        console.log('Loaded about');
       };
       img.src = aboutProfile;
       setCurrentUser(response);
       setLoggedIn(true);
     });
   }, []);
+  useEffect(() => {
+    const { source, inter, roboto, robotoSlab } = fontsLoaded;
+    if (source && inter && roboto && robotoSlab) {
+      console.log('FontsLoaded');
+      thunkDispatch({ type: 'IMAGES_LOADED' });
+    }
+  }, [fontsLoaded]);
   return (
     <>
       <Preloader isLoading={loading} />
