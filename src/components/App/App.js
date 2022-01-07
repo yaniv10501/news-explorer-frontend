@@ -100,14 +100,6 @@ function App() {
       setLoggedIn(true);
     });
   }, []);
-  useEffect(() => {
-    console.log(fontsLoaded);
-    const { source, inter, roboto, robotoSlab } = fontsLoaded;
-    if (source && inter && roboto && robotoSlab) {
-      console.log('FontsLoaded');
-      thunkDispatch({ type: 'IMAGES_LOADED' });
-    }
-  }, [fontsLoaded]);
   return (
     <>
       <Preloader isLoading={loading} />
