@@ -11,9 +11,10 @@ const initialState = {
 };
 
 const initialPageState = {
-  keyword: null,
   result: null,
   loading: true,
+  imagesLoading: true,
+  fontsLoading: true,
   silentLoading: false,
   isNothingFound: false,
   error: null,
@@ -77,8 +78,35 @@ const fetchReducer = (state, action) => {
       loading: false,
     };
   }
+  if (action.type === 'PAGE_IMAGES_LOADED') {
+    if (state.fontsLoading) {
+      return {
+        ...state,
+        imagesLoading: false,
+      };
+    }
+    return {
+      ...state,
+      imagesLoading: false,
+      loading: false,
+    };
+  }
+  if (action.type === 'FONTS_LOADED') {
+    if (state.imagesLoading) {
+      return {
+        ...state,
+        fontsLoading: false,
+      };
+    }
+    return {
+      ...state,
+      fontsLoading: false,
+      loading: false,
+    };
+  }
   if (action.type === 'NOTHING_FOUND') {
     return {
+      ...state,
       result: null,
       loading: false,
       silentLoading: false,
@@ -88,8 +116,10 @@ const fetchReducer = (state, action) => {
   }
   if (action.type === 'ERROR') {
     return {
+      ...state,
       result: null,
       loading: false,
+      silentLoading: false,
       isNothingFound: false,
       error: action.payload.error,
     };

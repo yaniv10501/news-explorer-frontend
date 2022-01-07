@@ -40,33 +40,28 @@ function App() {
       setCurrentUser(response);
       setLoggedIn(true);
     });
-    const headerBackgroundArray = [
+  }, []);
+  useLayoutEffect(() => {
+    const pageImages = [
       headerBackground,
       headerBackgroundTablet,
       headerBackgroundMobile,
+      logoutIcon,
+      aboutProfile,
     ];
-    headerBackgroundArray.forEach((image) => {
+    const pageImagesArrLength = pageImages.length * 2 - 1;
+    pageImages.forEach((image) => {
       console.log(image);
       const img = new Image();
       img.src = image;
       img.decode().finally(() => {
-        console.log('Loaded');
-        thunkDispatch({ type: 'IMAGES_LOADED' });
+        pageImages.push(true);
+        if (pageImages.length === pageImagesArrLength) {
+          console.log('Loaded');
+          thunkDispatch({ type: 'PAGE_IMAGES_LOADED' });
+        }
       });
     });
-    const headerBackgroundImage = new Image();
-    headerBackgroundImage.onLoad = () => {
-      console.log('Loaded');
-    };
-    headerBackgroundImage.src = logoutIcon;
-  }, []);
-  useLayoutEffect(() => {
-    const img = new Image();
-    console.log(aboutProfile);
-    img.onload = () => {
-      console.log('Loaded about');
-    };
-    img.src = aboutProfile;
     const SourceSansProFont = new FontFaceObserver('Source Sans Pro');
     const interFont = new FontFaceObserver('Inter');
     const RobotoFont = new FontFaceObserver('Roboto');
@@ -81,6 +76,7 @@ function App() {
       const { source, inter, roboto, robotoSlab } = fontsLoaded;
       if (source && inter && roboto && robotoSlab) {
         console.log('FontsLoaded');
+        thunkDispatch({ type: 'FONTS_LOADED' });
       }
     };
     SourceSansProFont.load().then(() => {
