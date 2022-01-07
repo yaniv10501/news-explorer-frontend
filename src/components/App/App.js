@@ -43,28 +43,30 @@ function App() {
     });
   }, []);
   useEffect(() => {
-    const pageImages = [
-      headerBackground,
-      headerBackgroundTablet,
-      headerBackgroundMobile,
-      logoutIcon,
-      logoutIconLight,
-      aboutProfile,
-    ];
-    const pageImagesArrLength = pageImages.length * 2 - 1;
-    pageImages.forEach((image) => {
-      console.log(image);
-      const img = new Image();
-      img.src = image;
-      img.decode().finally(() => {
-        pageImages.push(true);
-        if (pageImages.length === pageImagesArrLength) {
-          console.log('Loaded');
-          thunkDispatch({ type: 'PAGE_IMAGES_LOADED' });
-        }
+    if (isHome) {
+      const pageImages = [
+        headerBackground,
+        headerBackgroundTablet,
+        headerBackgroundMobile,
+        logoutIcon,
+        logoutIconLight,
+        aboutProfile,
+      ];
+      const pageImagesArrLength = pageImages.length * 2 - 1;
+      pageImages.forEach((image) => {
+        console.log(image);
+        const img = new Image();
+        img.src = image;
+        img.decode().finally(() => {
+          pageImages.push(true);
+          if (pageImages.length === pageImagesArrLength) {
+            console.log('Loaded');
+            thunkDispatch({ type: 'PAGE_IMAGES_LOADED' });
+          }
+        });
       });
-    });
-  }, []);
+    }
+  }, [isHome]);
   useLayoutEffect(() => {
     const SourceSansProFont = new FontFaceObserver('Source Sans Pro');
     const interFont = new FontFaceObserver('Inter');
