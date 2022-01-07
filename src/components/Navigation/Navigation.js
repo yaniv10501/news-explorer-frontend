@@ -141,7 +141,7 @@ function Navigation({
                 role="button"
                 tabIndex={0}
               >
-                {currentUser.message}
+                {currentUser.name}
               </div>
             </li>
           </>
