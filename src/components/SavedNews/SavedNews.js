@@ -21,7 +21,7 @@ function SavedNews({ setIsHome }) {
       <Preloader isLoading={loading} />
       <main className={loading ? 'saved-news saved-news_hidden' : 'saved-news'}>
         <SavedNewsHeader />
-        <SavedCardList articles={result}>
+        <SavedCardList result={result}>
           <div className="news-card__keyword">{}</div>
         </SavedCardList>
       </main>

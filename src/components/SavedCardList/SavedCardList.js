@@ -7,7 +7,7 @@ import mainApi from '../../utils/MainApi';
 import NewsCard from '../NewsCard/NewsCard';
 import Preloader from '../Preloader/Preloader';
 
-function SavedCardList({ articles }) {
+function SavedCardList({ result }) {
   const [state, thunkDispatch] = useThunkReducer(fetchReducer, initialState);
   const { loading } = state;
   console.log(loading);
@@ -29,26 +29,27 @@ function SavedCardList({ articles }) {
   return (
     <section className="news-card-list">
       <ul className="news-card-list__grid">
-        {articles.map((article, index) =>
-          index > cardAmount ? (
-            ''
-          ) : (
-            // eslint-disable-next-line react/no-array-index-key
-            <NewsCard article={article} key={index}>
-              <div className="news-card__keyword">{article.keyword}</div>
-              <div
-                className="news-card__delete-button"
-                id={article._id}
-                onClick={handleDeleteClick}
-                onKeyDown={() => {}}
-                role="button"
-                tabIndex={0}
-              >
-                <div className="news-card__delete-text">Remove from saved</div>
-              </div>
-            </NewsCard>
-          )
-        )}
+        {result.articles &&
+          result.articles.map((article, index) =>
+            index > cardAmount ? (
+              ''
+            ) : (
+              // eslint-disable-next-line react/no-array-index-key
+              <NewsCard article={article} key={index}>
+                <div className="news-card__keyword">{article.keyword}</div>
+                <div
+                  className="news-card__delete-button"
+                  id={article._id}
+                  onClick={handleDeleteClick}
+                  onKeyDown={() => {}}
+                  role="button"
+                  tabIndex={0}
+                >
+                  <div className="news-card__delete-text">Remove from saved</div>
+                </div>
+              </NewsCard>
+            )
+          )}
       </ul>
       <div
         className={
@@ -75,11 +76,11 @@ function SavedCardList({ articles }) {
 }
 
 SavedCardList.propTypes = {
-  articles: PropTypes.arrayOf(PropTypes.instanceOf(Object)),
+  result: PropTypes.instanceOf(Object),
 };
 
 SavedCardList.defaultProps = {
-  articles: [{}],
+  result: {},
 };
 
 export default SavedCardList;
