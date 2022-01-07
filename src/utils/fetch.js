@@ -36,7 +36,7 @@ const fetchReducer = (state, action) => {
   if (action.type === 'SILENT_LOADING') {
     return {
       result: null,
-      loading: true,
+      loading: false,
       silentLoading: true,
       isNothingFound: false,
       error: null,
