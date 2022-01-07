@@ -9,6 +9,7 @@ import mainApi from '../../utils/MainApi';
 function NewsCardList({
   loggedIn,
   isLoadingSearch,
+  silentLoading,
   setIsSigninPopupOpen,
   homeRef,
   thunkDispatch,
@@ -27,6 +28,7 @@ function NewsCardList({
   const handleArticleSave = (event) => {
     if (loggedIn) {
       mainApi.saveArticle(thunkDispatch, event.target);
+      console.log(silentLoading);
       const saveButton = event.target;
       saveButton.classList.toggle('news-card__save-button_active');
       return;
@@ -160,6 +162,7 @@ function NewsCardList({
 NewsCardList.propTypes = {
   loggedIn: PropTypes.bool.isRequired,
   isLoadingSearch: PropTypes.bool.isRequired,
+  silentLoading: PropTypes.bool.isRequired,
   setIsSigninPopupOpen: PropTypes.func.isRequired,
   homeRef: PropTypes.instanceOf(Object).isRequired,
   thunkDispatch: PropTypes.func.isRequired,

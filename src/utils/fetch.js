@@ -4,6 +4,7 @@ import isFunction from 'lodash/isFunction';
 const initialState = {
   result: null,
   loading: false,
+  silentLoading: false,
   isNothingFound: false,
   error: null,
 };
@@ -27,16 +28,25 @@ const fetchReducer = (state, action) => {
     return {
       result: null,
       loading: true,
+      silentLoading: false,
+      isNothingFound: false,
+      error: null,
+    };
+  }
+  if (action.type === 'SILENT_LOADING') {
+    return {
+      result: null,
+      loading: true,
+      silentLoading: true,
       isNothingFound: false,
       error: null,
     };
   }
   if (action.type === 'RESPONSE') {
     return {
+      ...state,
       result: action.payload.response,
-      loading: true,
-      isNothingFound: false,
-      error: null,
+      silentLoading: false,
     };
   }
   if (action.type === 'IMAGES_LOADED') {
@@ -64,9 +74,13 @@ const fetchReducer = (state, action) => {
   return state;
 };
 
-const useFetch = (dispatch, url, options) => {
-  dispatch({ type: 'LOADING' });
-
+const useFetch = (dispatch, url, options, silent) => {
+  if (!silent) {
+    dispatch({ type: 'LOADING' });
+  }
+  if (silent) {
+    dispatch({ type: 'SILENT_LOADING' });
+  }
   const fetchUrl = async () => {
     try {
       const response = await fetch(url, options);

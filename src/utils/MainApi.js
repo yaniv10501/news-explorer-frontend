@@ -29,10 +29,15 @@ class MainApi {
 
   saveArticle = (dispatch, eventTarget) => {
     console.log(eventTarget);
-    useFetch(dispatch, `${this.baseUrl}/articles`, {
-      method: 'POST',
-      credentials: 'include',
-    }).then((response) => console.log(response));
+    useFetch(
+      dispatch,
+      `${this.baseUrl}/articles`,
+      {
+        method: 'POST',
+        credentials: 'include',
+      },
+      true
+    ).then((response) => console.log(response));
   };
 
   deleteArticle = (dispatch, articleId) =>

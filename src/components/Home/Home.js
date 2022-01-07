@@ -28,7 +28,7 @@ function Home({
   const [searchActive, setSearchActive] = useState(false);
   const [isNothingFound, setIsNothingFound] = useState(false);
   const [state, thunkDispatch] = useThunkReducer(fetchReducer, initialState);
-  const { result, loading, error } = state;
+  const { result, loading, silentLoading, error } = state;
   useEffect(() => {
     setIsHome(true);
 
@@ -49,6 +49,7 @@ function Home({
             <NewsCardList
               loggedIn={loggedIn}
               isLoadingSearch={loading}
+              silentLoading={silentLoading}
               setIsSigninPopupOpen={setIsSigninPopupOpen}
               homeRef={homeRef}
               thunkDispatch={thunkDispatch}
