@@ -15,6 +15,7 @@ import aboutProfile from '../../images/about-profile.jpeg';
 import headerBackground from '../../images/header-background.jpg';
 import headerBackgroundTablet from '../../images/header-background-tablet.jpg';
 import headerBackgroundMobile from '../../images/header-background-mobile.jpg';
+import logoutIcon from '../../images/logout.svg';
 
 function App() {
   const [state, thunkDispatch] = useThunkReducer(fetchReducer, initialPageState);
@@ -58,7 +59,7 @@ function App() {
     headerBackgroundImage.onLoad = () => {
       console.log('Loaded');
     };
-    headerBackgroundImage.src = headerBackgroundTablet;
+    headerBackgroundImage.src = logoutIcon;
     const img = new Image();
     console.log(aboutProfile);
     img.onload = () => {
