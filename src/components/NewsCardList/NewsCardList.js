@@ -78,7 +78,6 @@ function NewsCardList({
   };
   useEffect(() => {
     if (isLoadingSearch) {
-      setArticles([]);
       setIsShowMoreVisible(true);
       setCardAmount(2);
       loadingImages = [];
