@@ -17,6 +17,7 @@ const handleImageLoad = (
   if (remainingArticles > showAmount) {
     arrLength = showAmount + 1;
   }
+  console.log(arrLength);
   if (loadingImages.length === arrLength) {
     thunkDispatch({ type: 'IMAGES_LOADED' });
     if (isLoadingMore) {
