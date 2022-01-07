@@ -11,6 +11,9 @@ import { fetchReducer, initialState, useThunkReducer } from '../../utils/fetch';
 import mainApi from '../../utils/MainApi';
 import Preloader from '../Preloader/Preloader';
 import aboutProfile from '../../images/about-profile.jpeg';
+import headerBackground from '../../images/header-background.jpg';
+import headerBackgroundTablet from '../../images/header-background-tablet.jpg';
+import headerBackgroundMobile from '../../images/header-background-mobile.jpg';
 
 function App() {
   const [state, thunkDispatch] = useThunkReducer(fetchReducer, initialState);
@@ -32,6 +35,16 @@ function App() {
     smoothscroll.polyfill();
     mainApi.getUserMe(thunkDispatch).then((response) => {
       console.log(response);
+      const headerBackgroundArray = [
+        headerBackground,
+        headerBackgroundTablet,
+        headerBackgroundMobile,
+      ];
+      headerBackgroundArray.forEach((image) => {
+        const img = new Image();
+        img.onLoad = () => console.log('Loaded');
+        img.src = image;
+      });
       const img = new Image();
       img.onload = () => {
         thunkDispatch({ type: 'IMAGES_LOADED' });
