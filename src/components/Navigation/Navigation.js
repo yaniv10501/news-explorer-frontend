@@ -13,6 +13,7 @@ function Navigation({
   menuOpen,
   setMenuOpen,
   navigationRef,
+  thunkDispatch,
 }) {
   const currentUser = useContext(CurrentUserContext);
   const mobileQuery = useMediaQuery({ query: '(max-width: 495px)' });
@@ -24,6 +25,7 @@ function Navigation({
   };
   const handleHomeClick = () => {
     if (isHome) return;
+    thunkDispatch({ type: 'LOADING' });
     setMenuOpen(false);
     navigate('/');
   };
@@ -175,6 +177,7 @@ Navigation.propTypes = {
   menuOpen: PropTypes.bool.isRequired,
   setMenuOpen: PropTypes.func.isRequired,
   navigationRef: PropTypes.instanceOf(Object).isRequired,
+  thunkDispatch: PropTypes.func.isRequired,
 };
 
 export default Navigation;

@@ -8,7 +8,7 @@ import mobileNavigationLight from '../../images/mobile-navigation-light.svg';
 import closeIcon from '../../images/close-icon.svg';
 import Navigation from '../Navigation/Navigation';
 
-function Header({ loggedIn, setLoggedIn, isHome, setIsSigninPopupOpen, headerRef }) {
+function Header({ loggedIn, setLoggedIn, isHome, setIsSigninPopupOpen, headerRef, thunkDispatch }) {
   const navigationRef = useRef();
   const mobileQuery = useMediaQuery({ query: '(max-width: 495px)' });
   const [menuOpen, setMenuOpen] = useState(false);
@@ -114,6 +114,7 @@ function Header({ loggedIn, setLoggedIn, isHome, setIsSigninPopupOpen, headerRef
               menuOpen={menuOpen}
               setMenuOpen={setMenuOpen}
               navigationRef={navigationRef}
+              thunkDispatch={thunkDispatch}
             />
           </>
         )}
@@ -148,6 +149,7 @@ Header.propTypes = {
   isHome: PropTypes.bool.isRequired,
   setIsSigninPopupOpen: PropTypes.func.isRequired,
   headerRef: PropTypes.instanceOf(Object).isRequired,
+  thunkDispatch: PropTypes.func.isRequired,
 };
 
 export default Header;

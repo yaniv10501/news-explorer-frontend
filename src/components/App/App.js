@@ -44,7 +44,6 @@ function App() {
   }, []);
   useEffect(() => {
     if (isHome) {
-      thunkDispatch({ type: 'LOADING' });
       const pageImages = [
         headerBackground,
         headerBackgroundTablet,
@@ -126,6 +125,7 @@ function App() {
             isHome={isHome}
             setIsSigninPopupOpen={setIsSigninPopupOpen}
             headerRef={headerRef}
+            thunkDispatch={thunkDispatch}
           />
           <Routes>
             <Route
