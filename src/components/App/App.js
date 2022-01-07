@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef, useLayoutEffect } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { Route, Routes, Navigate } from 'react-router-dom';
 import smoothscroll from 'smoothscroll-polyfill';
 import FontFaceObserver from 'fontfaceobserver';
@@ -21,35 +21,35 @@ function App() {
   const interFont = new FontFaceObserver('Inter');
   const RobotoFont = new FontFaceObserver('Roboto');
   const RobotoSlabFont = new FontFaceObserver('Roboto-Slab');
-  const [fontsLoaded, setFontsLoaded] = useState({
+  let fontsLoaded = {
     source: false,
     inter: false,
     roboto: false,
     robotoSlab: false,
-  });
+  };
   SourceSansProFont.load().then(() => {
-    setFontsLoaded({
+    fontsLoaded = {
       ...fontsLoaded,
       source: true,
-    });
+    };
   });
   interFont.load().then(() => {
-    setFontsLoaded({
+    fontsLoaded = {
       ...fontsLoaded,
       inter: true,
-    });
+    };
   });
   RobotoFont.load().then(() => {
-    setFontsLoaded({
+    fontsLoaded = {
       ...fontsLoaded,
       roboto: true,
-    });
+    };
   });
   RobotoSlabFont.load().then(() => {
-    setFontsLoaded({
+    fontsLoaded = {
       ...fontsLoaded,
       robotoSlab: true,
-    });
+    };
   });
   const [state, thunkDispatch] = useThunkReducer(fetchReducer, initialState);
   const { loading } = state;
@@ -68,33 +68,28 @@ function App() {
   };
   useEffect(() => {
     smoothscroll.polyfill();
-    mainApi
-      .getUserMe(thunkDispatch)
-      .then((response) => {
-        console.log(response);
-        const headerBackgroundArray = [
-          headerBackground,
-          headerBackgroundTablet,
-          headerBackgroundMobile,
-        ];
-        headerBackgroundArray.forEach((image) => {
-          const img = new Image();
-          img.onLoad = () => console.log('Loaded');
-          img.src = image;
-        });
+    mainApi.getUserMe(thunkDispatch).then((response) => {
+      console.log(response);
+      const headerBackgroundArray = [
+        headerBackground,
+        headerBackgroundTablet,
+        headerBackgroundMobile,
+      ];
+      headerBackgroundArray.forEach((image) => {
         const img = new Image();
-        img.onload = () => {
-          console.log('Loaded about');
-        };
-        img.src = aboutProfile;
-        setCurrentUser(response);
-        setLoggedIn(true);
-      })
-      .catch(() => {
-        thunkDispatch({ type: 'IMAGES_LOADED' });
+        img.onLoad = () => console.log('Loaded');
+        img.src = image;
       });
+      const img = new Image();
+      img.onload = () => {
+        console.log('Loaded about');
+      };
+      img.src = aboutProfile;
+      setCurrentUser(response);
+      setLoggedIn(true);
+    });
   }, []);
-  useLayoutEffect(() => {
+  useEffect(() => {
     const { source, inter, roboto, robotoSlab } = fontsLoaded;
     if (source && inter && roboto && robotoSlab) {
       console.log('FontsLoaded');
