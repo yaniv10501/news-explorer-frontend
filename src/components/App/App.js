@@ -49,7 +49,9 @@ function App() {
       console.log(image);
       const img = new Image();
       img.onLoad = () => {
-        console.log('Loaded');
+        img.decode().finally(() => {
+          console.log('Loaded');
+        });
       };
       img.src = image;
     });
