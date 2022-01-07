@@ -40,8 +40,6 @@ function App() {
       setCurrentUser(response);
       setLoggedIn(true);
     });
-  }, []);
-  useLayoutEffect(() => {
     const headerBackgroundArray = [
       headerBackground,
       headerBackgroundTablet,
@@ -60,6 +58,8 @@ function App() {
       console.log('Loaded');
     };
     headerBackgroundImage.src = logoutIcon;
+  }, []);
+  useLayoutEffect(() => {
     const img = new Image();
     console.log(aboutProfile);
     img.onload = () => {
