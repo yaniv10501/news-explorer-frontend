@@ -16,6 +16,9 @@ function SavedNews({ setIsHome }) {
     mainApi.getSavedArticles(thunkDispatch);
     return () => setIsHome(true);
   }, []);
+  useEffect(() => {
+    console.log(loading);
+  }, [loading]);
   return (
     <>
       <Preloader isLoading={loading} />
