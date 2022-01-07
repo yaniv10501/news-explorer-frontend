@@ -53,6 +53,9 @@ function App() {
           console.log('Loaded');
         });
       };
+      img.decode().finally(() => {
+        console.log('Loaded');
+      });
       img.src = image;
     });
     const headerBackgroundImage = new Image();
