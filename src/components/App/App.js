@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef, useLayoutEffect } from 'react';
 import { Route, Routes, Navigate } from 'react-router-dom';
 import smoothscroll from 'smoothscroll-polyfill';
 import FontFaceObserver from 'fontfaceobserver';
@@ -94,7 +94,7 @@ function App() {
         thunkDispatch({ type: 'IMAGES_LOADED' });
       });
   }, []);
-  useEffect(() => {
+  useLayoutEffect(() => {
     const { source, inter, roboto, robotoSlab } = fontsLoaded;
     if (source && inter && roboto && robotoSlab) {
       console.log('FontsLoaded');
