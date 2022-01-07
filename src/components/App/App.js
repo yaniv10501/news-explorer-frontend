@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef, useLayoutEffect } from 'react';
 import { Route, Routes, Navigate } from 'react-router-dom';
 import smoothscroll from 'smoothscroll-polyfill';
 import FontFaceObserver from 'fontfaceobserver';
@@ -18,51 +18,6 @@ import headerBackgroundMobile from '../../images/header-background-mobile.jpg';
 
 function App() {
   const [state, thunkDispatch] = useThunkReducer(fetchReducer, initialState);
-  const SourceSansProFont = new FontFaceObserver('Source Sans Pro');
-  const interFont = new FontFaceObserver('Inter');
-  const RobotoFont = new FontFaceObserver('Roboto');
-  const RobotoSlabFont = new FontFaceObserver('Roboto-Slab');
-  let fontsLoaded = {
-    source: false,
-    inter: false,
-    roboto: false,
-    robotoSlab: false,
-  };
-  const checkFontsLoaded = () => {
-    const { source, inter, roboto, robotoSlab } = fontsLoaded;
-    if (source && inter && roboto && robotoSlab) {
-      console.log('FontsLoaded');
-      thunkDispatch({ type: 'IMAGES_LOADED' });
-    }
-  };
-  SourceSansProFont.load().then(() => {
-    fontsLoaded = {
-      ...fontsLoaded,
-      source: true,
-    };
-    checkFontsLoaded();
-  });
-  interFont.load().then(() => {
-    fontsLoaded = {
-      ...fontsLoaded,
-      inter: true,
-    };
-    checkFontsLoaded();
-  });
-  RobotoFont.load().then(() => {
-    fontsLoaded = {
-      ...fontsLoaded,
-      roboto: true,
-    };
-    checkFontsLoaded();
-  });
-  RobotoSlabFont.load().then(() => {
-    fontsLoaded = {
-      ...fontsLoaded,
-      robotoSlab: true,
-    };
-    checkFontsLoaded();
-  });
   const { loading } = state;
   const headerRef = useRef();
   const homeRef = useRef();
@@ -98,6 +53,53 @@ function App() {
       img.src = aboutProfile;
       setCurrentUser(response);
       setLoggedIn(true);
+    });
+  }, []);
+  useLayoutEffect(() => {
+    const SourceSansProFont = new FontFaceObserver('Source Sans Pro');
+    const interFont = new FontFaceObserver('Inter');
+    const RobotoFont = new FontFaceObserver('Roboto');
+    const RobotoSlabFont = new FontFaceObserver('Roboto-Slab');
+    let fontsLoaded = {
+      source: false,
+      inter: false,
+      roboto: false,
+      robotoSlab: false,
+    };
+    const checkFontsLoaded = () => {
+      const { source, inter, roboto, robotoSlab } = fontsLoaded;
+      if (source && inter && roboto && robotoSlab) {
+        console.log('FontsLoaded');
+        thunkDispatch({ type: 'IMAGES_LOADED' });
+      }
+    };
+    SourceSansProFont.load().then(() => {
+      fontsLoaded = {
+        ...fontsLoaded,
+        source: true,
+      };
+      checkFontsLoaded();
+    });
+    interFont.load().then(() => {
+      fontsLoaded = {
+        ...fontsLoaded,
+        inter: true,
+      };
+      checkFontsLoaded();
+    });
+    RobotoFont.load().then(() => {
+      fontsLoaded = {
+        ...fontsLoaded,
+        roboto: true,
+      };
+      checkFontsLoaded();
+    });
+    RobotoSlabFont.load().then(() => {
+      fontsLoaded = {
+        ...fontsLoaded,
+        robotoSlab: true,
+      };
+      checkFontsLoaded();
     });
   }, []);
   return (
