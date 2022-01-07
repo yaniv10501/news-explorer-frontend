@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Navigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import '../NewsCardList/NewsCardList.css';
 import testArticles from '../../assets/testArticles';
@@ -38,13 +39,15 @@ function SavedCardList({ result, error, thunkDispatch }) {
   };
   useEffect(() => {
     console.log(result);
-    console.log(error, error?.status, error?.message);
   }, [result, error]);
   return (
     <section className="news-card-list">
       {error ? (
         <div className="news-card-list__get-container">
-          <h2 className="news-card-list__get-title">Search for articles</h2>
+          <h2 className="news-card-list__get-title">Search for new articles</h2>
+          <button className="search__form-submit-button" type="button" onClick={<Navigate to="" />}>
+            Search
+          </button>
         </div>
       ) : (
         <>
