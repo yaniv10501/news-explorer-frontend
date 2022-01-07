@@ -26,9 +26,8 @@ function Home({
   setCurrentUser,
 }) {
   const [searchActive, setSearchActive] = useState(false);
-  const [isNothingFound, setIsNothingFound] = useState(false);
   const [state, thunkDispatch] = useThunkReducer(fetchReducer, initialState);
-  const { result, loading, silentLoading, error } = state;
+  const { result, loading, silentLoading, isNothingFound, error } = state;
   useEffect(() => {
     setIsHome(true);
 
@@ -37,11 +36,7 @@ function Home({
   return (
     <>
       <main className="home" ref={homeRef}>
-        <SearchForm
-          setSearchActive={setSearchActive}
-          thunkDispatch={thunkDispatch}
-          setIsNothingFound={setIsNothingFound}
-        />
+        <SearchForm setSearchActive={setSearchActive} thunkDispatch={thunkDispatch} />
         {searchActive &&
           (isNothingFound ? (
             <NothingFound isLoadingSearch={loading} />
