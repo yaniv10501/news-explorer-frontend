@@ -34,7 +34,7 @@ function App() {
       console.log(response);
       const img = new Image();
       img.onload = () => {
-        console.log('imageLoaded');
+        thunkDispatch({ type: 'IMAGES_LOADED' });
       };
       img.src = aboutProfile;
       setCurrentUser(response);
