@@ -36,7 +36,7 @@ function App() {
   useEffect(() => {
     smoothscroll.polyfill();
     mainApi.getUserMe(thunkDispatch).then((response) => {
-      console.log(response);
+      if (response instanceof Error) return;
       setCurrentUser(response);
       setLoggedIn(true);
     });
@@ -58,7 +58,6 @@ function App() {
         img.decode().finally(() => {
           pageImages.push(true);
           if (pageImages.length === pageImagesArrLength) {
-            console.log('Loaded');
             thunkDispatch({ type: 'PAGE_IMAGES_LOADED' });
           }
         });
@@ -79,7 +78,6 @@ function App() {
     const checkFontsLoaded = () => {
       const { source, inter, roboto, robotoSlab } = fontsLoaded;
       if (source && inter && roboto && robotoSlab) {
-        console.log('FontsLoaded');
         thunkDispatch({ type: 'FONTS_LOADED' });
       }
     };

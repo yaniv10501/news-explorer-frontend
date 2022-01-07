@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router-dom';
 import { useMediaQuery } from 'react-responsive';
 import './Navigation.css';
 import CurrentUserContext from '../../contexts/CurrentUserContext';
-import logoutIconLight from '../../images/logout-light.svg';
 
 function Navigation({
   loggedIn,
@@ -21,12 +20,8 @@ function Navigation({
   const navigate = useNavigate();
   const handleSavedArticlesClick = () => {
     if (!isHome) return;
-    const img = new Image();
-    img.src = logoutIconLight;
-    img.decode().finally(() => {
-      setMenuOpen(false);
-      navigate('/saved-news');
-    });
+    setMenuOpen(false);
+    navigate('/saved-news');
   };
   const handleHomeClick = () => {
     if (isHome) return;
