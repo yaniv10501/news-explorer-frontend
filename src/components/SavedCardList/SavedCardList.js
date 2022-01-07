@@ -37,7 +37,10 @@ function SavedCardList({ result, thunkDispatch }) {
     );
   };
   useEffect(() => {
-    setCardAmount(result.length);
+    console.log(result);
+    if (result) {
+      setCardAmount(result.length);
+    }
   }, [result]);
   return (
     <section className="news-card-list">
