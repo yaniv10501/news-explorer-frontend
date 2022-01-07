@@ -1,8 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import testArticles from '../../assets/testArticles';
+import { fetchReducer, initialState, useThunkReducer } from '../../utils/fetch';
+import mainApi from '../../utils/MainApi';
 import './SavedNewsHeader.css';
 
 function SavedNewsHeader() {
+  const [state, thunkDispatch] = useThunkReducer(fetchReducer, initialState);
+  const { loading } = state;
+  console.log(loading);
   const [savedKeywords, setSavedKeywords] = useState('');
   useEffect(() => {
     if (testArticles.length === 1) {
@@ -57,6 +62,10 @@ function SavedNewsHeader() {
       }
       setSavedKeywords(`${keywordsArr[0]}, ${keywordsArr[1]} and ${keywordsArr.length - 2} more`);
     }
+  }, []);
+
+  useEffect(() => {
+    mainApi.getSavedArticles(thunkDispatch);
   }, []);
   return (
     <section className="saved-news-header">

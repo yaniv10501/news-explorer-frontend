@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import PopupWithForm from '../PopupWithForm/PopupWithForm';
+import { fetchReducer, initialState, useThunkReducer } from '../../utils/fetch';
+import mainApi from '../../utils/MainApi';
 
 function SigninPopup({
   closeAllPopups,
@@ -8,9 +10,25 @@ function SigninPopup({
   setIsSignupPopupOpen,
   setLoggedIn,
   headerRef,
+  setCurrentUser,
 }) {
-  const handleSubmit = (event) => {
+  const [state, thunkDispatch] = useThunkReducer(fetchReducer, initialState);
+  const { loading } = state;
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const handleEmailChange = (event) => {
+    setEmail(event.target.value);
+  };
+  const handlePasswordChange = (event) => {
+    setPassword(event.target.value);
+  };
+  const handleSubmit = async (event) => {
     event.preventDefault();
+    const response = await mainApi.signIn(thunkDispatch, email, password);
+    if (response instanceof Error) {
+      return;
+    }
+    setCurrentUser(response);
     closeAllPopups();
     setLoggedIn(true);
   };
@@ -26,7 +44,7 @@ function SigninPopup({
       isOpen={isSigninPopupOpen}
       onSubmit={handleSubmit}
       formValid
-      isLoading={false}
+      isLoading={loading}
       handleClose={closeAllPopups}
       headerRef={headerRef}
     >
@@ -37,6 +55,8 @@ function SigninPopup({
           type="text"
           placeholder="Enter email"
           name="email"
+          value={email}
+          onChange={handleEmailChange}
           required
         />
       </label>
@@ -50,6 +70,8 @@ function SigninPopup({
           type="password"
           placeholder="Enter password"
           name="password"
+          value={password}
+          onChange={handlePasswordChange}
           required
         />
       </label>
@@ -65,6 +87,7 @@ SigninPopup.propTypes = {
   setIsSignupPopupOpen: PropTypes.func.isRequired,
   setLoggedIn: PropTypes.func.isRequired,
   headerRef: PropTypes.instanceOf(Object).isRequired,
+  setCurrentUser: PropTypes.func.isRequired,
 };
 
 export default SigninPopup;

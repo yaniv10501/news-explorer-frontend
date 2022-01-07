@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import './Home.css';
+import { useThunkReducer, fetchReducer, initialState } from '../../utils/fetch';
 import SearchForm from '../SearchForm/SearchForm';
 import NewsCardList from '../NewsCardList/NewsCardList';
 import About from '../About/About';
@@ -22,10 +23,12 @@ function Home({
   setIsSuccessRegisterPopupOpen,
   homeRef,
   headerRef,
+  setCurrentUser,
 }) {
   const [searchActive, setSearchActive] = useState(false);
   const [isNothingFound, setIsNothingFound] = useState(false);
-  const [isLoadingSearch, setIsLoadingSearch] = useState(false);
+  const [state, thunkDispatch] = useThunkReducer(fetchReducer, initialState);
+  const { result, loading, error } = state;
   useEffect(() => {
     setIsHome(true);
 
@@ -36,18 +39,21 @@ function Home({
       <main className="home" ref={homeRef}>
         <SearchForm
           setSearchActive={setSearchActive}
-          setIsLoadingSearch={setIsLoadingSearch}
+          thunkDispatch={thunkDispatch}
           setIsNothingFound={setIsNothingFound}
         />
         {searchActive &&
-          (isNothingFound ? (
-            <NothingFound isLoadingSearch={isLoadingSearch} />
+          (isNothingFound || error ? (
+            <NothingFound isLoadingSearch={loading} />
           ) : (
             <NewsCardList
               loggedIn={loggedIn}
-              isLoadingSearch={isLoadingSearch}
+              isLoadingSearch={loading}
               setIsSigninPopupOpen={setIsSigninPopupOpen}
               homeRef={homeRef}
+              thunkDispatch={thunkDispatch}
+              result={result}
+              error={error}
             />
           ))}
         <About />
@@ -58,6 +64,8 @@ function Home({
         setIsSignupPopupOpen={setIsSignupPopupOpen}
         setLoggedIn={setLoggedIn}
         headerRef={headerRef}
+        thunkDispatch={thunkDispatch}
+        setCurrentUser={setCurrentUser}
       />
       <SignupPopup
         closeAllPopups={closeAllPopups}
@@ -89,6 +97,7 @@ Home.propTypes = {
   setIsSuccessRegisterPopupOpen: PropTypes.func.isRequired,
   homeRef: PropTypes.instanceOf(Object).isRequired,
   headerRef: PropTypes.instanceOf(Object).isRequired,
+  setCurrentUser: PropTypes.func.isRequired,
 };
 
 export default Home;

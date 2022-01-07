@@ -7,6 +7,7 @@ import Footer from '../Footer/Footer';
 import Home from '../Home/Home';
 import SavedNewsHeader from '../SavedNewsHeader/SavedNewsHeader';
 import SavedCardList from '../SavedCardList/SavedCardList';
+import CurrentUserContext from '../../contexts/CurrentUserContext';
 
 function App() {
   const headerRef = useRef();
@@ -16,6 +17,7 @@ function App() {
   const [isSigninPopupOpen, setIsSigninPopupOpen] = useState(false);
   const [isSignupPopupOpen, setIsSignupPopupOpen] = useState(false);
   const [isSuccessRegisterPopupOpen, setIsSuccessRegisterPopupOpen] = useState(false);
+  const [currentUser, setCurrentUser] = useState({});
   const closeAllPopups = () => {
     setIsSigninPopupOpen(false);
     setIsSignupPopupOpen(false);
@@ -26,51 +28,54 @@ function App() {
   }, []);
   return (
     <div className="page">
-      <Header
-        loggedIn={loggedIn}
-        setLoggedIn={setLoggedIn}
-        isHome={isHome}
-        setIsSigninPopupOpen={setIsSigninPopupOpen}
-        headerRef={headerRef}
-      />
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <Home
-              loggedIn={loggedIn}
-              setLoggedIn={setLoggedIn}
-              setIsHome={setIsHome}
-              closeAllPopups={closeAllPopups}
-              isSigninPopupOpen={isSigninPopupOpen}
-              setIsSigninPopupOpen={setIsSigninPopupOpen}
-              isSignupPopupOpen={isSignupPopupOpen}
-              setIsSignupPopupOpen={setIsSignupPopupOpen}
-              isSuccessRegisterPopupOpen={isSuccessRegisterPopupOpen}
-              setIsSuccessRegisterPopupOpen={setIsSuccessRegisterPopupOpen}
-              homeRef={homeRef}
-              headerRef={headerRef}
-            />
-          }
+      <CurrentUserContext.Provider value={currentUser}>
+        <Header
+          loggedIn={loggedIn}
+          setLoggedIn={setLoggedIn}
+          isHome={isHome}
+          setIsSigninPopupOpen={setIsSigninPopupOpen}
+          headerRef={headerRef}
         />
-        <Route
-          path="/saved-news"
-          element={
-            loggedIn ? (
-              <>
-                <SavedNewsHeader setIsHome={setIsHome} />
-                <SavedCardList>
-                  <div className="news-card__keyword">{}</div>
-                </SavedCardList>
-              </>
-            ) : (
-              <Navigate to="/" />
-            )
-          }
-        />
-        <Route path="*" element={<Navigate to="/" />} />
-      </Routes>
-      <Footer isHome={isHome} homeRef={homeRef} />
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <Home
+                loggedIn={loggedIn}
+                setLoggedIn={setLoggedIn}
+                setIsHome={setIsHome}
+                closeAllPopups={closeAllPopups}
+                isSigninPopupOpen={isSigninPopupOpen}
+                setIsSigninPopupOpen={setIsSigninPopupOpen}
+                isSignupPopupOpen={isSignupPopupOpen}
+                setIsSignupPopupOpen={setIsSignupPopupOpen}
+                isSuccessRegisterPopupOpen={isSuccessRegisterPopupOpen}
+                setIsSuccessRegisterPopupOpen={setIsSuccessRegisterPopupOpen}
+                homeRef={homeRef}
+                headerRef={headerRef}
+                setCurrentUser={setCurrentUser}
+              />
+            }
+          />
+          <Route
+            path="/saved-news"
+            element={
+              loggedIn ? (
+                <>
+                  <SavedNewsHeader setIsHome={setIsHome} />
+                  <SavedCardList>
+                    <div className="news-card__keyword">{}</div>
+                  </SavedCardList>
+                </>
+              ) : (
+                <Navigate to="/" />
+              )
+            }
+          />
+          <Route path="*" element={<Navigate to="/" />} />
+        </Routes>
+        <Footer isHome={isHome} homeRef={homeRef} />
+      </CurrentUserContext.Provider>
     </div>
   );
 }

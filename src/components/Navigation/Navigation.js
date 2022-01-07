@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
 import { useMediaQuery } from 'react-responsive';
 import './Navigation.css';
+import CurrentUserContext from '../../contexts/CurrentUserContext';
 
 function Navigation({
   loggedIn,
@@ -13,6 +14,7 @@ function Navigation({
   setMenuOpen,
   navigationRef,
 }) {
+  const currentUser = useContext(CurrentUserContext);
   const mobileQuery = useMediaQuery({ query: '(max-width: 495px)' });
   const navigate = useNavigate();
   const handleSavedArticlesClick = () => {
@@ -84,7 +86,7 @@ function Navigation({
                 role="button"
                 tabIndex={0}
               >
-                Elise
+                {currentUser.name}
               </div>
             </li>
           </>
@@ -139,7 +141,7 @@ function Navigation({
                 role="button"
                 tabIndex={0}
               >
-                Elise
+                {currentUser.message}
               </div>
             </li>
           </>

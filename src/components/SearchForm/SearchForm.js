@@ -2,8 +2,9 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 // import escape from 'escape-html';
 import './SearchForm.css';
+import newsApi from '../../utils/NewsApi';
 
-function SearchForm({ setSearchActive, setIsLoadingSearch, setIsNothingFound }) {
+function SearchForm({ setSearchActive, thunkDispatch, setIsNothingFound }) {
   const [searchValue, setSearchValue] = useState('');
   const handleSearchChange = (event) => {
     const { value } = event.target;
@@ -13,10 +14,7 @@ function SearchForm({ setSearchActive, setIsLoadingSearch, setIsNothingFound }) 
   const handleSearchSubmit = (event) => {
     event.preventDefault();
     setSearchActive(true);
-    setIsLoadingSearch(true);
-    setTimeout(() => {
-      setIsLoadingSearch(false);
-    }, 1200);
+    thunkDispatch((dispatch) => newsApi.searchArticles(dispatch, searchValue));
     if (searchValue.toLowerCase() === 'nothing') {
       setIsNothingFound(true);
       return;
@@ -50,7 +48,7 @@ function SearchForm({ setSearchActive, setIsLoadingSearch, setIsNothingFound }) 
 
 SearchForm.propTypes = {
   setSearchActive: PropTypes.func.isRequired,
-  setIsLoadingSearch: PropTypes.func.isRequired,
+  thunkDispatch: PropTypes.func.isRequired,
   setIsNothingFound: PropTypes.func.isRequired,
 };
 
