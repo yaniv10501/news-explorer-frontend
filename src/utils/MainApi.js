@@ -27,14 +27,33 @@ class MainApi {
       credentials: 'include',
     }).then((response) => console.log(response));
 
-  saveArticle = (dispatch, source, title, text, date, link, image, keyword) => {
-    console.log(source, title, text, date, link, image, keyword);
+  saveArticle = (dispatch, article, keyword) => {
+    const {
+      source: { name: source },
+      title,
+      description: text,
+      publishedAt: date,
+      url: link,
+      urlToImage: image,
+    } = article;
     useFetch(
       dispatch,
       `${this.baseUrl}/articles`,
       {
         method: 'POST',
         credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          source,
+          title,
+          text,
+          date,
+          link,
+          image,
+          keyword,
+        }),
       },
       true
     ).then((response) => console.log(response));

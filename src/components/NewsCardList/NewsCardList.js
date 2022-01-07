@@ -29,15 +29,7 @@ function NewsCardList({
   };
   const handleArticleSave = (event, article) => {
     if (loggedIn) {
-      const {
-        source: { name: source },
-        title,
-        description: text,
-        publishedAt: date,
-        url: link,
-        urlToImage: image,
-      } = article;
-      mainApi.saveArticle(thunkDispatch, source, title, text, date, link, image, keyword);
+      mainApi.saveArticle(thunkDispatch, article, keyword);
       console.log(silentLoading);
       const saveButton = event.target;
       saveButton.classList.toggle('news-card__save-button_active');
