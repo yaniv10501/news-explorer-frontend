@@ -11,7 +11,7 @@ function SavedCardList({ result, thunkDispatch }) {
   let loadingImages = [];
   const [isLoadingMore, setIsLoadingMore] = useState(false);
   const [isShowMoreVisible, setIsShowMoreVisible] = useState(testArticles.length > 3);
-  const [cardAmount, setCardAmount] = useState(5);
+  const [cardAmount, setCardAmount] = useState(result.length);
   const handleShowMoreClick = () => {
     setIsLoadingMore(true);
     // SetTimeout is used to fake loading time.
