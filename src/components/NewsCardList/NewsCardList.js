@@ -81,11 +81,11 @@ function NewsCardList({
       setIsShowMoreVisible(true);
       setCardAmount(2);
       loadingImages = [];
-      if (result && result.articles) {
+      if (result.articles) {
         setArticles(result.articles);
       }
     }
-  }, [isLoadingSearch, result.articles]);
+  }, [isLoadingSearch, result]);
   return (
     <section className="news-card-list">
       <Preloader isLoading={isLoadingSearch}>
