@@ -49,7 +49,9 @@ function App() {
     headerBackgroundArray.forEach((image) => {
       console.log(image);
       const img = new Image();
-      img.onLoad = () => console.log('Loaded');
+      img.onLoad = () => {
+        console.log('Loaded');
+      };
       img.src = image;
     });
     const img = new Image();
