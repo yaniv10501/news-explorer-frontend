@@ -47,6 +47,7 @@ function App() {
       headerBackgroundMobile,
     ];
     headerBackgroundArray.forEach((image) => {
+      console.log(image);
       const img = new Image();
       img.onLoad = () => console.log('Loaded');
       img.src = image;
