@@ -21,35 +21,35 @@ function App() {
   const interFont = new FontFaceObserver('Inter');
   const RobotoFont = new FontFaceObserver('Roboto');
   const RobotoSlabFont = new FontFaceObserver('Roboto-Slab');
-  let fontsLoaded = {
+  const [fontsLoaded, setFontsLoaded] = useState({
     source: false,
     inter: false,
     roboto: false,
     robotoSlab: false,
-  };
+  });
   SourceSansProFont.load().then(() => {
-    fontsLoaded = {
+    setFontsLoaded({
       ...fontsLoaded,
       source: true,
-    };
+    });
   });
   interFont.load().then(() => {
-    fontsLoaded = {
+    setFontsLoaded({
       ...fontsLoaded,
       inter: true,
-    };
+    });
   });
   RobotoFont.load().then(() => {
-    fontsLoaded = {
+    setFontsLoaded({
       ...fontsLoaded,
       roboto: true,
-    };
+    });
   });
   RobotoSlabFont.load().then(() => {
-    fontsLoaded = {
+    setFontsLoaded({
       ...fontsLoaded,
       robotoSlab: true,
-    };
+    });
   });
   const [state, thunkDispatch] = useThunkReducer(fetchReducer, initialState);
   const { loading } = state;
