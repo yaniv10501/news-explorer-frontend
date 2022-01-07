@@ -16,7 +16,6 @@ import headerBackground from '../../images/header-background.jpg';
 import headerBackgroundTablet from '../../images/header-background-tablet.jpg';
 import headerBackgroundMobile from '../../images/header-background-mobile.jpg';
 import logoutIcon from '../../images/logout.svg';
-import logoutIconLight from '../../images/logout-light.svg';
 
 function App() {
   const [state, thunkDispatch] = useThunkReducer(fetchReducer, initialPageState);
@@ -49,7 +48,6 @@ function App() {
         headerBackgroundTablet,
         headerBackgroundMobile,
         logoutIcon,
-        logoutIconLight,
         aboutProfile,
       ];
       const pageImagesArrLength = pageImages.length * 2 - 1;
