@@ -96,7 +96,7 @@ function App() {
       console.log('FontsLoaded');
       thunkDispatch({ type: 'IMAGES_LOADED' });
     }
-  }, [fontsLoaded]);
+  }, [fontsLoaded.source, fontsLoaded.inter, fontsLoaded.roboto, fontsLoaded.robotoSlab]);
   return (
     <>
       <Preloader isLoading={loading} />
