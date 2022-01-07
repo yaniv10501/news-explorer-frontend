@@ -22,6 +22,11 @@ class MainApi {
       return response;
     });
 
+  getUserMe = (dispatch) =>
+    useFetch(dispatch, `${this.baseUrl}/users/me`, {
+      credentials: 'include',
+    }).then((response) => response);
+
   getSavedArticles = (dispatch) =>
     useFetch(dispatch, `${this.baseUrl}/articles`, {
       credentials: 'include',

@@ -7,8 +7,13 @@ import Footer from '../Footer/Footer';
 import Home from '../Home/Home';
 import CurrentUserContext from '../../contexts/CurrentUserContext';
 import SavedNews from '../SavedNews/SavedNews';
+import { fetchReducer, initialState, useThunkReducer } from '../../utils/fetch';
+import mainApi from '../../utils/MainApi';
+import Preloader from '../Preloader/Preloader';
 
 function App() {
+  const [state, thunkDispatch] = useThunkReducer(fetchReducer, initialState);
+  const { loading } = state;
   const headerRef = useRef();
   const homeRef = useRef();
   const [isHome, setIsHome] = useState(false);
@@ -24,47 +29,55 @@ function App() {
   };
   useEffect(() => {
     smoothscroll.polyfill();
+    mainApi.getUserMe(thunkDispatch).then((response) => {
+      console.log(response);
+      setCurrentUser(response);
+      setLoggedIn(true);
+    });
   }, []);
   return (
-    <div className="page">
-      <CurrentUserContext.Provider value={currentUser}>
-        <Header
-          loggedIn={loggedIn}
-          setLoggedIn={setLoggedIn}
-          isHome={isHome}
-          setIsSigninPopupOpen={setIsSigninPopupOpen}
-          headerRef={headerRef}
-        />
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <Home
-                loggedIn={loggedIn}
-                setLoggedIn={setLoggedIn}
-                setIsHome={setIsHome}
-                closeAllPopups={closeAllPopups}
-                isSigninPopupOpen={isSigninPopupOpen}
-                setIsSigninPopupOpen={setIsSigninPopupOpen}
-                isSignupPopupOpen={isSignupPopupOpen}
-                setIsSignupPopupOpen={setIsSignupPopupOpen}
-                isSuccessRegisterPopupOpen={isSuccessRegisterPopupOpen}
-                setIsSuccessRegisterPopupOpen={setIsSuccessRegisterPopupOpen}
-                homeRef={homeRef}
-                headerRef={headerRef}
-                setCurrentUser={setCurrentUser}
-              />
-            }
+    <>
+      <Preloader isLoading={loading} />
+      <div className={loading ? 'page page_hidden' : 'page'}>
+        <CurrentUserContext.Provider value={currentUser}>
+          <Header
+            loggedIn={loggedIn}
+            setLoggedIn={setLoggedIn}
+            isHome={isHome}
+            setIsSigninPopupOpen={setIsSigninPopupOpen}
+            headerRef={headerRef}
           />
-          <Route
-            path="/saved-news"
-            element={loggedIn ? <SavedNews setIsHome={setIsHome} /> : <Navigate to="/" />}
-          />
-          <Route path="*" element={<Navigate to="/" />} />
-        </Routes>
-        <Footer isHome={isHome} homeRef={homeRef} />
-      </CurrentUserContext.Provider>
-    </div>
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <Home
+                  loggedIn={loggedIn}
+                  setLoggedIn={setLoggedIn}
+                  setIsHome={setIsHome}
+                  closeAllPopups={closeAllPopups}
+                  isSigninPopupOpen={isSigninPopupOpen}
+                  setIsSigninPopupOpen={setIsSigninPopupOpen}
+                  isSignupPopupOpen={isSignupPopupOpen}
+                  setIsSignupPopupOpen={setIsSignupPopupOpen}
+                  isSuccessRegisterPopupOpen={isSuccessRegisterPopupOpen}
+                  setIsSuccessRegisterPopupOpen={setIsSuccessRegisterPopupOpen}
+                  homeRef={homeRef}
+                  headerRef={headerRef}
+                  setCurrentUser={setCurrentUser}
+                />
+              }
+            />
+            <Route
+              path="/saved-news"
+              element={loggedIn ? <SavedNews setIsHome={setIsHome} /> : <Navigate to="/" />}
+            />
+            <Route path="*" element={<Navigate to="/" />} />
+          </Routes>
+          <Footer isHome={isHome} homeRef={homeRef} />
+        </CurrentUserContext.Provider>
+      </div>
+    </>
   );
 }
 
