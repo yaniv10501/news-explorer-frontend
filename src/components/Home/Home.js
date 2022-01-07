@@ -27,7 +27,7 @@ function Home({
 }) {
   const [searchActive, setSearchActive] = useState(false);
   const [state, thunkDispatch] = useThunkReducer(fetchReducer, initialState);
-  const { result, loading, silentLoading, isNothingFound, error } = state;
+  const { keyword, result, loading, silentLoading, isNothingFound, error } = state;
   useEffect(() => {
     setIsHome(true);
 
@@ -48,6 +48,7 @@ function Home({
               setIsSigninPopupOpen={setIsSigninPopupOpen}
               homeRef={homeRef}
               thunkDispatch={thunkDispatch}
+              keyword={keyword}
               result={result}
               error={error}
             />

@@ -2,6 +2,7 @@ import { useReducer } from 'react';
 import isFunction from 'lodash/isFunction';
 
 const initialState = {
+  keyword: null,
   result: null,
   loading: false,
   silentLoading: false,
@@ -24,8 +25,19 @@ const useThunkReducer = (reducer, initState) => {
 };
 
 const fetchReducer = (state, action) => {
+  if (action.type === 'NEW_SEARCH') {
+    return {
+      keyword: action.payload.keyword,
+      result: null,
+      loading: true,
+      silentLoading: false,
+      isNothingFound: false,
+      error: null,
+    };
+  }
   if (action.type === 'LOADING') {
     return {
+      ...state,
       result: null,
       loading: true,
       silentLoading: false,
@@ -35,6 +47,7 @@ const fetchReducer = (state, action) => {
   }
   if (action.type === 'SILENT_LOADING') {
     return {
+      ...state,
       result: null,
       loading: false,
       silentLoading: true,

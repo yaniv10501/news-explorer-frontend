@@ -14,6 +14,7 @@ function SearchForm({ setSearchActive, thunkDispatch }) {
   const handleSearchSubmit = (event) => {
     event.preventDefault();
     setSearchActive(true);
+    thunkDispatch({ type: 'NEW_SEARCH', payload: searchValue });
     thunkDispatch((dispatch) => newsApi.searchArticles(dispatch, searchValue));
   };
   useEffect(() => {}, []);
