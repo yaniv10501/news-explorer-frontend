@@ -4,6 +4,7 @@ import './NewsCardList.css';
 import testArticles from '../../assets/testArticles';
 import NewsCard from '../NewsCard/NewsCard';
 import Preloader from '../Preloader/Preloader';
+import mainApi from '../../utils/MainApi';
 
 function NewsCardList({
   loggedIn,
@@ -25,6 +26,7 @@ function NewsCardList({
   };
   const handleArticleSave = (event) => {
     if (loggedIn) {
+      mainApi.saveArticle(thunkDispatch, event.target);
       const saveButton = event.target;
       saveButton.classList.toggle('news-card__save-button_active');
       return;

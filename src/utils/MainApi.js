@@ -22,11 +22,24 @@ class MainApi {
       return response;
     });
 
-  getSavedArticles = (dispatch) => {
+  getSavedArticles = (dispatch) =>
     useFetch(dispatch, `${this.baseUrl}/articles`, {
       credentials: 'include',
     }).then((response) => console.log(response));
+
+  saveArticle = (dispatch, eventTarget) => {
+    console.log(eventTarget);
+    useFetch(dispatch, `${this.baseUrl}/articles`, {
+      method: 'POST',
+      credentials: 'include',
+    }).then((response) => console.log(response));
   };
+
+  deleteArticle = (dispatch, articleId) =>
+    useFetch(dispatch, `${this.baseUrl}/articles/${articleId}`, {
+      method: 'DELETE',
+      credentials: 'include',
+    }).then((response) => console.log(response));
 }
 
 const mainApi = new MainApi(backEndApi);

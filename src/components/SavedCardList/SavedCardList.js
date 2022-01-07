@@ -1,10 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import '../NewsCardList/NewsCardList.css';
 import testArticles from '../../assets/testArticles';
+import { fetchReducer, initialState, useThunkReducer } from '../../utils/fetch';
+import mainApi from '../../utils/MainApi';
 import NewsCard from '../NewsCard/NewsCard';
 import Preloader from '../Preloader/Preloader';
 
 function SavedCardList() {
+  const [state, thunkDispatch] = useThunkReducer(fetchReducer, initialState);
+  const { loading } = state;
+  console.log(loading);
   const [isLoadingMore, setIsLoadingMore] = useState(false);
   const [isShowMoreVisible, setIsShowMoreVisible] = useState(testArticles.length > 3);
   const [cardAmount, setCardAmount] = useState(5);
@@ -17,6 +22,12 @@ function SavedCardList() {
       if (cardAmount + 4 >= testArticles.length) setIsShowMoreVisible(false);
     }, 1200);
   };
+  const handleDeleteClick = (event) => {
+    mainApi.deleteArticle(thunkDispatch, event.target.id);
+  };
+  useEffect(() => {
+    mainApi.getSavedArticles(thunkDispatch);
+  }, []);
   return (
     <div className="news-card-list">
       <ul className="news-card-list__grid">
@@ -29,7 +40,8 @@ function SavedCardList() {
               <div className="news-card__keyword">{article.keyword}</div>
               <div
                 className="news-card__delete-button"
-                onClick={() => {}}
+                id={article._id}
+                onClick={handleDeleteClick}
                 onKeyDown={() => {}}
                 role="button"
                 tabIndex={0}
