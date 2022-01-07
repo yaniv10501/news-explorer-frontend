@@ -55,6 +55,7 @@ function App() {
       img.src = image;
     });
     const img = new Image();
+    console.log(aboutProfile);
     img.onload = () => {
       console.log('Loaded about');
     };
