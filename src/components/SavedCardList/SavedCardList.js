@@ -39,7 +39,7 @@ function SavedCardList({ result }) {
               ''
             ) : (
               // eslint-disable-next-line react/no-array-index-key
-              <NewsCard article={article} key={index}>
+              <NewsCard article={article} key={index} handleImageLoad={() => {}}>
                 <div className="news-card__keyword">{article.keyword}</div>
                 <div
                   className="news-card__delete-button"

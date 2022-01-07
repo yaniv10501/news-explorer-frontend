@@ -4,18 +4,24 @@ import './NewsCard.css';
 import noImage from '../../images/no-image.png';
 import formatArticleDate from '../../utils/formatArticleDate';
 
-function NewsCard({
-  article: {
+function NewsCard({ article, handleImageLoad, children }) {
+  const {
     source: { name: source },
     title,
     description: text,
     publishedAt: date,
     url: link,
     urlToImage: image,
-  },
-  handleImageLoad,
-  children,
-}) {
+  } = article.publishedAt
+    ? article
+    : {
+        source: { name: article.source },
+        title: article.title,
+        description: article.text,
+        publishedAt: article.date,
+        url: article.link,
+        urlToImage: article.image,
+      };
   const handleArticleClick = (event) => {
     if (
       event.target.className.indexOf('news-card__save') === -1 &&
