@@ -51,6 +51,7 @@ function App() {
       img.src = image;
       img.decode().finally(() => {
         console.log('Loaded');
+        thunkDispatch({ type: 'IMAGES_LOADED' });
       });
     });
     const headerBackgroundImage = new Image();
@@ -80,7 +81,6 @@ function App() {
       const { source, inter, roboto, robotoSlab } = fontsLoaded;
       if (source && inter && roboto && robotoSlab) {
         console.log('FontsLoaded');
-        thunkDispatch({ type: 'IMAGES_LOADED' });
       }
     };
     SourceSansProFont.load().then(() => {
