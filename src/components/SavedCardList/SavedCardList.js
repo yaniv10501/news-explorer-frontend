@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Navigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import '../NewsCardList/NewsCardList.css';
 import testArticles from '../../assets/testArticles';
@@ -9,6 +9,7 @@ import Preloader from '../Preloader/Preloader';
 import handleImageLoad from '../../utils/handleImageLoad';
 
 function SavedCardList({ result, error, thunkDispatch }) {
+  const navigate = useNavigate();
   let loadingImages = [];
   const [isLoadingMore, setIsLoadingMore] = useState(false);
   const [isShowMoreVisible, setIsShowMoreVisible] = useState(testArticles.length > 3);
@@ -37,6 +38,9 @@ function SavedCardList({ result, error, thunkDispatch }) {
       5
     );
   };
+  const handleHomeClick = () => {
+    navigate('/');
+  };
   useEffect(() => {
     console.log(result);
   }, [result, error]);
@@ -44,9 +48,9 @@ function SavedCardList({ result, error, thunkDispatch }) {
     <section className="news-card-list">
       {error ? (
         <div className="news-card-list__get-container">
-          <h2 className="news-card-list__get-title">Search for new articles</h2>
-          <button className="search__form-submit-button" type="button" onClick={<Navigate to="" />}>
-            Search
+          <h2 className="news-card-list__get-title">Search for new articles to save</h2>
+          <button className="search__form-submit-button" type="button" onClick={handleHomeClick}>
+            Home
           </button>
         </div>
       ) : (
