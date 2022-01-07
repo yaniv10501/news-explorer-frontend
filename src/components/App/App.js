@@ -54,6 +54,11 @@ function App() {
       };
       img.src = image;
     });
+    const headerBackgroundImage = new Image();
+    headerBackgroundImage.onLoad = () => {
+      console.log('Loaded');
+    };
+    headerBackgroundImage.src = headerBackgroundTablet;
     const img = new Image();
     console.log(aboutProfile);
     img.onload = () => {
