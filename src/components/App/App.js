@@ -96,6 +96,7 @@ function App() {
     });
   }, []);
   useEffect(() => {
+    console.log(location);
     if (location.pathname === '/') {
       const loadHomeImage = () => {
         const pageImages = [
@@ -149,6 +150,9 @@ function App() {
         loadHomeImage();
         setIsHome(true);
       }
+    }
+    if (location.pathname === '/saved-news') {
+      setIsHome(false);
     }
   }, [location]);
   return (
