@@ -23,8 +23,11 @@ function SignupPopup({
     if (isValid) {
       mainApi.signUp(thunkDispatch, email, password, name).then((response) => {
         if (response instanceof Error) {
-          console.log(response);
-          setFormError(response.message);
+          if (response.message === 'This Email is already used') {
+            setFormError(response.message);
+            return;
+          }
+          setFormError('Something went wrong, please try again');
           return;
         }
         closeAllPopups();
