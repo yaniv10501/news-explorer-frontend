@@ -14,16 +14,16 @@ const useFormValidation = () => {
       if (passwordValue.length > 6) {
         if (testValid(passwordValue)) {
           if (!testStrength(passwordValue)) {
-            passwordInput.validationMessage =
+            passwordInput.customMessage =
               'Please include at least 1 uppercase character, 1 lowercase character, and 1 number.';
           }
         } else {
-          passwordInput.validationMessage = 'Password is invalid';
+          passwordInput.customMessage = 'Password is invalid';
         }
       }
     }
     setValues({ ...values, [name]: value });
-    setErrors({ ...errors, [name]: e.target.validationMessage });
+    setErrors({ ...errors, [name]: e.target.customMessage || e.target.validationMessage });
     setIsValid(e.target.closest('form').checkValidity());
   };
 

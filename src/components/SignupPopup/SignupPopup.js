@@ -61,8 +61,6 @@ function SignupPopup({
           type="password"
           placeholder="Enter password"
           name="password"
-          pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$"
-          title="Please include at least 1 uppercase character, 1 lowercase character, and 1 number."
           value={password}
           onChange={handleChange}
           required
