@@ -18,14 +18,16 @@ export default function PopupWithForm({
   onSubmit,
   formValid,
   formError,
+  resetForm,
   isLoading,
   handleClose,
   headerRef,
   children,
 }) {
   const mobileQuery = useMediaQuery({ query: '(max-width: 495px)' });
-  const clickHandler = (event) => handleClick(event, handleClose);
-  const linkClickHandler = (event) => handleLinkClick(event, handleClose, setLinkPopupOpen);
+  const clickHandler = (event) => handleClick(event, handleClose, resetForm);
+  const linkClickHandler = (event) =>
+    handleLinkClick(event, handleClose, resetForm, setLinkPopupOpen);
 
   useEffect(() => {
     lockScreen(isOpen, headerRef);
@@ -92,6 +94,7 @@ PopupWithForm.propTypes = {
   onSubmit: PropTypes.func.isRequired,
   formValid: PropTypes.bool.isRequired,
   formError: PropTypes.string.isRequired,
+  resetForm: PropTypes.func.isRequired,
   isLoading: PropTypes.bool.isRequired,
   handleClose: PropTypes.func.isRequired,
   headerRef: PropTypes.instanceOf(Object).isRequired,

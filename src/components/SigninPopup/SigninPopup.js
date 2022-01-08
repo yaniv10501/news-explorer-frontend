@@ -46,6 +46,7 @@ function SigninPopup({
       onSubmit={handleSubmit}
       formValid={isValid}
       formError={formError}
+      resetForm={resetForm}
       isLoading={silentLoading}
       handleClose={closeAllPopups}
       headerRef={headerRef}
