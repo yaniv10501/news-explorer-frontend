@@ -42,7 +42,7 @@ function SigninPopup({
       setLinkPopupOpen={setIsSignupPopupOpen}
       isOpen={isSigninPopupOpen}
       onSubmit={handleSubmit}
-      formValid
+      formValid={isValid}
       isLoading={loading}
       handleClose={closeAllPopups}
       headerRef={headerRef}
@@ -51,7 +51,7 @@ function SigninPopup({
         Email
         <input
           className="popup__input popup__input_type_email"
-          type="text"
+          type="email"
           placeholder="Enter email"
           name="email"
           value={email}
