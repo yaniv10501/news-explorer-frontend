@@ -134,6 +134,7 @@ function Header({ loggedIn, setLoggedIn, isHome, setIsSigninPopupOpen, headerRef
               menuOpen={menuOpen}
               setMenuOpen={setMenuOpen}
               navigationRef={navigationRef}
+              thunkDispatch={thunkDispatch}
             />
           </div>
         ) : (
