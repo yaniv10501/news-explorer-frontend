@@ -60,6 +60,7 @@
 
   .saved-news-header__title {
     font-size: 12px;
+    width: auto;
   }
 
   .saved-news-header__subtitle {
