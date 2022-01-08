@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import './Home.css';
 import { useThunkReducer, fetchReducer, initialState } from '../../utils/fetch';
@@ -28,13 +27,12 @@ function Home({
   headerRef,
   setCurrentUser,
 }) {
-  const navigate = useNavigate();
   const [searchActive, setSearchActive] = useState(false);
   const [state, thunkDispatch] = useThunkReducer(fetchReducer, initialState);
   const { keyword, result, loading, isNothingFound } = state;
   useEffect(() => {
     setIsHome(true);
-    console.log(navigate);
+
     return () => setIsHome(false);
   }, []);
   return (
