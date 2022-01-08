@@ -46,7 +46,7 @@
   border-bottom: 3px solid #fff;
 }
 
-.navigation__item_active_light {
+.navigation__item_active_theme_light {
   border-bottom: 3px solid #1a1b22;
 }
 
@@ -63,7 +63,7 @@
   cursor: pointer;
 }
 
-.navigation__title_light {
+.navigation__title_theme_light {
   color: #1a1b22;
 }
 
@@ -95,11 +95,11 @@
   background-image: url('../../images/logout.svg');
 }
 
-.navigation__title_user-action_light {
+.navigation__title_user-action_theme_light {
   border: 1px solid #1a1b22;
 }
 
-.navigation__title_user-action_light::after {
+.navigation__title_user-action_theme_light::after {
   background-image: url('../../images/logout-light.svg');
 }
 

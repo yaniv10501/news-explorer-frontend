@@ -47,7 +47,7 @@ function Navigation({
             >
               <div
                 className={
-                  isHome ? 'navigation__title' : 'navigation__title navigation__title_light'
+                  isHome ? 'navigation__title' : 'navigation__title navigation__title_theme_light'
                 }
                 onClick={handleHomeClick}
                 onKeyDown={() => {}}
@@ -61,12 +61,12 @@ function Navigation({
               className={
                 isHome
                   ? 'navigation__item'
-                  : 'navigation__item  navigation__item_active navigation__item_active_light'
+                  : 'navigation__item  navigation__item_active navigation__item_active_theme_light'
               }
             >
               <div
                 className={
-                  isHome ? 'navigation__title' : 'navigation__title navigation__title_light'
+                  isHome ? 'navigation__title' : 'navigation__title navigation__title_theme_light'
                 }
                 onClick={handleSavedArticlesClick}
                 onKeyDown={() => {}}
@@ -81,7 +81,7 @@ function Navigation({
                 className={
                   isHome
                     ? 'navigation__title navigation__title_user-action'
-                    : 'navigation__title navigation__title_light navigation__title_user-action navigation__title_user-action_light'
+                    : 'navigation__title navigation__title_theme_light navigation__title_user-action navigation__title_user-action_theme_light'
                 }
                 onClick={handleSignOutClick}
                 onKeyDown={() => {}}

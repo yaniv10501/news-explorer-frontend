@@ -21,7 +21,7 @@ export default function InfoTooltip({
       tabIndex={0}
       className={isOpen ? `popup popup_opened` : `popup`}
     >
-      <div className="popup__container popup__container_info">
+      <div className="popup__container popup__container_type_info">
         <p className="popup__message">{formMessage}</p>
         <a
           className="popup__bottom-title popup__bottom-link popup__bottom-link_info"

@@ -68,7 +68,7 @@ function Header({ loggedIn, setLoggedIn, isHome, setIsSigninPopupOpen, headerRef
   return (
     <>
       <header
-        className={isHome ? 'header' : 'header header_light'}
+        className={isHome ? 'header' : 'header header_theme_light'}
         style={menuOpen ? { backgroundColor: '#1A1B22' } : {}}
         ref={headerRef}
       >
@@ -80,7 +80,7 @@ function Header({ loggedIn, setLoggedIn, isHome, setIsSigninPopupOpen, headerRef
           (menuOpen ? (
             <h2 className="header__title">NewsExplorer</h2>
           ) : (
-            <h2 className={isHome ? 'header__title' : 'header__title header__title_light'}>
+            <h2 className={isHome ? 'header__title' : 'header__title header__title_theme_light'}>
               NewsExplorer
             </h2>
           ))}
@@ -103,7 +103,7 @@ function Header({ loggedIn, setLoggedIn, isHome, setIsSigninPopupOpen, headerRef
         }
         {!mobileQuery && (
           <>
-            <h2 className={isHome ? 'header__title' : 'header__title header__title_light'}>
+            <h2 className={isHome ? 'header__title' : 'header__title header__title_theme_light'}>
               NewsExplorer
             </h2>
             <Navigation

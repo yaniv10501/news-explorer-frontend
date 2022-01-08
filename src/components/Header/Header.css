@@ -14,7 +14,7 @@
   box-shadow: inset 0px -1px 0px rgba(255, 255, 255, 0.2);
 }
 
-.header_light {
+.header_theme_light {
   background: #fff;
   box-shadow: inset 0px -1px 0px #d1d2d6;
 }
@@ -28,7 +28,7 @@
   font-weight: 700;
 }
 
-.header__title_light {
+.header__title_theme_light {
   color: #1a1b22;
 }
 
