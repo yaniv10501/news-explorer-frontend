@@ -20,6 +20,9 @@ function SavedNews({ setIsHome }) {
   useEffect(() => {
     console.log(loading);
   }, [loading]);
+  useEffect(() => {
+    console.log(articles);
+  }, [articles]);
   return (
     <>
       <Preloader isLoading={loading} />
