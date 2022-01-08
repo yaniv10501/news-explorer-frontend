@@ -50,7 +50,7 @@ class MainApi {
         body: JSON.stringify({ articles }),
       },
       { silent: true }
-    ).then((response) => console.log(response));
+    ).then((response) => response);
 
   saveArticle = (dispatch, article, keyword, saveButton) => {
     const {
