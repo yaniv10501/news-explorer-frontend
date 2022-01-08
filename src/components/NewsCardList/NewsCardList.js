@@ -143,7 +143,7 @@ function NewsCardList({
                 article={article}
                 // eslint-disable-next-line react/no-array-index-key
                 key={index}
-                handleImageLoading={handleImageLoading}
+                handleImageLoad={handleImageLoading}
               >
                 <div
                   className={
