@@ -104,6 +104,16 @@ function NewsCardList({
     }
   }, [isLoadingSearch, result]);
   useEffect(() => {
+    if (loggedIn && articles) {
+      mainApi.checkSavedArticles(thunkDispatch, articles).then((response) => {
+        if (response.checkedArticles) {
+          const { checkedArticles } = response;
+          setArticles(checkedArticles);
+        }
+      });
+    }
+  }, [loggedIn]);
+  useEffect(() => {
     console.log(articles);
   }, [articles]);
   return (
