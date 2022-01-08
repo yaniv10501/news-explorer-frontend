@@ -72,6 +72,7 @@ function NewsCardList({
         loadingImages = [];
       }
       if (result && result.articles) {
+        if (result.articles.length === 0) return;
         if (loggedIn) {
           mainApi.checkSavedArticles(thunkDispatch, result.articles, false).then((response) => {
             if (response.checkedArticles) {

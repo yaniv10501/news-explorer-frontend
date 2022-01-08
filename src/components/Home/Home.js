@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import './Home.css';
 import { useThunkReducer, fetchReducer, initialState } from '../../utils/fetch';
@@ -29,9 +29,6 @@ function Home({
   const [searchActive, setSearchActive] = useState(false);
   const [state, thunkDispatch] = useThunkReducer(fetchReducer, initialState);
   const { keyword, result, loading, isNothingFound } = state;
-  useEffect(() => {
-    console.log(isNothingFound);
-  }, [isNothingFound]);
   return (
     <>
       <main className="home" ref={homeRef}>
