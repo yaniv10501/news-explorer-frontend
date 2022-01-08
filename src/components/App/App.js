@@ -119,6 +119,26 @@ function App() {
   }, []);
   useEffect(() => {
     if (location.pathname === '/') {
+      const loadHomeImage = () => {
+        const pageImages = [
+          headerBackground,
+          headerBackgroundTablet,
+          headerBackgroundMobile,
+          logoutIcon,
+          aboutProfile,
+        ];
+        const pageImagesArrLength = pageImages.length * 2 - 1;
+        pageImages.forEach((image) => {
+          const img = new Image();
+          img.src = image;
+          img.decode().finally(() => {
+            pageImages.push(true);
+            if (pageImages.length === pageImagesArrLength) {
+              thunkDispatch({ type: 'PAGE_IMAGES_LOADED' });
+            }
+          });
+        });
+      };
       if (navigationType === 'REPLACE') {
         mainApi.getUserMe(thunkDispatch).then((response) => {
           if (response.email) {
@@ -127,6 +147,7 @@ function App() {
             navigate('/save-news');
             setIsHome(false);
           } else {
+            loadHomeImage();
             setCurrentUser({});
             setLoggedIn(false);
             setIsHome(true);
@@ -143,7 +164,12 @@ function App() {
           } else {
             setLoggedIn(false);
           }
+          loadHomeImage();
         });
+      }
+      if (navigationType === 'PUSH') {
+        loadHomeImage();
+        setIsHome(true);
       }
     }
   }, [location]);
