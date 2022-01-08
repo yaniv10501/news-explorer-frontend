@@ -17,6 +17,7 @@ export default function PopupWithForm({
   isOpen,
   onSubmit,
   formValid,
+  formError,
   isLoading,
   handleClose,
   headerRef,
@@ -51,7 +52,7 @@ export default function PopupWithForm({
 
           {children}
 
-          <span className="popup__form-error">{}</span>
+          <span className="popup__form-error">{formError}</span>
 
           <button
             className={
@@ -90,6 +91,7 @@ PopupWithForm.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   onSubmit: PropTypes.func.isRequired,
   formValid: PropTypes.bool.isRequired,
+  formError: PropTypes.string.isRequired,
   isLoading: PropTypes.bool.isRequired,
   handleClose: PropTypes.func.isRequired,
   headerRef: PropTypes.instanceOf(Object).isRequired,

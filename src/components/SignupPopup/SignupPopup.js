@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import PopupWithForm from '../PopupWithForm/PopupWithForm';
 import useFormValidation from '../../utils/useFormValidation';
@@ -12,6 +12,7 @@ function SignupPopup({
   setIsSuccessRegisterPopupOpen,
   headerRef,
 }) {
+  const [formError, setFormError] = useState('');
   const { values, handleChange, errors, isValid, resetForm } = useFormValidation();
   const { email = '', password = '', name = '' } = values;
   const { email: emailError, password: passwordError, name: nameError } = errors;
@@ -25,6 +26,10 @@ function SignupPopup({
     if (isValid) {
       mainApi.signUp(thunkDispatch, email, password, name).then((response) => {
         console.log(response);
+        if (response instanceof Error) {
+          setFormError(response.message);
+          return;
+        }
         closeAllPopups();
         setIsSuccessRegisterPopupOpen(true);
         resetForm();
@@ -43,6 +48,7 @@ function SignupPopup({
       isOpen={isSignupPopupOpen}
       onSubmit={handleSubmit}
       formValid={isValid}
+      formError={formError}
       isLoading={silentLoading}
       handleClose={closeAllPopups}
       headerRef={headerRef}
