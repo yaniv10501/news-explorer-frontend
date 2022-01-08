@@ -119,7 +119,6 @@ const fetchReducer = (state, action) => {
       result: null,
       loading: false,
       silentLoading: false,
-      isNothingFound: false,
       error: action.payload.error,
     };
   }
