@@ -77,7 +77,7 @@ class MainApi {
     });
   };
 
-  deleteArticle = (dispatch, articleId, saveButton) =>
+  deleteArticle = (dispatch, articleId, { saveButton, articles, setArticles }) =>
     useFetch(
       dispatch,
       `${this.baseUrl}/articles/${articleId}`,
@@ -95,6 +95,9 @@ class MainApi {
         const saveButtonElement = saveButton;
         saveButtonElement.classList.remove('news-card__save-button_active');
         saveButtonElement.id = '';
+      }
+      if (articles && setArticles) {
+        setArticles(articles.filter((article) => article._id !== articleId));
       }
     });
 }

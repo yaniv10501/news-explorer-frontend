@@ -21,7 +21,7 @@ function SavedCardList({ result, error, thunkDispatch, articles, setArticles }) 
     }, 1200);
   };
   const handleDeleteClick = (event) => {
-    mainApi.deleteArticle(thunkDispatch, event.target.id, articles, setArticles);
+    mainApi.deleteArticle(thunkDispatch, event.target.id, { articles, setArticles });
   };
   const handleImageLoading = () => {
     loadingImages = handleImageLoad(
