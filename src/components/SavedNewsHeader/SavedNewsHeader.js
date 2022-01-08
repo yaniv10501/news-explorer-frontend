@@ -8,6 +8,10 @@ function SavedNewsHeader({ articles }) {
   const [savedKeywords, setSavedKeywords] = useState('');
   useEffect(() => {
     if (articles) {
+      if (articles.length === 0) {
+        setSavedKeywords('');
+        return;
+      }
       if (articles.length === 1) {
         setSavedKeywords(articles[0].keyword);
         return;
