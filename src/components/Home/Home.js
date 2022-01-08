@@ -39,7 +39,7 @@ function Home({
         <SearchForm setSearchActive={setSearchActive} thunkDispatch={thunkDispatch} />
         {searchActive &&
           (isNothingFound ? (
-            <NothingFound isLoadingSearch={loading} />
+            <NothingFound isLoadingSearch={loading} thunkDispatch={thunkDispatch} />
           ) : (
             <NewsCardList
               loggedIn={loggedIn}

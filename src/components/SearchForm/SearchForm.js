@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-// import escape from 'escape-html';
+import escape from 'escape-html';
 import './SearchForm.css';
 import newsApi from '../../utils/NewsApi';
 
@@ -8,8 +8,8 @@ function SearchForm({ setSearchActive, thunkDispatch }) {
   const [searchValue, setSearchValue] = useState('');
   const handleSearchChange = (event) => {
     const { value } = event.target;
-    setSearchValue(value);
-    // const escapedValue = escape(value);
+    const escapedValue = escape(value);
+    setSearchValue(escapedValue);
   };
   const handleSearchSubmit = (event) => {
     event.preventDefault();
