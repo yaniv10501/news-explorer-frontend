@@ -43,7 +43,7 @@ function SignupPopup({
         Email
         <input
           className="popup__input popup__input_type_email"
-          type="text"
+          type="email"
           placeholder="Enter email"
           name="email"
           value={email}
