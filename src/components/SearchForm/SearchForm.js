@@ -21,7 +21,7 @@ function SearchForm({ setSearchActive, thunkDispatch }) {
     setPlaceholder('Enter topic');
     setSearchActive(true);
     thunkDispatch({ type: 'NEW_SEARCH', payload: { keyword: searchValue } });
-    thunkDispatch((dispatch) => newsApi.searchArticles(dispatch, searchValue));
+    newsApi.searchArticles(thunkDispatch, searchValue);
   };
   useEffect(() => {}, []);
   return (
