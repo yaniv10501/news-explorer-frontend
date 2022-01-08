@@ -73,7 +73,7 @@ class MainApi {
       }
       const saveButtonElement = saveButton;
       saveButtonElement.classList.add('news-card__save-button_active');
-      saveButtonElement.id = response.id;
+      saveButtonElement.id = response.article.id;
     });
   };
 
