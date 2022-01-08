@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import PopupWithForm from '../PopupWithForm/PopupWithForm';
-import { handleLinkClick } from '../../utils/form';
 import useFormValidation from '../../utils/useFormValidation';
 import mainApi from '../../utils/MainApi';
 import { fetchReducer, initialState, useThunkReducer } from '../../utils/fetch';
@@ -22,10 +21,12 @@ function SignupPopup({
     setIsSigninPopupOpen(true);
   };
   const handleSubmit = (event) => {
+    event.preventDefault();
     if (isValid) {
       mainApi.signUp(thunkDispatch, email, password, name).then((response) => {
         console.log(response);
-        handleLinkClick(event, closeAllPopups, setIsSuccessRegisterPopupOpen);
+        closeAllPopups();
+        setIsSuccessRegisterPopupOpen(true);
         resetForm();
       });
     }
