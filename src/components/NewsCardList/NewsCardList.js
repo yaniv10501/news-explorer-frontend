@@ -87,15 +87,19 @@ function NewsCardList({
         loadingImages = [];
       }
       if (result && result.articles) {
-        mainApi.checkSavedArticles(thunkDispatch, result.articles).then((response) => {
-          if (response.checkedArticles) {
-            const { checkedArticles } = response;
-            setArticles(checkedArticles);
-            if (checkedArticles.length <= 3) {
-              setIsShowMoreVisible(false);
+        if (loggedIn) {
+          mainApi.checkSavedArticles(thunkDispatch, result.articles).then((response) => {
+            if (response.checkedArticles) {
+              const { checkedArticles } = response;
+              setArticles(checkedArticles);
+              if (checkedArticles.length <= 3) {
+                setIsShowMoreVisible(false);
+              }
             }
-          }
-        });
+          });
+        } else {
+          setArticles(result.articles);
+        }
       }
     }
   }, [isLoadingSearch, result]);
