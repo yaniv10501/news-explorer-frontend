@@ -123,6 +123,7 @@
 }
 
 .popup__bottom-title {
+  display: flex;
   font-family: 'Inter';
   font-weight: normal;
   font-size: 14px;
@@ -135,10 +136,9 @@
 .popup__bottom-link {
   color: #2f71e5;
   text-decoration: none;
-  text-align: left;
 }
 
-.popup__bottom-link_info {
+.popup__bottom-link_type_info {
   font-size: 18px;
   line-height: 22px;
 }
