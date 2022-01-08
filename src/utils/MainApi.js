@@ -68,7 +68,7 @@ class MainApi {
       credentials: 'include',
     }).then((response) => response);
 
-  checkSavedArticles = (dispatch, articles, { silent = false }) =>
+  checkSavedArticles = (dispatch, articles, silent) =>
     useFetch(
       dispatch,
       `${this.baseUrl}/articles/checkSaved`,
