@@ -36,8 +36,8 @@ function Navigation({
   };
   const handleSignOutClick = () => {
     mainApi.signOut(thunkDispatch).then(() => {
-      setLoggedIn(false);
       navigate('/');
+      setLoggedIn(false);
     });
   };
   return (

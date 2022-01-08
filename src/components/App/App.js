@@ -120,6 +120,9 @@ function App() {
   useEffect(() => {
     console.log(location);
     console.log(navigationType);
+    if (location.pathname === '/' && navigationType === 'REPLACE') {
+      setIsNotAuthorizedPopupOpen(true);
+    }
   }, [location]);
   return (
     <>
