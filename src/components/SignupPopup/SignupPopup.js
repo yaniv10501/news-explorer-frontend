@@ -76,6 +76,8 @@ function SignupPopup({
           type="text"
           placeholder="Enter name"
           name="name"
+          minLength="2"
+          maxLength="30"
           value={name}
           onChange={handleChange}
           required
