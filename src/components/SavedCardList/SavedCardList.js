@@ -25,7 +25,7 @@ function SavedCardList({ result, error, thunkDispatch, articles, setArticles }) 
   };
   const handleImageLoading = () => {
     loadingImages = handleImageLoad(
-      result.length,
+      articles.length,
       loadingImages,
       thunkDispatch,
       isLoadingMore,
