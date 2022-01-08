@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import './NewsCardList.css';
-import testArticles from '../../assets/testArticles';
 import NewsCard from '../NewsCard/NewsCard';
 import Preloader from '../Preloader/Preloader';
 import mainApi from '../../utils/MainApi';
@@ -19,7 +18,7 @@ function NewsCardList({
   let loadingImages = [];
   const [isLoadingMore, setIsLoadingMore] = useState(false);
   const [articles, setArticles] = useState([]);
-  const [isShowMoreVisible, setIsShowMoreVisible] = useState(testArticles.length > 3);
+  const [isShowMoreVisible, setIsShowMoreVisible] = useState(false);
   const [cardAmount, setCardAmount] = useState(2);
   const handleShowMoreClick = () => {
     const bottomOverlay = document.querySelector('.news-card-list__button-overlay');
@@ -87,6 +86,9 @@ function NewsCardList({
       loadingImages = [];
       if (result && result.articles) {
         setArticles(result.articles);
+        if (result.articles.length <= 3) {
+          setIsShowMoreVisible(false);
+        }
       }
     }
   }, [isLoadingSearch, result]);
