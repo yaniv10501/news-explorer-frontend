@@ -132,14 +132,15 @@
   padding-top: 16px;
 }
 
+.popup__bottom-title_type_info {
+  font-size: 18px;
+  line-height: 22px;
+  display: flex;
+}
+
 .popup__bottom-link {
   color: #2f71e5;
   text-decoration: none;
-}
-
-.popup__bottom-link_type_info {
-  font-size: 18px;
-  line-height: 22px;
 }
 
 .popup__close-button {

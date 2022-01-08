@@ -57,17 +57,15 @@ function Popup({
     >
       <div className="popup__container">
         {children}
-        <p className="popup__bottom-title">
+        <p
+          className={
+            name === 'info'
+              ? 'popup__bottom-title popup__bottom-title_type_info'
+              : 'popup__bottom-title'
+          }
+        >
           {popupBottomTitle}
-          <a
-            className={
-              name === 'info'
-                ? 'popup__bottom-link popup__bottom-link_type_info'
-                : 'popup__bottom-link'
-            }
-            href={popupBottomTitle}
-            onClick={handleLinkClick}
-          >
+          <a className="popup__bottom-link" href={popupBottomTitle} onClick={handleLinkClick}>
             {popupBottomLink}
           </a>
         </p>
