@@ -4,6 +4,7 @@ import PopupWithForm from '../PopupWithForm/PopupWithForm';
 import { handleLinkClick } from '../../utils/form';
 import useFormValidation from '../../utils/useFormValidation';
 import mainApi from '../../utils/MainApi';
+import { fetchReducer, initialState, useThunkReducer } from '../../utils/fetch';
 
 function SignupPopup({
   closeAllPopups,
@@ -11,12 +12,12 @@ function SignupPopup({
   setIsSigninPopupOpen,
   setIsSuccessRegisterPopupOpen,
   headerRef,
-  thunkDispatch,
-  silentLoading,
 }) {
   const { values, handleChange, errors, isValid, resetForm } = useFormValidation();
   const { email = '', password = '', name = '' } = values;
   const { email: emailError, password: passwordError, name: nameError } = errors;
+  const [state, thunkDispatch] = useThunkReducer(fetchReducer, initialState);
+  const { silentLoading } = state;
   const setLinkPopupOpen = () => {
     setIsSigninPopupOpen(true);
   };
@@ -102,8 +103,6 @@ SignupPopup.propTypes = {
   setIsSigninPopupOpen: PropTypes.func.isRequired,
   setIsSuccessRegisterPopupOpen: PropTypes.func.isRequired,
   headerRef: PropTypes.instanceOf(Object).isRequired,
-  thunkDispatch: PropTypes.func.isRequired,
-  silentLoading: PropTypes.bool.isRequired,
 };
 
 export default SignupPopup;

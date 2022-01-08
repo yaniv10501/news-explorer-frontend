@@ -61,7 +61,6 @@ function Home({
         setIsSignupPopupOpen={setIsSignupPopupOpen}
         setLoggedIn={setLoggedIn}
         headerRef={headerRef}
-        thunkDispatch={thunkDispatch}
         setCurrentUser={setCurrentUser}
       />
       <SignupPopup
@@ -70,8 +69,6 @@ function Home({
         setIsSigninPopupOpen={setIsSigninPopupOpen}
         setIsSuccessRegisterPopupOpen={setIsSuccessRegisterPopupOpen}
         headerRef={headerRef}
-        thunkDispatch={thunkDispatch}
-        silentLoading={silentLoading}
       />
       <SuccessRegisterPopup
         closeAllPopups={closeAllPopups}
