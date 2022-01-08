@@ -8,7 +8,15 @@ function NothingFound({ isLoadingSearch, thunkDispatch }) {
   const handleImageLoad = () => thunkDispatch({ type: 'IMAGES_LOADED' });
   return (
     <section className="nothing-found">
-      <Preloader isLoading={isLoadingSearch} />
+      <Preloader isLoading={isLoadingSearch}>
+        <h2
+          className={
+            isLoadingSearch ? 'preloader__title' : 'preloader__title preloader__title_hidden'
+          }
+        >
+          Searching for news...
+        </h2>
+      </Preloader>
       <div
         className={
           isLoadingSearch
