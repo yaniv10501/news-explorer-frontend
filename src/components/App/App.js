@@ -154,7 +154,10 @@ function App() {
             <Route
               path="/saved-news"
               element={
-                <ProtectedRoute loggedIn={loggedIn}>
+                <ProtectedRoute
+                  loggedIn={loggedIn}
+                  setIsNotAuthorizedPopupOpen={setIsNotAuthorizedPopupOpen}
+                >
                   <SavedNews setIsHome={setIsHome} />
                 </ProtectedRoute>
               }
