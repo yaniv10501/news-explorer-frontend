@@ -4,6 +4,8 @@ import './NewsCardList.css';
 import NewsCard from '../NewsCard/NewsCard';
 import Preloader from '../Preloader/Preloader';
 import mainApi from '../../utils/MainApi';
+import handleImageLoad from '../../utils/handleImageLoad';
+import handleShowMore from '../../utils/handleShowMore';
 
 function NewsCardList({
   loggedIn,
@@ -19,12 +21,7 @@ function NewsCardList({
   const [articles, setArticles] = useState([]);
   const [isShowMoreVisible, setIsShowMoreVisible] = useState(true);
   const [cardAmount, setCardAmount] = useState(2);
-  const handleShowMoreClick = () => {
-    const bottomOverlay = document.querySelector('.news-card-list__button-overlay');
-    bottomOverlay.classList.add('news-card-list__button-overlay_loading');
-    setIsLoadingMore(true);
-    setCardAmount(cardAmount + 3);
-  };
+  const handleShowMoreClick = () => handleShowMore(setIsLoadingMore, setCardAmount, cardAmount);
   const handleArticleSave = (event, article) => {
     if (loggedIn) {
       const saveButton = event.target;
@@ -55,27 +52,17 @@ function NewsCardList({
     };
     window.addEventListener('scroll', handleAutoScroll);
   };
-  const handleImageLoad = () => {
-    const articlesLength = articles.length;
-    loadingImages.push(true);
-    let arrLength;
-    const remainingArticles = articlesLength - cardAmount + 1;
-    if (remainingArticles <= 2) {
-      arrLength = remainingArticles + 1;
-    }
-    if (remainingArticles > 2) {
-      arrLength = 3;
-    }
-    if (loadingImages.length === arrLength) {
-      thunkDispatch({ type: 'IMAGES_LOADED' });
-      if (isLoadingMore) {
-        const bottomOverlay = document.querySelector('.news-card-list__button-overlay');
-        bottomOverlay.classList.remove('news-card-list__button-overlay_loading');
-        if (cardAmount + 1 >= articlesLength) setIsShowMoreVisible(false);
-        setIsLoadingMore(false);
-        loadingImages = [];
-      }
-    }
+  const handleImageLoading = () => {
+    loadingImages = handleImageLoad(
+      articles.length,
+      loadingImages,
+      thunkDispatch,
+      isLoadingMore,
+      setIsLoadingMore,
+      setIsShowMoreVisible,
+      cardAmount,
+      3
+    );
   };
   useEffect(() => {
     if (isLoadingSearch) {
@@ -156,7 +143,7 @@ function NewsCardList({
                 article={article}
                 // eslint-disable-next-line react/no-array-index-key
                 key={index}
-                handleImageLoad={handleImageLoad}
+                handleImageLoading={handleImageLoading}
               >
                 <div
                   className={

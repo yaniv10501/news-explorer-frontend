@@ -5,21 +5,14 @@ import mainApi from '../../utils/MainApi';
 import NewsCard from '../NewsCard/NewsCard';
 import Preloader from '../Preloader/Preloader';
 import handleImageLoad from '../../utils/handleImageLoad';
+import handleShowMore from '../../utils/handleShowMore';
 
-function SavedCardList({ result, error, thunkDispatch, articles, setArticles }) {
+function SavedCardList({ result, thunkDispatch, articles, setArticles }) {
   let loadingImages = [];
   const [isLoadingMore, setIsLoadingMore] = useState(false);
   const [isShowMoreVisible, setIsShowMoreVisible] = useState(false);
   const [cardAmount, setCardAmount] = useState(5);
-  const handleShowMoreClick = () => {
-    setIsLoadingMore(true);
-    // SetTimeout is used to fake loading time.
-    setTimeout(() => {
-      setIsLoadingMore(false);
-      setCardAmount(cardAmount + 3);
-      if (cardAmount + 4 >= result.length) setIsShowMoreVisible(false);
-    }, 1200);
-  };
+  const handleShowMoreClick = () => handleShowMore(setIsLoadingMore, setCardAmount, cardAmount);
   const handleDeleteClick = (event) => {
     mainApi.deleteArticle(thunkDispatch, event.target.id, { articles, setArticles });
   };
@@ -42,8 +35,7 @@ function SavedCardList({ result, error, thunkDispatch, articles, setArticles }) 
         setIsShowMoreVisible(true);
       }
     }
-    console.log(result);
-  }, [result, error]);
+  }, [result]);
   return (
     <section className="news-card-list">
       <ul className="news-card-list__grid">
@@ -96,7 +88,6 @@ function SavedCardList({ result, error, thunkDispatch, articles, setArticles }) 
 
 SavedCardList.propTypes = {
   result: PropTypes.instanceOf(Object),
-  error: PropTypes.instanceOf(Object),
   thunkDispatch: PropTypes.func.isRequired,
   articles: PropTypes.instanceOf(Object).isRequired,
   setArticles: PropTypes.func.isRequired,
@@ -104,7 +95,6 @@ SavedCardList.propTypes = {
 
 SavedCardList.defaultProps = {
   result: [],
-  error: {},
 };
 
 export default SavedCardList;

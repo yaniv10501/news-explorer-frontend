@@ -18,14 +18,10 @@ function SignupPopup({
   const { email: emailError, password: passwordError, name: nameError } = errors;
   const [state, thunkDispatch] = useThunkReducer(fetchReducer, initialState);
   const { silentLoading } = state;
-  const setLinkPopupOpen = () => {
-    setIsSigninPopupOpen(true);
-  };
   const handleSubmit = (event) => {
     event.preventDefault();
     if (isValid) {
       mainApi.signUp(thunkDispatch, email, password, name).then((response) => {
-        console.log(response);
         if (response instanceof Error) {
           setFormError(response.message);
           return;
@@ -44,7 +40,7 @@ function SignupPopup({
       submitTitle="Sign up"
       submitLoadingTitle="Signing up"
       formBottomTitle="Sign in"
-      setLinkPopupOpen={setLinkPopupOpen}
+      setLinkPopupOpen={setIsSigninPopupOpen}
       isOpen={isSignupPopupOpen}
       onSubmit={handleSubmit}
       formValid={isValid}

@@ -16,6 +16,7 @@ import headerBackground from '../../images/header-background.jpg';
 import headerBackgroundTablet from '../../images/header-background-tablet.jpg';
 import headerBackgroundMobile from '../../images/header-background-mobile.jpg';
 import logoutIcon from '../../images/logout.svg';
+import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 
 function App() {
   const [state, thunkDispatch] = useThunkReducer(fetchReducer, initialPageState);
@@ -148,7 +149,11 @@ function App() {
             />
             <Route
               path="/saved-news"
-              element={loggedIn ? <SavedNews setIsHome={setIsHome} /> : <Navigate to="/" />}
+              element={
+                <ProtectedRoute loggedIn={loggedIn}>
+                  <SavedNews setIsHome={setIsHome} />
+                </ProtectedRoute>
+              }
             />
             <Route path="*" element={<Navigate to="/" />} />
           </Routes>

@@ -9,12 +9,12 @@ function About() {
       <div className="about__text">
         <h2 className="about__title">About the author</h2>
         <p className="about__brief">
-          This block describes the project author. Here you should indicate your name, what you do,
-          and which development technologies you know.
+          My name is Yaniv Schweitzer, i am a full-stack developer with deep knowledge about
+          javascript, react and node.js.
         </p>
         <p className="about__brief">
-          You can also talk about your experience with Practicum, what you learned there, and how
-          you can help potential customers.
+          During my work with the practicum team i expanded my knowledge about coding and learned
+          how to build a secure and responsive web application.
         </p>
       </div>
     </section>

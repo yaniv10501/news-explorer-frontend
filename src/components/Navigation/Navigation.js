@@ -35,8 +35,7 @@ function Navigation({
     setIsSigninPopupOpen(true);
   };
   const handleSignOutClick = () => {
-    mainApi.signOut(thunkDispatch).then((response) => {
-      console.log(response);
+    mainApi.signOut(thunkDispatch).then(() => {
       setLoggedIn(false);
       navigate('/');
     });

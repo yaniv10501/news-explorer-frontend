@@ -18,7 +18,6 @@ const handleImageLoad = (
   if (remainingArticles > showAmount) {
     arrLength = showAmount + 1;
   }
-  console.log(arrLength, loadingImages.length);
   if (loadingImages.length === arrLength) {
     thunkDispatch({ type: 'IMAGES_LOADED' });
     if (resultLength < cardAmount) setIsShowMoreVisible(false);
