@@ -31,10 +31,10 @@ function NewsCardList({
     if (loggedIn) {
       const saveButton = event.target;
       if (saveButton.classList.contains('news-card__save-button_active')) {
+        mainApi.deleteArticle(thunkDispatch, saveButton.id, saveButton);
+      } else {
         mainApi.saveArticle(thunkDispatch, article, keyword, saveButton);
         console.log(silentLoading);
-      } else {
-        mainApi.deleteArticle(thunkDispatch, saveButton.id, saveButton);
       }
       return;
     }
