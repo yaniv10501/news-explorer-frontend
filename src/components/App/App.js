@@ -96,7 +96,7 @@ function App() {
     });
   }, []);
   useEffect(() => {
-    console.log(location);
+    console.log(location, navigationType);
     if (location.pathname === '/') {
       const loadHomeImage = () => {
         const pageImages = [
