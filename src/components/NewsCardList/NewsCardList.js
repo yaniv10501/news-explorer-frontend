@@ -112,6 +112,15 @@ function NewsCardList({
         }
       });
     }
+    if (!loggedIn && articles) {
+      setArticles(
+        articles.map((item) => {
+          const articleItem = item;
+          articleItem._id = '';
+          return articleItem;
+        })
+      );
+    }
   }, [loggedIn]);
   useEffect(() => {
     console.log(articles);
