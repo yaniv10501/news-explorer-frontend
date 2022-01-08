@@ -7,17 +7,22 @@ class MainApi {
   }
 
   signIn = (dispatch, email, password) =>
-    useFetch(dispatch, `${this.baseUrl}/signin`, {
-      method: 'POST',
-      credentials: 'include',
-      headers: {
-        'Content-Type': 'application/json',
+    useFetch(
+      dispatch,
+      `${this.baseUrl}/signin`,
+      {
+        method: 'POST',
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email,
+          password,
+        }),
       },
-      body: JSON.stringify({
-        email,
-        password,
-      }),
-    }).then((response) => {
+      { silent: true }
+    ).then((response) => {
       console.log(response);
       return response;
     });
