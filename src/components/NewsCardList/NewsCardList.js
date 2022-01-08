@@ -87,9 +87,9 @@ function NewsCardList({
       loadingImages = [];
       if (result && result.articles) {
         mainApi.checkSavedArticles(thunkDispatch, result.articles).then((response) => {
-          console.log(response);
           if (response.checkedArticles) {
             const { checkedArticles } = response;
+            console.log(checkedArticles);
             setArticles(checkedArticles);
             if (checkedArticles.length <= 3) {
               setIsShowMoreVisible(false);
