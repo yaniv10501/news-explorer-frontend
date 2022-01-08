@@ -49,28 +49,6 @@ function App() {
   useEffect(() => {
     smoothscroll.polyfill();
   }, []);
-  useEffect(() => {
-    if (location.pathname === '/') {
-      const pageImages = [
-        headerBackground,
-        headerBackgroundTablet,
-        headerBackgroundMobile,
-        logoutIcon,
-        aboutProfile,
-      ];
-      const pageImagesArrLength = pageImages.length * 2 - 1;
-      pageImages.forEach((image) => {
-        const img = new Image();
-        img.src = image;
-        img.decode().finally(() => {
-          pageImages.push(true);
-          if (pageImages.length === pageImagesArrLength) {
-            thunkDispatch({ type: 'PAGE_IMAGES_LOADED' });
-          }
-        });
-      });
-    }
-  }, [location]);
   useLayoutEffect(() => {
     const SourceSansProFont = new FontFaceObserver('Source Sans Pro');
     const interFont = new FontFaceObserver('Inter');
