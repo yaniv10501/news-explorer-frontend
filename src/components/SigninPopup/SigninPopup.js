@@ -17,7 +17,7 @@ function SigninPopup({
   const { email = '', password = '' } = values;
   const { email: emailError, password: passwordError } = errors;
   const [state, thunkDispatch] = useThunkReducer(fetchReducer, initialState);
-  const { loading } = state;
+  const { silentLoading } = state;
   const handleSubmit = async (event) => {
     event.preventDefault();
     if (isValid) {
@@ -43,7 +43,7 @@ function SigninPopup({
       isOpen={isSigninPopupOpen}
       onSubmit={handleSubmit}
       formValid={isValid}
-      isLoading={loading}
+      isLoading={silentLoading}
       handleClose={closeAllPopups}
       headerRef={headerRef}
     >
