@@ -17,7 +17,7 @@ const handleImageLoad = (
     if (resultLength > cardAmount) {
       arrLength = 3;
     } else {
-      arrLength = 2 - cardAmount - resultLength;
+      arrLength = 2 - (cardAmount - resultLength);
     }
   }
   if (loadingImages.length === arrLength) {
