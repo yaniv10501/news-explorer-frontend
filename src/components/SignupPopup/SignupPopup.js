@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import PopupWithForm from '../PopupWithForm/PopupWithForm';
 import { handleLinkClick } from '../../utils/form';
@@ -11,7 +11,7 @@ function SignupPopup({
   setIsSuccessRegisterPopupOpen,
   headerRef,
 }) {
-  const { values, handleChange, errors, isValid, resetForm } = useFormValidation();
+  const { values, handleChange, errors, isValid, setValues, resetForm } = useFormValidation();
   const { email, password, name } = values;
   const { email: emailError, password: passwordError, name: nameError } = errors;
   const setLinkPopupOpen = () => {
@@ -23,6 +23,13 @@ function SignupPopup({
       resetForm();
     }
   };
+  useEffect(() => {
+    setValues({
+      email: '',
+      password: '',
+      name: '',
+    });
+  }, []);
   return (
     <PopupWithForm
       name="signup"
