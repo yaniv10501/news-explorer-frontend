@@ -140,7 +140,7 @@ const fetchReducer = (state, action) => {
  */
 
 const useFetch = (dispatch, url, options, functionOptions) => {
-  const { silent = false, auth = false } = functionOptions;
+  const { silent = false, auth = false } = functionOptions || {};
   if (!silent) {
     dispatch({ type: 'LOADING' });
   }
