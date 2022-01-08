@@ -107,7 +107,6 @@ const fetchReducer = (state, action) => {
   if (action.type === 'NOTHING_FOUND') {
     return {
       ...state,
-      result: null,
       loading: true,
       silentLoading: false,
       isNothingFound: true,
