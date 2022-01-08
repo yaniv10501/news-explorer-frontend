@@ -71,6 +71,7 @@ function Home({
         setIsSuccessRegisterPopupOpen={setIsSuccessRegisterPopupOpen}
         headerRef={headerRef}
         thunkDispatch={thunkDispatch}
+        silentLoading={silentLoading}
       />
       <SuccessRegisterPopup
         closeAllPopups={closeAllPopups}

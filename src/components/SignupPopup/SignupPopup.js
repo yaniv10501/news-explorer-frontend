@@ -12,6 +12,7 @@ function SignupPopup({
   setIsSuccessRegisterPopupOpen,
   headerRef,
   thunkDispatch,
+  silentLoading,
 }) {
   const { values, handleChange, errors, isValid, resetForm } = useFormValidation();
   const { email = '', password = '', name = '' } = values;
@@ -40,7 +41,7 @@ function SignupPopup({
       isOpen={isSignupPopupOpen}
       onSubmit={handleSubmit}
       formValid={isValid}
-      isLoading={false}
+      isLoading={silentLoading}
       handleClose={closeAllPopups}
       headerRef={headerRef}
     >
@@ -102,6 +103,7 @@ SignupPopup.propTypes = {
   setIsSuccessRegisterPopupOpen: PropTypes.func.isRequired,
   headerRef: PropTypes.instanceOf(Object).isRequired,
   thunkDispatch: PropTypes.func.isRequired,
+  silentLoading: PropTypes.bool.isRequired,
 };
 
 export default SignupPopup;

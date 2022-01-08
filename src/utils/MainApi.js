@@ -12,11 +12,14 @@ class MainApi {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({
-        email,
-        password,
-        name,
-      }),
+      body: JSON.stringify(
+        {
+          email,
+          password,
+          name,
+        },
+        { silent: true }
+      ),
     }).then((response) => response);
 
   signIn = (dispatch, email, password) =>
