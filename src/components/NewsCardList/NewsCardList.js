@@ -80,12 +80,12 @@ function NewsCardList({
     }
   };
   useEffect(() => {
+    console.log(result);
     if (isLoadingSearch) {
       if (articles.length > 0) {
         setArticles([]);
         setCardAmount(2);
         loadingImages = [];
-        console.log(articles.length);
       }
       if (result && result.articles) {
         if (loggedIn) {
