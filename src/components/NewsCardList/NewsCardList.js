@@ -86,7 +86,7 @@ function NewsCardList({
         setCardAmount(2);
         loadingImages = [];
       }
-      console.log(result, result.articles);
+      console.log(result);
       if (result && result.articles) {
         if (loggedIn) {
           mainApi.checkSavedArticles(thunkDispatch, result.articles, false).then((response) => {
