@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import escape from 'escape-html';
 import './SearchForm.css';
@@ -21,9 +21,12 @@ function SearchForm({ setSearchActive, thunkDispatch }) {
     setPlaceholder('Enter topic');
     setSearchActive(true);
     thunkDispatch({ type: 'NEW_SEARCH', payload: { keyword: searchValue } });
-    newsApi.searchArticles(thunkDispatch, searchValue);
+    newsApi.searchArticles(thunkDispatch, searchValue).then((response) => {
+      if (response.articles && response.articles.length === 0) {
+        thunkDispatch({ type: 'NOTHING_FOUND' });
+      }
+    });
   };
-  useEffect(() => {}, []);
   return (
     <section className="search">
       <form className="search__form" noValidate onSubmit={handleSearchSubmit}>

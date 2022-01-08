@@ -11,13 +11,7 @@ class NewsApi {
 
   searchArticles = (dispatch, query) =>
     useFetch(dispatch, `${this.baseUrl + query}&from=${this.from}&to=${this.to}`).then(
-      (response) => {
-        console.log(response.articles && response.articles.length === 0);
-        if (response.articles && response.articles.length === 0) {
-          dispatch({ type: 'NOTHING_FOUND' });
-        }
-        return response;
-      }
+      (response) => response
     );
 }
 
