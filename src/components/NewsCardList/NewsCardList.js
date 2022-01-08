@@ -80,27 +80,26 @@ function NewsCardList({
     }
   };
   useEffect(() => {
-    console.log(result);
     if (isLoadingSearch) {
       if (articles.length > 0) {
         setArticles([]);
         setCardAmount(2);
         loadingImages = [];
       }
-      if (result && result.articles) {
-        if (loggedIn) {
-          mainApi.checkSavedArticles(thunkDispatch, result.articles, false).then((response) => {
-            if (response.checkedArticles) {
-              const { checkedArticles } = response;
-              setArticles(checkedArticles);
-              if (checkedArticles.length <= 3) {
-                setIsShowMoreVisible(false);
-              }
+    }
+    if (result && result.articles) {
+      if (loggedIn) {
+        mainApi.checkSavedArticles(thunkDispatch, result.articles, false).then((response) => {
+          if (response.checkedArticles) {
+            const { checkedArticles } = response;
+            setArticles(checkedArticles);
+            if (checkedArticles.length <= 3) {
+              setIsShowMoreVisible(false);
             }
-          });
-        } else {
-          setArticles(result.articles);
-        }
+          }
+        });
+      } else {
+        setArticles(result.articles);
       }
     }
   }, [isLoadingSearch, result]);
