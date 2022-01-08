@@ -4,14 +4,14 @@ import InfoTooltip from '../InfoToolTip/InfoTooltip';
 
 function NotAuthorizedPopup({
   isNotAuthorizedPopupOpen,
-  handleClose,
+  closeAllPopups,
   setIsSigninPopupOpen,
   headerRef,
 }) {
   return (
     <InfoTooltip
       isOpen={isNotAuthorizedPopupOpen}
-      handleClose={handleClose}
+      handleClose={closeAllPopups}
       formMessage="Sign in to visit this page"
       popupBottomLink="Sign in"
       setLinkPopupOpen={setIsSigninPopupOpen}
@@ -22,7 +22,7 @@ function NotAuthorizedPopup({
 
 NotAuthorizedPopup.propTypes = {
   isNotAuthorizedPopupOpen: PropTypes.bool.isRequired,
-  handleClose: PropTypes.func.isRequired,
+  closeAllPopups: PropTypes.func.isRequired,
   setIsSigninPopupOpen: PropTypes.func.isRequired,
   headerRef: PropTypes.instanceOf(Object).isRequired,
 };
