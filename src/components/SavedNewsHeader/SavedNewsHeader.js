@@ -3,26 +3,26 @@ import PropTypes from 'prop-types';
 import './SavedNewsHeader.css';
 import CurrentUserContext from '../../contexts/CurrentUserContext';
 
-function SavedNewsHeader({ result, articles }) {
+function SavedNewsHeader({ articles }) {
   const { name } = useContext(CurrentUserContext);
   const [savedKeywords, setSavedKeywords] = useState('');
   useEffect(() => {
-    if (result) {
-      if (result.length === 1) {
-        setSavedKeywords(result[0].keyword);
+    if (articles) {
+      if (articles.length === 1) {
+        setSavedKeywords(articles[0].keyword);
         return;
       }
-      if (result.length === 2) {
-        if (result[0].keyword === result[1].keyword) {
-          setSavedKeywords(result[0].keyword);
+      if (articles.length === 2) {
+        if (articles[0].keyword === articles[1].keyword) {
+          setSavedKeywords(articles[0].keyword);
           return;
         }
-        setSavedKeywords(`${result[0].keyword} and ${result[1].keyword}`);
+        setSavedKeywords(`${articles[0].keyword} and ${articles[1].keyword}`);
         return;
       }
-      if (result.length === 3) {
+      if (articles.length === 3) {
         const keywordsArr = [];
-        result.forEach((article) => {
+        articles.forEach((article) => {
           const { keyword } = article;
           if (keywordsArr.indexOf(keyword) === -1) {
             keywordsArr.push(keyword);
@@ -38,9 +38,9 @@ function SavedNewsHeader({ result, articles }) {
         }
         setSavedKeywords(`${keywordsArr[0]}, ${keywordsArr[1]} and ${keywordsArr[2]}`);
       }
-      if (result.length > 3) {
+      if (articles.length > 3) {
         const keywordsArr = [];
-        result.forEach((article) => {
+        articles.forEach((article) => {
           const { keyword } = article;
           if (keywordsArr.indexOf(keyword) === -1) {
             keywordsArr.push(keyword);
@@ -61,7 +61,7 @@ function SavedNewsHeader({ result, articles }) {
         setSavedKeywords(`${keywordsArr[0]}, ${keywordsArr[1]} and ${keywordsArr.length - 2} more`);
       }
     }
-  }, [result]);
+  }, [articles]);
   return (
     <section className="saved-news-header">
       <h2 className="saved-news-header__title">Saved articles</h2>
@@ -76,12 +76,7 @@ function SavedNewsHeader({ result, articles }) {
 }
 
 SavedNewsHeader.propTypes = {
-  result: PropTypes.instanceOf(Object),
   articles: PropTypes.instanceOf(Object).isRequired,
-};
-
-SavedNewsHeader.defaultProps = {
-  result: [],
 };
 
 export default SavedNewsHeader;
