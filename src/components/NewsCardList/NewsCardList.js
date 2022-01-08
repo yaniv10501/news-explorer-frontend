@@ -61,7 +61,7 @@ function NewsCardList({
       setIsLoadingMore,
       setIsShowMoreVisible,
       cardAmount,
-      3
+      2
     );
   };
   useEffect(() => {
