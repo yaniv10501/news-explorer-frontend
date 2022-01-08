@@ -38,19 +38,14 @@ class MainApi {
     }).then((response) => response);
 
   checkSavedArticles = (dispatch, articles) =>
-    useFetch(
-      dispatch,
-      `${this.baseUrl}/articles/checkSaved`,
-      {
-        method: 'POST',
-        credentials: 'include',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ articles }),
+    useFetch(dispatch, `${this.baseUrl}/articles/checkSaved`, {
+      method: 'POST',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json',
       },
-      { silent: true }
-    ).then((response) => response);
+      body: JSON.stringify({ articles }),
+    }).then((response) => response);
 
   saveArticle = (dispatch, article, keyword, saveButton) => {
     const {

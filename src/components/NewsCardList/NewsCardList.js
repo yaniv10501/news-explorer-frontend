@@ -137,7 +137,11 @@ function NewsCardList({
                 handleImageLoad={handleImageLoad}
               >
                 <div
-                  className="news-card__save-button"
+                  className={
+                    article._id
+                      ? 'news-card__save-button news-card__save-button_active'
+                      : 'news-card__save-button'
+                  }
                   id={article._id || ''}
                   onClick={(event) => handleArticleSave(event, article)}
                   onKeyDown={() => {}}
