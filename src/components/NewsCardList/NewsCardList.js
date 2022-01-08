@@ -105,7 +105,7 @@ function NewsCardList({
     }
   }, [isLoadingSearch, result]);
   useEffect(() => {
-    if (loggedIn && articles) {
+    if (loggedIn && articles.length > 0) {
       console.log('hey');
       mainApi.checkSavedArticles(thunkDispatch, articles, true).then((response) => {
         if (response.checkedArticles) {
@@ -114,7 +114,7 @@ function NewsCardList({
         }
       });
     }
-    if (!loggedIn && articles) {
+    if (!loggedIn && articles.length > 0) {
       setArticles(
         articles.map((item) => {
           const articleItem = item;
