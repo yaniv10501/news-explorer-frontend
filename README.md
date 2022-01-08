@@ -1,6 +1,6 @@
 # News Exolorer FrontEnd
 
-The frontend for the News Explorer Website.
+The frontend for the News Explorer Website, [Link to the deployed website](https://www.yaniv-news-app.students.nomoreparties.sbs)
 
 ## Website current features:
 
