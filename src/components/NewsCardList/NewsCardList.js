@@ -81,7 +81,7 @@ function NewsCardList({
   };
   useEffect(() => {
     if (isLoadingSearch) {
-      if (articles) {
+      if (articles.length > 0) {
         setArticles([]);
         setIsShowMoreVisible(true);
         setCardAmount(2);
