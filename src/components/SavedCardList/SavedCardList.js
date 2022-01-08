@@ -36,7 +36,7 @@ function SavedCardList({ result, error, thunkDispatch, articles, setArticles }) 
     );
   };
   useEffect(() => {
-    if (result) {
+    if (result && !result.message) {
       setArticles(result);
       if (result.length > 6) {
         setIsShowMoreVisible(true);
