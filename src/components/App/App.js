@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef, useLayoutEffect } from 'react';
-import { Route, Routes, Navigate, useLocation, useNavigationType } from 'react-router-dom';
+import { Route, Routes, Navigate, useLocation, useNavigate } from 'react-router-dom';
 import smoothscroll from 'smoothscroll-polyfill';
 import FontFaceObserver from 'fontfaceobserver';
 import './App.css';
@@ -20,7 +20,7 @@ import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 
 function App() {
   const location = useLocation();
-  const navigationType = useNavigationType();
+  const navigate = useNavigate();
   const [state, thunkDispatch] = useThunkReducer(fetchReducer, initialPageState);
   const { loading } = state;
   const headerRef = useRef();
@@ -119,12 +119,13 @@ function App() {
   }, []);
   useEffect(() => {
     if (location.pathname === '/') {
-      setIsHome(true);
-      if (navigationType === 'REPLACE') {
+      if (loggedIn) {
+        navigate('/save-news');
+        setIsHome(false);
+      } else {
         setIsNotAuthorizedPopupOpen(true);
+        setIsHome(true);
       }
-    } else {
-      setIsHome(false);
     }
   }, [location]);
   return (
@@ -165,12 +166,7 @@ function App() {
             <Route
               path="/saved-news"
               element={
-                <ProtectedRoute
-                  loggedIn={loggedIn}
-                  thunkDispatch={thunkDispatch}
-                  setCurrentUser={setCurrentUser}
-                  setLoggedIn={setLoggedIn}
-                >
+                <ProtectedRoute loggedIn={loggedIn}>
                   <SavedNews />
                 </ProtectedRoute>
               }
