@@ -80,7 +80,7 @@ class MainApi {
         },
         body: JSON.stringify({ articles }),
       },
-      { silent }
+      { silent: silent || false }
     ).then((response) => response);
 
   saveArticle = (dispatch, article, keyword, saveButton) => {
