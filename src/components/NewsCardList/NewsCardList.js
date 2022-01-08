@@ -58,7 +58,7 @@ function NewsCardList({
     window.addEventListener('scroll', handleAutoScroll);
   };
   const handleImageLoad = () => {
-    const articlesLength = result.articles.length;
+    const articlesLength = articles.length;
     loadingImages.push(true);
     let arrLength;
     const remainingArticles = articlesLength - cardAmount + 1;
