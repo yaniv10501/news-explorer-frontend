@@ -23,6 +23,7 @@ function SignupPopup({
     if (isValid) {
       mainApi.signUp(thunkDispatch, email, password, name).then((response) => {
         if (response instanceof Error) {
+          console.log(response);
           setFormError(response.message);
           return;
         }

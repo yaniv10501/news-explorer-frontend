@@ -7,6 +7,7 @@ const useFormValidation = () => {
   const [isValid, setIsValid] = useState(false);
 
   const handleChange = (event) => {
+    let costumIsValid;
     const { name, value } = event.target;
     if (name === 'password') {
       const passwordInput = event.target;
@@ -16,11 +17,14 @@ const useFormValidation = () => {
           if (!testStrength(passwordValue)) {
             passwordInput.customMessage =
               'Please include at least 1 uppercase character, 1 lowercase character, and 1 number.';
+            costumIsValid = false;
           } else {
             passwordInput.customMessage = '';
+            costumIsValid = true;
           }
         } else {
           passwordInput.customMessage = 'Password is invalid';
+          costumIsValid = false;
         }
       } else {
         passwordInput.customMessage = '';
@@ -32,16 +36,19 @@ const useFormValidation = () => {
       if (nameValue.length >= 2 && nameValue.length <= 30) {
         if (testValid(nameValue)) {
           nameInput.customMessage = '';
+          costumIsValid = true;
         } else {
           nameInput.customMessage = 'Name is invalid';
+          costumIsValid = false;
         }
       } else {
         nameInput.customMessage = '';
+        costumIsValid = true;
       }
     }
     setValues({ ...values, [name]: value });
     setErrors({ ...errors, [name]: event.target.customMessage || event.target.validationMessage });
-    setIsValid(event.target.closest('form').checkValidity());
+    setIsValid(costumIsValid ? event.target.closest('form').checkValidity() : false);
   };
 
   const resetForm = useCallback(
