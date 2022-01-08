@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { useMediaQuery } from 'react-responsive';
 import './Navigation.css';
 import CurrentUserContext from '../../contexts/CurrentUserContext';
+import mainApi from '../../utils/MainApi';
 
 function Navigation({
   loggedIn,
@@ -34,8 +35,11 @@ function Navigation({
     setIsSigninPopupOpen(true);
   };
   const handleSignOutClick = () => {
-    setLoggedIn(false);
-    navigate('/');
+    mainApi.signOut(thunkDispatch).then((response) => {
+      console.log(response);
+      setLoggedIn(false);
+      navigate('/');
+    });
   };
   return (
     <ul className={menuOpen ? 'navigation navigation_open' : 'navigation'} ref={navigationRef}>

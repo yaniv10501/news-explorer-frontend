@@ -36,7 +36,7 @@ class MainApi {
         credentials: 'include',
       },
       { silent: true }
-    ).then((response) => console.log(response));
+    ).then((response) => response);
 
   getUserMe = (dispatch) =>
     useFetch(
