@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import './Home.css';
 import { useThunkReducer, fetchReducer, initialState } from '../../utils/fetch';
@@ -14,7 +14,6 @@ import NotAuthorizedPopup from '../NotAuthorizedPopup/NotAuthorizedPopup';
 function Home({
   loggedIn,
   setLoggedIn,
-  setIsHome,
   closeAllPopups,
   isSigninPopupOpen,
   setIsSigninPopupOpen,
@@ -30,11 +29,6 @@ function Home({
   const [searchActive, setSearchActive] = useState(false);
   const [state, thunkDispatch] = useThunkReducer(fetchReducer, initialState);
   const { keyword, result, loading, isNothingFound } = state;
-  useEffect(() => {
-    setIsHome(true);
-
-    return () => setIsHome(false);
-  }, []);
   return (
     <>
       <main className="home" ref={homeRef}>
@@ -89,7 +83,6 @@ function Home({
 Home.propTypes = {
   loggedIn: PropTypes.bool.isRequired,
   setLoggedIn: PropTypes.func.isRequired,
-  setIsHome: PropTypes.func.isRequired,
   closeAllPopups: PropTypes.func.isRequired,
   isSigninPopupOpen: PropTypes.bool.isRequired,
   setIsSigninPopupOpen: PropTypes.func.isRequired,

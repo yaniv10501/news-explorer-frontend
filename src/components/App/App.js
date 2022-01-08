@@ -25,8 +25,8 @@ function App() {
   const { loading } = state;
   const headerRef = useRef();
   const homeRef = useRef();
-  const [isHome, setIsHome] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
+  const [isHome, setIsHome] = useState(location.pathname === '/');
   const [isSigninPopupOpen, setIsSigninPopupOpen] = useState(false);
   const [isSignupPopupOpen, setIsSignupPopupOpen] = useState(false);
   const [isSuccessRegisterPopupOpen, setIsSuccessRegisterPopupOpen] = useState(false);
@@ -50,7 +50,7 @@ function App() {
     });
   }, []);
   useEffect(() => {
-    if (isHome) {
+    if (location.pathname === '/') {
       const pageImages = [
         headerBackground,
         headerBackgroundTablet,
@@ -70,7 +70,7 @@ function App() {
         });
       });
     }
-  }, [isHome]);
+  }, [location]);
   useLayoutEffect(() => {
     const SourceSansProFont = new FontFaceObserver('Source Sans Pro');
     const interFont = new FontFaceObserver('Inter');
@@ -118,10 +118,13 @@ function App() {
     });
   }, []);
   useEffect(() => {
-    console.log(location);
-    console.log(navigationType);
-    if (location.pathname === '/' && navigationType === 'REPLACE') {
-      setIsNotAuthorizedPopupOpen(true);
+    if (location.pathname === '/') {
+      setIsHome(true);
+      if (navigationType === 'REPLACE') {
+        setIsNotAuthorizedPopupOpen(true);
+      }
+    } else {
+      setIsHome(false);
     }
   }, [location]);
   return (
@@ -144,7 +147,6 @@ function App() {
                 <Home
                   loggedIn={loggedIn}
                   setLoggedIn={setLoggedIn}
-                  setIsHome={setIsHome}
                   closeAllPopups={closeAllPopups}
                   isSigninPopupOpen={isSigninPopupOpen}
                   setIsSigninPopupOpen={setIsSigninPopupOpen}
@@ -167,7 +169,7 @@ function App() {
                   loggedIn={loggedIn}
                   setIsNotAuthorizedPopupOpen={setIsNotAuthorizedPopupOpen}
                 >
-                  <SavedNews setIsHome={setIsHome} />
+                  <SavedNews />
                 </ProtectedRoute>
               }
             />
