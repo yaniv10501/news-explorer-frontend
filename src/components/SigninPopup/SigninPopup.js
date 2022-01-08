@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import PopupWithForm from '../PopupWithForm/PopupWithForm';
 import { fetchReducer, initialState, useThunkReducer } from '../../utils/fetch';
 import mainApi from '../../utils/MainApi';
+import useFormValidation from '../../utils/useFormValidation';
 
 function SigninPopup({
   closeAllPopups,
@@ -12,25 +13,23 @@ function SigninPopup({
   headerRef,
   setCurrentUser,
 }) {
+  const { values, handleChange, errors, isValid, resetForm } = useFormValidation();
+  const { email = '', password = '' } = values;
+  const { email: emailError, password: passwordError } = errors;
   const [state, thunkDispatch] = useThunkReducer(fetchReducer, initialState);
   const { loading } = state;
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const handleEmailChange = (event) => {
-    setEmail(event.target.value);
-  };
-  const handlePasswordChange = (event) => {
-    setPassword(event.target.value);
-  };
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const response = await mainApi.signIn(thunkDispatch, email, password);
-    if (response instanceof Error) {
-      return;
+    if (isValid) {
+      const response = await mainApi.signIn(thunkDispatch, email, password);
+      if (response instanceof Error) {
+        return;
+      }
+      setCurrentUser(response);
+      closeAllPopups();
+      setLoggedIn(true);
+      resetForm();
     }
-    setCurrentUser(response);
-    closeAllPopups();
-    setLoggedIn(true);
   };
   return (
     <PopupWithForm
@@ -56,12 +55,12 @@ function SigninPopup({
           placeholder="Enter email"
           name="email"
           value={email}
-          onChange={handleEmailChange}
+          onChange={handleChange}
           required
         />
       </label>
 
-      <span className="popup__error">{}</span>
+      <span className="popup__error">{emailError}</span>
 
       <label className="popup__label" htmlFor="password">
         Password
@@ -70,13 +69,14 @@ function SigninPopup({
           type="password"
           placeholder="Enter password"
           name="password"
+          minLength="6"
           value={password}
-          onChange={handlePasswordChange}
+          onChange={handleChange}
           required
         />
       </label>
 
-      <span className="popup__error">{}</span>
+      <span className="popup__error">{passwordError}</span>
     </PopupWithForm>
   );
 }
