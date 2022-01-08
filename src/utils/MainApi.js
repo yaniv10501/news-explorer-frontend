@@ -37,7 +37,7 @@ class MainApi {
       credentials: 'include',
     }).then((response) => response);
 
-  saveArticle = (dispatch, article, keyword) => {
+  saveArticle = (dispatch, article, keyword, saveButton) => {
     const {
       source: { name: source },
       title,
@@ -66,7 +66,13 @@ class MainApi {
         }),
       },
       { silent: true }
-    ).then((response) => console.log(response));
+    ).then((response) => {
+      console.log(response);
+      if (response instanceof Error) {
+        return;
+      }
+      saveButton.classList.toggle('news-card__save-button_active');
+    });
   };
 
   deleteArticle = (dispatch, articleId) =>
