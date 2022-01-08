@@ -27,6 +27,17 @@ class MainApi {
       return response;
     });
 
+  signOut = (dispatch) =>
+    useFetch(
+      dispatch,
+      `${this.baseUrl}/signout`,
+      {
+        method: 'POST',
+        credentials: 'include',
+      },
+      { silent: true }
+    ).then((response) => console.log(response));
+
   getUserMe = (dispatch) =>
     useFetch(
       dispatch,
