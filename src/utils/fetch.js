@@ -127,7 +127,20 @@ const fetchReducer = (state, action) => {
   return state;
 };
 
-const useFetch = (dispatch, url, options, silent, auth) => {
+/**
+ * @function useFetch
+ * @description This function will call a fetch request and dispatch actions based on functionOptions.
+ * @param {function} dispatch - The dispatch function to be called.
+ * @param {string} url - The url of the request.
+ * @param {object} options - Option for the feth request.
+ * @param {object} functionOptions - Options for the function.
+ * @param {boolean} silent - Set true for fetch request that doesn't return images.
+ * @param {boolean} auth - Set true for authorization request.
+ * @returns The parsed response or the error, if auth set to true error wont be dispatched.
+ */
+
+const useFetch = (dispatch, url, options, functionOptions) => {
+  const { silent = false, auth = false } = functionOptions;
   if (!silent) {
     dispatch({ type: 'LOADING' });
   }
@@ -155,26 +168,4 @@ const useFetch = (dispatch, url, options, silent, auth) => {
   return fetchUrl();
 };
 
-const getArticles = (dispatch, url, options) =>
-  useFetch(dispatch, url, options).then((response) => {
-    if (response instanceof Error) {
-      return response;
-    }
-    if (response.articles.length === 0) {
-      dispatch({ type: 'ERROR', payload: { error: new Error('NOTHING_FOUND') } });
-    }
-    return response;
-  });
-
-const signIn = (dispatch, url, options) =>
-  useFetch(dispatch, url, options).then((response) => console.log(response));
-
-export {
-  useThunkReducer,
-  fetchReducer,
-  initialState,
-  initialPageState,
-  getArticles,
-  signIn,
-  useFetch,
-};
+export { useThunkReducer, fetchReducer, initialState, initialPageState, useFetch };

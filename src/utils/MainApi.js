@@ -29,8 +29,7 @@ class MainApi {
       {
         credentials: 'include',
       },
-      false,
-      true
+      { auth: true }
     ).then((response) => response);
 
   getSavedArticles = (dispatch) =>
@@ -66,15 +65,20 @@ class MainApi {
           keyword,
         }),
       },
-      true
+      { silent: true }
     ).then((response) => console.log(response));
   };
 
   deleteArticle = (dispatch, articleId) =>
-    useFetch(dispatch, `${this.baseUrl}/articles/${articleId}`, {
-      method: 'DELETE',
-      credentials: 'include',
-    }).then((response) => console.log(response));
+    useFetch(
+      dispatch,
+      `${this.baseUrl}/articles/${articleId}`,
+      {
+        method: 'DELETE',
+        credentials: 'include',
+      },
+      { silent: true }
+    ).then((response) => console.log(response));
 }
 
 const mainApi = new MainApi(backEndApi);

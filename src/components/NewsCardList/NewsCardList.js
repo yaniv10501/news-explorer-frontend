@@ -29,11 +29,11 @@ function NewsCardList({
   };
   const handleArticleSave = (event, article) => {
     if (loggedIn) {
-      mainApi.saveArticle(thunkDispatch, article, keyword);
-      console.log(silentLoading);
-      const saveButton = event.target;
-      saveButton.classList.toggle('news-card__save-button_active');
-      return;
+      mainApi.saveArticle(thunkDispatch, article, keyword).then(() => {
+        console.log(silentLoading);
+        const saveButton = event.target;
+        saveButton.classList.toggle('news-card__save-button_active');
+      });
     }
     const checkHomeY = () => {
       const { y } = homeRef.current.getBoundingClientRect();
