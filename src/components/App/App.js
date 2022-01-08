@@ -96,7 +96,6 @@ function App() {
     });
   }, []);
   useEffect(() => {
-    console.log(location, navigationType, loggedIn);
     if (location.pathname === '/') {
       const loadHomeImage = () => {
         const pageImages = [
@@ -123,7 +122,7 @@ function App() {
           if (response.email) {
             setCurrentUser(response);
             setLoggedIn(true);
-            navigate('/save-news');
+            navigate('/saved-news');
             setIsHome(false);
           } else {
             loadHomeImage();
