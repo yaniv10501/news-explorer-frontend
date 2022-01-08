@@ -1,5 +1,12 @@
 import React, { useEffect, useState, useRef, useLayoutEffect } from 'react';
-import { Route, Routes, Navigate, useLocation, useNavigate } from 'react-router-dom';
+import {
+  Route,
+  Routes,
+  Navigate,
+  useLocation,
+  useNavigationType,
+  useNavigate,
+} from 'react-router-dom';
 import smoothscroll from 'smoothscroll-polyfill';
 import FontFaceObserver from 'fontfaceobserver';
 import './App.css';
@@ -20,6 +27,7 @@ import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 
 function App() {
   const location = useLocation();
+  const navigationType = useNavigationType();
   const navigate = useNavigate();
   const [state, thunkDispatch] = useThunkReducer(fetchReducer, initialPageState);
   const { loading } = state;
@@ -40,14 +48,6 @@ function App() {
   };
   useEffect(() => {
     smoothscroll.polyfill();
-    mainApi.getUserMe(thunkDispatch).then((response) => {
-      if (response.email) {
-        setCurrentUser(response);
-        setLoggedIn(true);
-      } else {
-        setLoggedIn(false);
-      }
-    });
   }, []);
   useEffect(() => {
     if (location.pathname === '/') {
@@ -119,12 +119,31 @@ function App() {
   }, []);
   useEffect(() => {
     if (location.pathname === '/') {
-      if (loggedIn) {
-        navigate('/save-news');
-        setIsHome(false);
-      } else {
-        setIsNotAuthorizedPopupOpen(true);
+      if (navigationType === 'REPLACE') {
+        mainApi.getUserMe(thunkDispatch).then((response) => {
+          if (response.email) {
+            setCurrentUser(response);
+            setLoggedIn(true);
+            navigate('/save-news');
+            setIsHome(false);
+          } else {
+            setCurrentUser({});
+            setLoggedIn(false);
+            setIsHome(true);
+            setIsNotAuthorizedPopupOpen(true);
+          }
+        });
+      }
+      if (navigationType === 'POP') {
         setIsHome(true);
+        mainApi.getUserMe(thunkDispatch).then((response) => {
+          if (response.email) {
+            setCurrentUser(response);
+            setLoggedIn(true);
+          } else {
+            setLoggedIn(false);
+          }
+        });
       }
     }
   }, [location]);

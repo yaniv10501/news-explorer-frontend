@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Navigate } from 'react-router-dom';
 
 function ProtectedRoute({ children, loggedIn }) {
-  return loggedIn ? children : <Navigate to="/" />;
+  return loggedIn ? children : <Navigate replace to="/" />;
 }
 ProtectedRoute.propTypes = {
   children: PropTypes.node.isRequired,
