@@ -33,6 +33,7 @@ function SignupPopup({
         closeAllPopups();
         setIsSuccessRegisterPopupOpen(true);
         resetForm();
+        setFormError('');
       });
     }
   };

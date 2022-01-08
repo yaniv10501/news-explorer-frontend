@@ -31,6 +31,7 @@ function SigninPopup({
       closeAllPopups();
       setLoggedIn(true);
       resetForm();
+      setFormError('');
     }
   };
   return (
