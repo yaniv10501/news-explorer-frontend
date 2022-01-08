@@ -1,5 +1,5 @@
 import { useState, useCallback } from 'react';
-import { testStrength, testValid } from './regex';
+import { testEmail, testStrength, testValid } from './regex';
 
 const useFormValidation = () => {
   const [values, setValues] = useState({});
@@ -13,8 +13,10 @@ const useFormValidation = () => {
       const passwordInput = event.target;
       const passwordValue = passwordInput.value;
       if (passwordValue.length >= 6) {
-        if (testValid(passwordValue)) {
-          if (!testStrength(passwordValue)) {
+        const isInputValid = testValid(passwordValue);
+        if (isInputValid) {
+          const isInputStrong = testStrength(passwordValue);
+          if (!isInputStrong) {
             passwordInput.customMessage =
               'Please include at least 1 uppercase character, 1 lowercase character, and 1 number.';
             costumIsValid = false;
@@ -34,7 +36,8 @@ const useFormValidation = () => {
       const nameInput = event.target;
       const nameValue = nameInput.value;
       if (nameValue.length >= 2 && nameValue.length <= 30) {
-        if (testValid(nameValue)) {
+        const isInputValid = testValid(nameValue);
+        if (isInputValid) {
           nameInput.customMessage = '';
           costumIsValid = true;
         } else {
@@ -44,6 +47,18 @@ const useFormValidation = () => {
       } else {
         nameInput.customMessage = '';
         costumIsValid = true;
+      }
+    }
+    if (name === 'email') {
+      const emailInput = event.target;
+      const emailValue = emailInput.value;
+      const isInputValid = testEmail(emailValue);
+      if (isInputValid) {
+        emailInput.customMessage = '';
+        costumIsValid = true;
+      } else {
+        emailInput.customMessage = 'Enter an email address';
+        costumIsValid = false;
       }
     }
     setValues({ ...values, [name]: value });

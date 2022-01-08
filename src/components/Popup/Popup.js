@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import './Popup.css';
-import { isFunction } from 'lodash';
 import { useMediaQuery } from 'react-responsive';
 import lockScreen from '../../utils/lockScreen';
 
@@ -13,23 +12,16 @@ function Popup({
   popupBottomLink,
   setLinkPopupOpen,
   headerRef,
-  resetForm,
   children,
 }) {
   const handleClick = (event) => {
     if (event.target.className.includes('popup_opened')) {
       handleClose();
-      if (isFunction(resetForm)) {
-        resetForm();
-      }
     }
   };
   const handleLinkClick = (event) => {
     event.preventDefault();
     handleClose();
-    if (isFunction(resetForm)) {
-      resetForm();
-    }
     setTimeout(() => {
       setLinkPopupOpen(true);
     }, 350);
@@ -88,7 +80,6 @@ Popup.propTypes = {
   popupBottomLink: PropTypes.string.isRequired,
   setLinkPopupOpen: PropTypes.func.isRequired,
   headerRef: PropTypes.instanceOf(Object).isRequired,
-  resetForm: PropTypes.func.isRequired,
   children: PropTypes.instanceOf(Object),
 };
 

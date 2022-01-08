@@ -20,7 +20,6 @@ export default function InfoTooltip({
       popupBottomLink={popupBottomLink}
       setLinkPopupOpen={setLinkPopupOpen}
       headerRef={headerRef}
-      resetForm={() => {}}
     >
       <p className="popup__message">{formMessage}</p>
     </Popup>

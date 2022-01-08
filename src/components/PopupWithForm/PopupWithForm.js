@@ -16,10 +16,16 @@ export default function PopupWithForm({
   formError,
   resetForm,
   isLoading,
-  handleClose,
+  closeAllPopups,
+  setFormError,
   headerRef,
   children,
 }) {
+  const handleClose = () => {
+    closeAllPopups();
+    setFormError('');
+    resetForm();
+  };
   return (
     <Popup
       handleClose={handleClose}
@@ -29,7 +35,7 @@ export default function PopupWithForm({
       popupBottomLink={popupBottomLink}
       setLinkPopupOpen={setLinkPopupOpen}
       headerRef={headerRef}
-      resetForm={resetForm}
+      setFormError={setFormError}
     >
       <form className="popup__form" name={formName} _id="" onSubmit={onSubmit} noValidate>
         <h2 className="popup__title">{formTitle}</h2>
@@ -64,7 +70,8 @@ PopupWithForm.propTypes = {
   formError: PropTypes.string.isRequired,
   resetForm: PropTypes.func.isRequired,
   isLoading: PropTypes.bool.isRequired,
-  handleClose: PropTypes.func.isRequired,
+  closeAllPopups: PropTypes.func.isRequired,
+  setFormError: PropTypes.func.isRequired,
   headerRef: PropTypes.instanceOf(Object).isRequired,
   children: PropTypes.instanceOf(Object),
 };

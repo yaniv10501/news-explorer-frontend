@@ -48,7 +48,8 @@ function SigninPopup({
       formError={formError}
       resetForm={resetForm}
       isLoading={silentLoading}
-      handleClose={closeAllPopups}
+      closeAllPopups={closeAllPopups}
+      setFormError={setFormError}
       headerRef={headerRef}
     >
       <label className="popup__label" htmlFor="email">
