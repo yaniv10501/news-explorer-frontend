@@ -5,6 +5,7 @@ import './SearchForm.css';
 import newsApi from '../../utils/NewsApi';
 
 function SearchForm({ setSearchActive, thunkDispatch }) {
+  const [placeholder, setPlaceholder] = useState('Enter topic');
   const [searchValue, setSearchValue] = useState('');
   const handleSearchChange = (event) => {
     const { value } = event.target;
@@ -13,6 +14,11 @@ function SearchForm({ setSearchActive, thunkDispatch }) {
   };
   const handleSearchSubmit = (event) => {
     event.preventDefault();
+    if (searchValue === '') {
+      setPlaceholder('Please enter a keyword');
+      return;
+    }
+    setPlaceholder('Enter topic');
     setSearchActive(true);
     thunkDispatch({ type: 'NEW_SEARCH', payload: { keyword: searchValue } });
     thunkDispatch((dispatch) => newsApi.searchArticles(dispatch, searchValue));
@@ -29,7 +35,7 @@ function SearchForm({ setSearchActive, thunkDispatch }) {
           <input
             className="search__form-input"
             type="text"
-            placeholder="Enter topic"
+            placeholder={placeholder}
             value={searchValue}
             onChange={handleSearchChange}
           />
