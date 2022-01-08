@@ -81,10 +81,12 @@ function NewsCardList({
   };
   useEffect(() => {
     if (isLoadingSearch) {
-      setArticles([]);
-      setIsShowMoreVisible(true);
-      setCardAmount(2);
-      loadingImages = [];
+      if (articles) {
+        setArticles([]);
+        setIsShowMoreVisible(true);
+        setCardAmount(2);
+        loadingImages = [];
+      }
       if (result && result.articles) {
         mainApi.checkSavedArticles(thunkDispatch, result.articles).then((response) => {
           if (response.checkedArticles) {
