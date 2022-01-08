@@ -10,13 +10,15 @@ const handleImageLoad = (
 ) => {
   loadingImages.push(true);
   let arrLength;
-  const remainingArticles =
-    resultLength < cardAmount ? resultLength : resultLength - cardAmount + 1;
-  if (remainingArticles <= showAmount) {
-    arrLength = remainingArticles;
+  if (resultLength <= showAmount) {
+    arrLength = resultLength;
   }
-  if (remainingArticles > showAmount) {
-    arrLength = showAmount + 1;
+  if (resultLength > showAmount) {
+    if (resultLength > cardAmount) {
+      arrLength = 3;
+    } else {
+      arrLength = 2 - cardAmount - resultLength;
+    }
   }
   if (loadingImages.length === arrLength) {
     thunkDispatch({ type: 'IMAGES_LOADED' });
