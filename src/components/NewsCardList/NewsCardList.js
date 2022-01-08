@@ -87,6 +87,7 @@ function NewsCardList({
         loadingImages = [];
       }
       if (result && result.articles) {
+        console.log(result, result.articles);
         if (loggedIn) {
           mainApi.checkSavedArticles(thunkDispatch, result.articles, false).then((response) => {
             if (response.checkedArticles) {
@@ -105,6 +106,7 @@ function NewsCardList({
   }, [isLoadingSearch, result]);
   useEffect(() => {
     if (loggedIn && articles) {
+      console.log('hey');
       mainApi.checkSavedArticles(thunkDispatch, articles, true).then((response) => {
         if (response.checkedArticles) {
           const { checkedArticles } = response;
