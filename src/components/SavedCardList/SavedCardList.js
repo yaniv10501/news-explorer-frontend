@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import '../NewsCardList/NewsCardList.css';
-import testArticles from '../../assets/testArticles';
 import mainApi from '../../utils/MainApi';
 import NewsCard from '../NewsCard/NewsCard';
 import Preloader from '../Preloader/Preloader';
@@ -18,7 +17,7 @@ function SavedCardList({ result, error, thunkDispatch }) {
     setTimeout(() => {
       setIsLoadingMore(false);
       setCardAmount(cardAmount + 3);
-      if (cardAmount + 4 >= testArticles.length) setIsShowMoreVisible(false);
+      if (cardAmount + 4 >= result.length) setIsShowMoreVisible(false);
     }, 1200);
   };
   const handleDeleteClick = (event) => {
