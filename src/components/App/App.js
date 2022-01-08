@@ -28,11 +28,13 @@ function App() {
   const [isSigninPopupOpen, setIsSigninPopupOpen] = useState(false);
   const [isSignupPopupOpen, setIsSignupPopupOpen] = useState(false);
   const [isSuccessRegisterPopupOpen, setIsSuccessRegisterPopupOpen] = useState(false);
+  const [isNotAuthorizedPopupOpen, setIsNotAuthorizedPopupOpen] = useState(false);
   const [currentUser, setCurrentUser] = useState({});
   const closeAllPopups = () => {
     setIsSigninPopupOpen(false);
     setIsSignupPopupOpen(false);
     setIsSuccessRegisterPopupOpen(false);
+    setIsNotAuthorizedPopupOpen(false);
   };
   useEffect(() => {
     smoothscroll.polyfill();
@@ -141,6 +143,8 @@ function App() {
                   setIsSignupPopupOpen={setIsSignupPopupOpen}
                   isSuccessRegisterPopupOpen={isSuccessRegisterPopupOpen}
                   setIsSuccessRegisterPopupOpen={setIsSuccessRegisterPopupOpen}
+                  isNotAuthorizedPopupOpen={isNotAuthorizedPopupOpen}
+                  setIsNotAuthorizedPopupOpen={setIsNotAuthorizedPopupOpen}
                   homeRef={homeRef}
                   headerRef={headerRef}
                   setCurrentUser={setCurrentUser}

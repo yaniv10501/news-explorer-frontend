@@ -2,17 +2,17 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import InfoTooltip from '../InfoToolTip/InfoTooltip';
 
-function SuccessRegisterPopup({
-  closeAllPopups,
-  isSuccessRegisterPopupOpen,
+function NotAuthorizedPopup({
+  isNotAuthorizedPopupOpen,
+  handleClose,
   setIsSigninPopupOpen,
   headerRef,
 }) {
   return (
     <InfoTooltip
-      isOpen={isSuccessRegisterPopupOpen}
-      handleClose={closeAllPopups}
-      formMessage="Registration successfully completed!"
+      isOpen={isNotAuthorizedPopupOpen}
+      handleClose={handleClose}
+      formMessage="Sign in to visit this page"
       popupBottomLink="Sign in"
       setLinkPopupOpen={setIsSigninPopupOpen}
       headerRef={headerRef}
@@ -20,11 +20,11 @@ function SuccessRegisterPopup({
   );
 }
 
-SuccessRegisterPopup.propTypes = {
-  closeAllPopups: PropTypes.func.isRequired,
-  isSuccessRegisterPopupOpen: PropTypes.bool.isRequired,
+NotAuthorizedPopup.propTypes = {
+  isNotAuthorizedPopupOpen: PropTypes.bool.isRequired,
+  handleClose: PropTypes.func.isRequired,
   setIsSigninPopupOpen: PropTypes.func.isRequired,
   headerRef: PropTypes.instanceOf(Object).isRequired,
 };
 
-export default SuccessRegisterPopup;
+export default NotAuthorizedPopup;

@@ -40,7 +40,7 @@ function SigninPopup({
       formTitle="Sign in"
       submitTitle="Sign in"
       submitLoadingTitle="Signing in"
-      formBottomTitle="Sign up"
+      popupBottomLink="Sign up"
       setLinkPopupOpen={setIsSignupPopupOpen}
       isOpen={isSigninPopupOpen}
       onSubmit={handleSubmit}

@@ -9,7 +9,7 @@ function About() {
       <div className="about__text">
         <h2 className="about__title">About the author</h2>
         <p className="about__brief">
-          My name is Yaniv Schweitzer, i am a full-stack developer with deep knowledge about
+          My name is Yaniv Schweitzer, i am a full-stack web developer with deep knowledge about
           javascript, react and node.js.
         </p>
         <p className="about__brief">
