@@ -63,10 +63,15 @@
 
   .saved-news-header__title {
     font-size: 12px;
+    width: 288px;
   }
 
   .saved-news-header__subtitle {
     margin-bottom: 50px;
+    width: 288px;
+  }
+
+  .saved-news-header__keywords {
     width: 288px;
   }
 }
