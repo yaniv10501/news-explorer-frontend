@@ -6,6 +6,19 @@ class MainApi {
     this.baseUrl = baseUrl;
   }
 
+  signUp = (dispatch, email, password, name) =>
+    useFetch(dispatch, `${this.baseUrl}/signup`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        email,
+        password,
+        name,
+      }),
+    }).then((response) => response);
+
   signIn = (dispatch, email, password) =>
     useFetch(
       dispatch,
@@ -22,10 +35,7 @@ class MainApi {
         }),
       },
       { silent: true }
-    ).then((response) => {
-      console.log(response);
-      return response;
-    });
+    ).then((response) => response);
 
   signOut = (dispatch) =>
     useFetch(
@@ -93,7 +103,6 @@ class MainApi {
       },
       { silent: true }
     ).then((response) => {
-      console.log(response);
       if (response instanceof Error) {
         return;
       }
@@ -113,7 +122,6 @@ class MainApi {
       },
       { silent: true }
     ).then((response) => {
-      console.log(response);
       if (response instanceof Error) {
         return;
       }

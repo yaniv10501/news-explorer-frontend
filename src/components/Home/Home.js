@@ -70,6 +70,7 @@ function Home({
         setIsSigninPopupOpen={setIsSigninPopupOpen}
         setIsSuccessRegisterPopupOpen={setIsSuccessRegisterPopupOpen}
         headerRef={headerRef}
+        thunkDispatch={thunkDispatch}
       />
       <SuccessRegisterPopup
         closeAllPopups={closeAllPopups}

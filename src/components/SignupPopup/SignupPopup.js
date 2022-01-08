@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import PopupWithForm from '../PopupWithForm/PopupWithForm';
 import { handleLinkClick } from '../../utils/form';
 import useFormValidation from '../../utils/useFormValidation';
+import mainApi from '../../utils/MainApi';
 
 function SignupPopup({
   closeAllPopups,
@@ -10,6 +11,7 @@ function SignupPopup({
   setIsSigninPopupOpen,
   setIsSuccessRegisterPopupOpen,
   headerRef,
+  thunkDispatch,
 }) {
   const { values, handleChange, errors, isValid, resetForm } = useFormValidation();
   const { email = '', password = '', name = '' } = values;
@@ -19,8 +21,11 @@ function SignupPopup({
   };
   const handleSubmit = (event) => {
     if (isValid) {
-      handleLinkClick(event, closeAllPopups, setIsSuccessRegisterPopupOpen);
-      resetForm();
+      mainApi.signUp(thunkDispatch, email, password, name).then((response) => {
+        console.log(response);
+        handleLinkClick(event, closeAllPopups, setIsSuccessRegisterPopupOpen);
+        resetForm();
+      });
     }
   };
   return (
@@ -96,6 +101,7 @@ SignupPopup.propTypes = {
   setIsSigninPopupOpen: PropTypes.func.isRequired,
   setIsSuccessRegisterPopupOpen: PropTypes.func.isRequired,
   headerRef: PropTypes.instanceOf(Object).isRequired,
+  thunkDispatch: PropTypes.func.isRequired,
 };
 
 export default SignupPopup;
