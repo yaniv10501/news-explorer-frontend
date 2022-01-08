@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import PopupWithForm from '../PopupWithForm/PopupWithForm';
 import { handleLinkClick } from '../../utils/form';
+import useFormValidation from '../../utils/useFormValidation';
 
 function SignupPopup({
   closeAllPopups,
@@ -10,11 +11,18 @@ function SignupPopup({
   setIsSuccessRegisterPopupOpen,
   headerRef,
 }) {
+  const { values, handleChange, errors, isValid, resetForm } = useFormValidation();
+  const { email, password } = values;
+  const { email: emailError, password: passwordError } = errors;
   const setLinkPopupOpen = () => {
     setIsSigninPopupOpen(true);
   };
-  const handleSubmit = (event) =>
-    handleLinkClick(event, closeAllPopups, setIsSuccessRegisterPopupOpen);
+  const handleSubmit = (event) => {
+    if (isValid) {
+      handleLinkClick(event, closeAllPopups, setIsSuccessRegisterPopupOpen);
+      resetForm();
+    }
+  };
   return (
     <PopupWithForm
       name="signup"
@@ -26,7 +34,7 @@ function SignupPopup({
       setLinkPopupOpen={setLinkPopupOpen}
       isOpen={isSignupPopupOpen}
       onSubmit={handleSubmit}
-      formValid
+      formValid={isValid}
       isLoading={false}
       handleClose={closeAllPopups}
       headerRef={headerRef}
@@ -38,11 +46,13 @@ function SignupPopup({
           type="text"
           placeholder="Enter email"
           name="email"
+          value={email}
+          handleChange={handleChange}
           required
         />
       </label>
 
-      <span className="popup__error">{}</span>
+      <span className="popup__error">{emailError}</span>
 
       <label className="popup__label" htmlFor="password">
         Password
@@ -51,11 +61,13 @@ function SignupPopup({
           type="password"
           placeholder="Enter password"
           name="password"
+          value={password}
+          handleChange={handleChange}
           required
         />
       </label>
 
-      <span className="popup__error">{}</span>
+      <span className="popup__error">{passwordError}</span>
 
       <label className="popup__label" htmlFor="password">
         Name
