@@ -10,7 +10,7 @@ import handleImageLoad from '../../utils/handleImageLoad';
 function SavedCardList({ result, error, thunkDispatch }) {
   let loadingImages = [];
   const [isLoadingMore, setIsLoadingMore] = useState(false);
-  const [isShowMoreVisible, setIsShowMoreVisible] = useState(testArticles.length > 3);
+  const [isShowMoreVisible, setIsShowMoreVisible] = useState(false);
   const [cardAmount, setCardAmount] = useState(5);
   const handleShowMoreClick = () => {
     setIsLoadingMore(true);
@@ -37,6 +37,9 @@ function SavedCardList({ result, error, thunkDispatch }) {
     );
   };
   useEffect(() => {
+    if (result && result.length > 6) {
+      setIsShowMoreVisible(true);
+    }
     console.log(result);
   }, [result, error]);
   return (
