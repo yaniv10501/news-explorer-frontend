@@ -11,8 +11,8 @@ export default function InfoTooltip({
   formBottomTitle,
   setLinkPopupOpen,
 }) {
-  const clickHandler = (event) => handleClick(event, handleClose);
-  const linkClickHandler = (event) => handleLinkClick(event, handleClose, setLinkPopupOpen);
+  const clickHandler = (event) => handleClick(event, false, handleClose);
+  const linkClickHandler = (event) => handleLinkClick(event, handleClose, false, setLinkPopupOpen);
 
   return (
     <div

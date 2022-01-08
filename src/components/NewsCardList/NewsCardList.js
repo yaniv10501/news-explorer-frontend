@@ -8,7 +8,6 @@ import mainApi from '../../utils/MainApi';
 function NewsCardList({
   loggedIn,
   isLoadingSearch,
-  silentLoading,
   setIsSigninPopupOpen,
   homeRef,
   thunkDispatch,
@@ -33,7 +32,6 @@ function NewsCardList({
         mainApi.deleteArticle(thunkDispatch, saveButton.id, { saveButton });
       } else {
         mainApi.saveArticle(thunkDispatch, article, keyword, saveButton);
-        console.log(silentLoading);
       }
       return;
     }
@@ -87,7 +85,6 @@ function NewsCardList({
         loadingImages = [];
       }
       if (result && result.articles) {
-        console.log(result, result.articles);
         if (loggedIn) {
           mainApi.checkSavedArticles(thunkDispatch, result.articles, false).then((response) => {
             if (response.checkedArticles) {
@@ -106,7 +103,6 @@ function NewsCardList({
   }, [isLoadingSearch, result]);
   useEffect(() => {
     if (loggedIn && articles.length > 0) {
-      console.log('hey');
       mainApi.checkSavedArticles(thunkDispatch, articles, true).then((response) => {
         if (response.checkedArticles) {
           const { checkedArticles } = response;
@@ -124,9 +120,6 @@ function NewsCardList({
       );
     }
   }, [loggedIn]);
-  useEffect(() => {
-    console.log(articles);
-  }, [articles]);
   return (
     <section className="news-card-list">
       <Preloader isLoading={isLoadingSearch}>
@@ -212,7 +205,6 @@ function NewsCardList({
 NewsCardList.propTypes = {
   loggedIn: PropTypes.bool.isRequired,
   isLoadingSearch: PropTypes.bool.isRequired,
-  silentLoading: PropTypes.bool.isRequired,
   setIsSigninPopupOpen: PropTypes.func.isRequired,
   homeRef: PropTypes.instanceOf(Object).isRequired,
   thunkDispatch: PropTypes.func.isRequired,
