@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef, useLayoutEffect } from 'react';
-import { Route, Routes, Navigate, createBrowserHistory } from 'react-router-dom';
+import { Route, Routes, Navigate } from 'react-router-dom';
+import { createBrowserHistory } from 'history';
 import smoothscroll from 'smoothscroll-polyfill';
 import FontFaceObserver from 'fontfaceobserver';
 import './App.css';
