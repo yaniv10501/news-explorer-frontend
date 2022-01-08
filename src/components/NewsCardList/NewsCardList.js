@@ -18,7 +18,7 @@ function NewsCardList({
   let loadingImages = [];
   const [isLoadingMore, setIsLoadingMore] = useState(false);
   const [articles, setArticles] = useState([]);
-  const [isShowMoreVisible, setIsShowMoreVisible] = useState(false);
+  const [isShowMoreVisible, setIsShowMoreVisible] = useState(true);
   const [cardAmount, setCardAmount] = useState(2);
   const handleShowMoreClick = () => {
     const bottomOverlay = document.querySelector('.news-card-list__button-overlay');
@@ -83,7 +83,6 @@ function NewsCardList({
     if (isLoadingSearch) {
       if (articles.length > 0) {
         setArticles([]);
-        setIsShowMoreVisible(true);
         setCardAmount(2);
         loadingImages = [];
       }
