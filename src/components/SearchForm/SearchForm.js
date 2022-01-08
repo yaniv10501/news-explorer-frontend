@@ -12,7 +12,7 @@ function SearchForm({ setSearchActive, thunkDispatch }) {
     const escapedValue = escape(value);
     setSearchValue(escapedValue);
   };
-  const handleSearchSubmit = (event) => {
+  const handleSearchSubmit = async (event) => {
     event.preventDefault();
     if (searchValue === '') {
       setPlaceholder('Please enter a keyword');
@@ -20,12 +20,7 @@ function SearchForm({ setSearchActive, thunkDispatch }) {
     }
     setPlaceholder('Enter topic');
     setSearchActive(true);
-    thunkDispatch({ type: 'NEW_SEARCH', payload: { keyword: searchValue } });
-    newsApi.searchArticles(thunkDispatch, searchValue).then((response) => {
-      if (response.articles && response.articles.length === 0) {
-        thunkDispatch({ type: 'NOTHING_FOUND' });
-      }
-    });
+    newsApi.searchArticles(thunkDispatch, searchValue);
   };
   return (
     <section className="search">

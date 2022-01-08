@@ -9,10 +9,17 @@ class NewsApi {
     this.to = getSearchDates.to;
   }
 
-  searchArticles = (dispatch, query) =>
+  searchArticles = (dispatch, query) => {
+    dispatch({ type: 'NEW_SEARCH', payload: { keyword: query } });
     useFetch(dispatch, `${this.baseUrl + query}&from=${this.from}&to=${this.to}`).then(
-      (response) => response
+      (response) => {
+        if (response.articles && response.articles.length === 0) {
+          dispatch({ type: 'NOTHING_FOUND' });
+        }
+        return response;
+      }
     );
+  };
 }
 
 const newsApi = new NewsApi(newsBaseUrl);
