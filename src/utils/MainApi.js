@@ -71,11 +71,13 @@ class MainApi {
       if (response instanceof Error) {
         return;
       }
-      saveButton.classList.toggle('news-card__save-button_active');
+      const saveButtonElement = saveButton;
+      saveButtonElement.classList.add('news-card__save-button_active');
+      saveButtonElement.id = response.id;
     });
   };
 
-  deleteArticle = (dispatch, articleId) =>
+  deleteArticle = (dispatch, articleId, saveButton) =>
     useFetch(
       dispatch,
       `${this.baseUrl}/articles/${articleId}`,
@@ -84,7 +86,17 @@ class MainApi {
         credentials: 'include',
       },
       { silent: true }
-    ).then((response) => console.log(response));
+    ).then((response) => {
+      console.log(response);
+      if (response instanceof Error) {
+        return;
+      }
+      if (saveButton) {
+        const saveButtonElement = saveButton;
+        saveButtonElement.classList.remove('news-card__save-button_active');
+        saveButtonElement.id = '';
+      }
+    });
 }
 
 const mainApi = new MainApi(backEndApi);

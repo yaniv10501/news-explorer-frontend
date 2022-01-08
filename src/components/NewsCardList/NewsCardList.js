@@ -30,8 +30,12 @@ function NewsCardList({
   const handleArticleSave = (event, article) => {
     if (loggedIn) {
       const saveButton = event.target;
-      mainApi.saveArticle(thunkDispatch, article, keyword, saveButton);
-      console.log(silentLoading);
+      if (saveButton.classList.contains('news-card__save-button_active')) {
+        mainApi.saveArticle(thunkDispatch, article, keyword, saveButton);
+        console.log(silentLoading);
+      } else {
+        mainApi.deleteArticle(thunkDispatch, saveButton.id, saveButton);
+      }
       return;
     }
     const checkHomeY = () => {
