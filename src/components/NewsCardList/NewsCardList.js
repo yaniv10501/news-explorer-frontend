@@ -86,6 +86,7 @@ function NewsCardList({
       setCardAmount(2);
       loadingImages = [];
       if (result && result.articles) {
+        mainApi.checkSavedArticles(thunkDispatch, result.articles);
         setArticles(result.articles);
         if (result.articles.length <= 3) {
           setIsShowMoreVisible(false);

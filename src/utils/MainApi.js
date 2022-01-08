@@ -37,6 +37,21 @@ class MainApi {
       credentials: 'include',
     }).then((response) => response);
 
+  checkSavedArticles = (dispatch, articles) =>
+    useFetch(
+      dispatch,
+      `${this.baseUrl}/articles/checkSaved`,
+      {
+        method: 'POST',
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ articles }),
+      },
+      { silent: true }
+    ).then((response) => console.log(response));
+
   saveArticle = (dispatch, article, keyword, saveButton) => {
     const {
       source: { name: source },
