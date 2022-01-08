@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useRef, useLayoutEffect } from 'react';
-import { Route, Routes, Navigate } from 'react-router-dom';
-import { createBrowserHistory } from 'history';
+import { Route, Routes, Navigate, useLocation, useNavigationType } from 'react-router-dom';
 import smoothscroll from 'smoothscroll-polyfill';
 import FontFaceObserver from 'fontfaceobserver';
 import './App.css';
@@ -20,7 +19,8 @@ import logoutIcon from '../../images/logout.svg';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 
 function App() {
-  const history = createBrowserHistory();
+  const location = useLocation();
+  const navigationType = useNavigationType();
   const [state, thunkDispatch] = useThunkReducer(fetchReducer, initialPageState);
   const { loading } = state;
   const headerRef = useRef();
@@ -117,9 +117,10 @@ function App() {
       checkFontsLoaded();
     });
   }, []);
-  history.listen((location, action) => {
-    console.log(location, action);
-  });
+  useEffect(() => {
+    console.log(location);
+    console.log(navigationType);
+  }, [location]);
   return (
     <>
       <Preloader isLoading={loading} />
