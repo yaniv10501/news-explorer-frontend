@@ -12,8 +12,8 @@ function SignupPopup({
   headerRef,
 }) {
   const { values, handleChange, errors, isValid, resetForm } = useFormValidation();
-  const { email, password } = values;
-  const { email: emailError, password: passwordError } = errors;
+  const { email, password, name } = values;
+  const { email: emailError, password: passwordError, name: nameError } = errors;
   const setLinkPopupOpen = () => {
     setIsSigninPopupOpen(true);
   };
@@ -47,7 +47,7 @@ function SignupPopup({
           placeholder="Enter email"
           name="email"
           value={email}
-          handleChange={handleChange}
+          onChange={handleChange}
           required
         />
       </label>
@@ -62,7 +62,7 @@ function SignupPopup({
           placeholder="Enter password"
           name="password"
           value={password}
-          handleChange={handleChange}
+          onChange={handleChange}
           required
         />
       </label>
@@ -76,11 +76,13 @@ function SignupPopup({
           type="text"
           placeholder="Enter name"
           name="name"
+          value={name}
+          onChange={handleChange}
           required
         />
       </label>
 
-      <span className="popup__error">{}</span>
+      <span className="popup__error">{nameError}</span>
     </PopupWithForm>
   );
 }
