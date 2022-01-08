@@ -123,7 +123,6 @@
 }
 
 .popup__bottom-title {
-  display: flex;
   font-family: 'Inter';
   font-weight: normal;
   font-size: 14px;
