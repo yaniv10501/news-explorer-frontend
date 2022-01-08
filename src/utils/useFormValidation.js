@@ -16,6 +16,8 @@ const useFormValidation = () => {
           if (!testStrength(passwordValue)) {
             passwordInput.customMessage =
               'Please include at least 1 uppercase character, 1 lowercase character, and 1 number.';
+          } else {
+            passwordInput.customMessage = '';
           }
         } else {
           passwordInput.customMessage = 'Password is invalid';

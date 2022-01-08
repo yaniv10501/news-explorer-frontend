@@ -61,6 +61,7 @@ function SignupPopup({
           type="password"
           placeholder="Enter password"
           name="password"
+          minLength="6"
           value={password}
           onChange={handleChange}
           required
