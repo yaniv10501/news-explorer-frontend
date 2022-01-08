@@ -66,7 +66,7 @@ PopupWithForm.propTypes = {
   isLoading: PropTypes.bool.isRequired,
   handleClose: PropTypes.func.isRequired,
   headerRef: PropTypes.instanceOf(Object).isRequired,
-  children: PropTypes.arrayOf(PropTypes.instanceOf(Object)),
+  children: PropTypes.instanceOf(Object),
 };
 PopupWithForm.defaultProps = {
   children: [],

@@ -82,12 +82,11 @@ Popup.propTypes = {
   popupBottomLink: PropTypes.string.isRequired,
   setLinkPopupOpen: PropTypes.func.isRequired,
   headerRef: PropTypes.instanceOf(Object).isRequired,
-  resetForm: PropTypes.func,
-  children: PropTypes.arrayOf(PropTypes.instanceOf(Object)),
+  resetForm: PropTypes.func.isRequired,
+  children: PropTypes.instanceOf(Object),
 };
 
 Popup.defaultProps = {
-  resetForm: '',
   children: [],
 };
 
