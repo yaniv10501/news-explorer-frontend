@@ -167,7 +167,9 @@ function App() {
               element={
                 <ProtectedRoute
                   loggedIn={loggedIn}
-                  setIsNotAuthorizedPopupOpen={setIsNotAuthorizedPopupOpen}
+                  thunkDispatch={thunkDispatch}
+                  setCurrentUser={setCurrentUser}
+                  setLoggedIn={setLoggedIn}
                 >
                   <SavedNews />
                 </ProtectedRoute>
