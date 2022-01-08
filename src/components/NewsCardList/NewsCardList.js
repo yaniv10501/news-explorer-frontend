@@ -88,7 +88,7 @@ function NewsCardList({
       }
       if (result && result.articles) {
         if (loggedIn) {
-          mainApi.checkSavedArticles(thunkDispatch, result.articles).then((response) => {
+          mainApi.checkSavedArticles(thunkDispatch, result.articles, false).then((response) => {
             if (response.checkedArticles) {
               const { checkedArticles } = response;
               setArticles(checkedArticles);
