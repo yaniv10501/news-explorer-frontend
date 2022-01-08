@@ -122,6 +122,7 @@ function App() {
           if (response.email) {
             setCurrentUser(response);
             setLoggedIn(true);
+            thunkDispatch({ type: 'PAGE_IMAGES_LOADED' });
             navigate('/saved-news');
             setIsHome(false);
           } else {
