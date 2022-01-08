@@ -24,7 +24,7 @@ function SavedCardList({ result, error, thunkDispatch, articles, setArticles }) 
     mainApi.deleteArticle(thunkDispatch, event.target.id, articles, setArticles);
   };
   const handleImageLoading = () => {
-    loadingImages = handleImageLoad(
+    handleImageLoad(
       articles.length,
       loadingImages,
       thunkDispatch,
@@ -33,7 +33,9 @@ function SavedCardList({ result, error, thunkDispatch, articles, setArticles }) 
       setIsShowMoreVisible,
       cardAmount,
       5
-    );
+    ).then((response) => {
+      loadingImages = response;
+    });
   };
   useEffect(() => {
     if (result && result.articles) {
