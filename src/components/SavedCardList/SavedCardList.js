@@ -6,7 +6,7 @@ import NewsCard from '../NewsCard/NewsCard';
 import Preloader from '../Preloader/Preloader';
 import handleImageLoad from '../../utils/handleImageLoad';
 
-function SavedCardList({ result, error, thunkDispatch }) {
+function SavedCardList({ result, error, thunkDispatch, articles, setArticles }) {
   let loadingImages = [];
   const [isLoadingMore, setIsLoadingMore] = useState(false);
   const [isShowMoreVisible, setIsShowMoreVisible] = useState(false);
@@ -21,7 +21,7 @@ function SavedCardList({ result, error, thunkDispatch }) {
     }, 1200);
   };
   const handleDeleteClick = (event) => {
-    mainApi.deleteArticle(thunkDispatch, event.target.id);
+    mainApi.deleteArticle(thunkDispatch, event.target.id, articles, setArticles);
   };
   const handleImageLoading = () => {
     loadingImages = handleImageLoad(
@@ -36,17 +36,20 @@ function SavedCardList({ result, error, thunkDispatch }) {
     );
   };
   useEffect(() => {
-    if (result && result.length > 6) {
-      setIsShowMoreVisible(true);
+    if (result && result.articles) {
+      setArticles(result.articles);
+      if (result.length > 6) {
+        setIsShowMoreVisible(true);
+      }
     }
     console.log(result);
   }, [result, error]);
   return (
     <section className="news-card-list">
       <ul className="news-card-list__grid">
-        {result &&
-          result.length > 0 &&
-          result.map((article, index) =>
+        {articles &&
+          articles.length > 0 &&
+          articles.map((article, index) =>
             index > cardAmount ? (
               ''
             ) : (
@@ -95,6 +98,8 @@ SavedCardList.propTypes = {
   result: PropTypes.instanceOf(Object),
   error: PropTypes.instanceOf(Object),
   thunkDispatch: PropTypes.func.isRequired,
+  articles: PropTypes.instanceOf(Object).isRequired,
+  setArticles: PropTypes.func.isRequired,
 };
 
 SavedCardList.defaultProps = {

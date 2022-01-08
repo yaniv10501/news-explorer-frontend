@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import PropTypes from 'prop-types';
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import './SavedNews.css';
 import { fetchReducer, initialState, useThunkReducer } from '../../utils/fetch';
 import Preloader from '../Preloader/Preloader';
@@ -9,6 +9,7 @@ import SavedNewsHeader from '../SavedNewsHeader/SavedNewsHeader';
 import mainApi from '../../utils/MainApi';
 
 function SavedNews({ setIsHome }) {
+  const [articles, setArticles] = useState([]);
   const [state, thunkDispatch] = useThunkReducer(fetchReducer, initialState);
   const { result, loading, silentLoading, isNothingFound, error } = state;
   useEffect(() => {
@@ -23,8 +24,14 @@ function SavedNews({ setIsHome }) {
     <>
       <Preloader isLoading={loading} />
       <main className={loading ? 'saved-news saved-news_hidden' : 'saved-news'}>
-        <SavedNewsHeader result={result} />
-        <SavedCardList result={result} error={error} thunkDispatch={thunkDispatch}>
+        <SavedNewsHeader result={result} articles={articles} />
+        <SavedCardList
+          result={result}
+          error={error}
+          thunkDispatch={thunkDispatch}
+          articles={articles}
+          setArticles={setArticles}
+        >
           <div className="news-card__keyword">{}</div>
         </SavedCardList>
       </main>
