@@ -1,0 +1,8 @@
+.saved-news {
+  display: flex;
+  flex-direction: column;
+}
+
+.saved-news_hidden {
+  visibility: hidden;
+}

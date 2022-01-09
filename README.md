@@ -1,70 +1,39 @@
-# Getting Started with Create React App
+# News Exolorer FrontEnd
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+The frontend for the News Explorer Website, [Link to the deployed website](https://www.yaniv-news-app.students.nomoreparties.sbs)
 
-## Available Scripts
+## Website current features:
 
-In the project directory, you can run:
+* **Sign In**
+* **Sign Up**
+* **Search Form**
+* **Navigation**
 
-### `npm start`
+### Sign In
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Use the sign in button to toggle the form popup. Inputs are being validated on change with a costum hook.
+When you are signed in you have access to the Saved Articles page and you can activate the save button on search results.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Sign Up
 
-### `npm test`
+Click a save button on a search result while not logged in or use the link from the sign in form to toggle the form popup. Inputs are being validated on change with a costum hook. If the email is already used the form wont be submitted and an error message will be displayed.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+After signing up you can use the link in the info popup to open the sign in form or stay with theh loggedIn state as false.
 
-### `npm run build`
+### Search Forms
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+The search form can be used to search for articles that matches a keyword from the past week. If no input is provided the place holder will change to - "Please enter a keyword".
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+If the user is signed in the results are scanned to check if any of the articles is already saved, if so the article save button will be active.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+If there are search results rendered on the screen and a user toggles the logged in state, the save button on saved articles will be activated accordingly.
 
-### `npm run eject`
+### Navigation
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+After signing in you can use the navigation in the header to move to the Saved Articles page.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+If you try to visit the Saved Articles page when you are not signed in you will be redirected to the home page and a popup will appear promoting you to sign in so you can access the page.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+If the user have saved articles they will be rendered in the Saved Articles page.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Articles can be deleted from the Saved Articles page either by clicking the saved button on a search result or by clicking the delete button on the Saved Articles page.

@@ -1,0 +1,25 @@
+.page {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  font-family: 'Roboto', 'Roboto-Slab', 'Inter';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  text-rendering: optimizeLegibility;
+  background-color: #fff;
+}
+
+.page_hidden {
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.lock-screen {
+  height: 100%;
+  overflow: hidden;
+  width: 100%;
+  position: fixed;
+}

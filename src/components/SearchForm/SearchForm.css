@@ -1,0 +1,137 @@
+.search {
+  box-sizing: border-box;
+  height: 576px;
+  background-image: url('../../images/header-background.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  padding-top: 80px;
+}
+
+.search__form-title {
+  margin: 0 auto;
+  padding-top: 80px;
+  width: 608px;
+  color: #fff;
+  font-family: 'Roboto-Slab';
+  font-size: 60px;
+  line-height: 64px;
+  font-weight: 400;
+}
+
+.search__form-subtitle {
+  margin: 0 auto;
+  padding: 32px 0 88px 0;
+  width: 608px;
+  color: #fff;
+  font-size: 18px;
+  line-height: 24px;
+  font-weight: 400;
+}
+
+.search__form-search-container {
+  position: relative;
+  width: 608px;
+  height: 64px;
+  margin: 0 auto;
+}
+
+.search__form-input {
+  width: 90%;
+  height: 100%;
+  margin: 0;
+  padding: 10px 130px 10px 24px;
+  outline: none;
+  background: #fff;
+  border: 1px solid #d1d2d6;
+  box-sizing: border-box;
+  backdrop-filter: blur(8px);
+  border-radius: 100px;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 22px;
+}
+
+.search__form-submit-button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: 168px;
+  border: none;
+  background: #2f71e5;
+  box-shadow: 0px 5px 15px rgba(14, 26, 57, 0.2);
+  border-radius: 100px;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 24px;
+  color: #fff;
+  transition: background 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.search__form-submit-button:hover {
+  cursor: pointer;
+  background-color: #347eff;
+}
+
+.search__form-submit-button:active {
+  background-color: #2a65cc;
+}
+
+@media screen and (max-width: 1023px) {
+  .search {
+    height: 400px;
+    padding-top: 66px;
+    background-image: url('../../images/header-background-tablet.jpg');
+  }
+
+  .search__form-title {
+    padding-top: 38px;
+    font-size: 36px;
+    line-height: 40px;
+    width: 452px;
+  }
+
+  .search__form-subtitle {
+    width: 452px;
+    padding: 16px 0 48px 0;
+  }
+
+  .search__form-search-container {
+    width: 452px;
+  }
+}
+
+@media screen and (max-width: 495px) {
+  .search {
+    height: 536px;
+    padding-top: 56px;
+    background-image: url('../../images/header-background-mobile.jpg');
+
+  }
+
+  .search__form-title {
+    padding-top: 30px;
+    width: 288px;
+  }
+
+  .search__form-subtitle {
+    width: 288px;
+    padding: 16px 0 122px 0;
+  }
+
+  .search__form-search-container {
+    width: 288px;
+  }
+
+  .search__form-input {
+    width: 288px;
+    padding: 20px 16px;
+  }
+
+  .search__form-submit-button {
+    position: static;
+    width: 288px;
+    margin-top: 16px;
+  }
+}
