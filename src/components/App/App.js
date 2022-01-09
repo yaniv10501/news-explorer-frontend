@@ -24,6 +24,7 @@ import headerBackgroundTablet from '../../images/header-background-tablet.jpg';
 import headerBackgroundMobile from '../../images/header-background-mobile.jpg';
 import logoutIcon from '../../images/logout.svg';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
+import { PAGE_IMAGES_LOADED, FONTS_LOADED } from '../../assets/reducerActions';
 
 function App() {
   const location = useLocation();
@@ -63,7 +64,7 @@ function App() {
     const checkFontsLoaded = () => {
       const { source, inter, roboto, robotoSlab } = fontsLoaded;
       if (source && inter && roboto && robotoSlab) {
-        thunkDispatch({ type: 'FONTS_LOADED' });
+        thunkDispatch({ type: FONTS_LOADED });
       }
     };
     SourceSansProFont.load().then(() => {
@@ -112,7 +113,7 @@ function App() {
           img.decode().finally(() => {
             pageImages.push(true);
             if (pageImages.length === pageImagesArrLength) {
-              thunkDispatch({ type: 'PAGE_IMAGES_LOADED' });
+              thunkDispatch({ type: PAGE_IMAGES_LOADED });
             }
           });
         });
@@ -122,7 +123,7 @@ function App() {
           if (response.email) {
             setCurrentUser(response);
             setLoggedIn(true);
-            thunkDispatch({ type: 'PAGE_IMAGES_LOADED' });
+            thunkDispatch({ type: PAGE_IMAGES_LOADED });
             navigate('/saved-news');
             setIsHome(false);
           } else {

@@ -1,5 +1,16 @@
 import { useReducer } from 'react';
 import isFunction from 'lodash/isFunction';
+import {
+  NEW_SEARCH,
+  LOADING,
+  SILENT_LOADING,
+  RESPONSE,
+  IMAGES_LOADED,
+  PAGE_IMAGES_LOADED,
+  FONTS_LOADED,
+  NOTHING_FOUND,
+  ERROR,
+} from '../assets/reducerActions';
 
 const initialState = {
   keyword: null,
@@ -35,7 +46,7 @@ const useThunkReducer = (reducer, initState) => {
 };
 
 const fetchReducer = (state, action) => {
-  if (action.type === 'NEW_SEARCH') {
+  if (action.type === NEW_SEARCH) {
     return {
       keyword: action.payload.keyword,
       result: null,
@@ -45,7 +56,7 @@ const fetchReducer = (state, action) => {
       error: null,
     };
   }
-  if (action.type === 'LOADING') {
+  if (action.type === LOADING) {
     return {
       ...state,
       result: null,
@@ -55,7 +66,7 @@ const fetchReducer = (state, action) => {
       error: null,
     };
   }
-  if (action.type === 'SILENT_LOADING') {
+  if (action.type === SILENT_LOADING) {
     return {
       ...state,
       result: null,
@@ -65,20 +76,20 @@ const fetchReducer = (state, action) => {
       error: null,
     };
   }
-  if (action.type === 'RESPONSE') {
+  if (action.type === RESPONSE) {
     return {
       ...state,
       result: action.payload.response,
       silentLoading: false,
     };
   }
-  if (action.type === 'IMAGES_LOADED') {
+  if (action.type === IMAGES_LOADED) {
     return {
       ...state,
       loading: false,
     };
   }
-  if (action.type === 'PAGE_IMAGES_LOADED') {
+  if (action.type === PAGE_IMAGES_LOADED) {
     if (state.fontsLoading) {
       return {
         ...state,
@@ -91,7 +102,7 @@ const fetchReducer = (state, action) => {
       loading: false,
     };
   }
-  if (action.type === 'FONTS_LOADED') {
+  if (action.type === FONTS_LOADED) {
     if (state.imagesLoading) {
       return {
         ...state,
@@ -104,7 +115,7 @@ const fetchReducer = (state, action) => {
       loading: false,
     };
   }
-  if (action.type === 'NOTHING_FOUND') {
+  if (action.type === NOTHING_FOUND) {
     return {
       ...state,
       loading: true,
@@ -113,7 +124,7 @@ const fetchReducer = (state, action) => {
       error: null,
     };
   }
-  if (action.type === 'ERROR') {
+  if (action.type === ERROR) {
     return {
       ...state,
       result: null,
@@ -132,7 +143,7 @@ const fetchReducer = (state, action) => {
  * @param {string} url - The url of the request.
  * @param {object} options - Option for the feth request.
  * @param {object} functionOptions - Options for the function.
- * @param {boolean} silent - Set true for fetch request that doesn't return images.
+ * @param {boolean} silent - Set true for fetch request that doesnt return images.
  * @param {boolean} auth - Set true for authorization request.
  * @returns The parsed response or the error, if auth set to true error wont be dispatched.
  */
@@ -140,10 +151,10 @@ const fetchReducer = (state, action) => {
 const useFetch = (dispatch, url, options, functionOptions) => {
   const { silent = false, auth = false } = functionOptions || {};
   if (!silent) {
-    dispatch({ type: 'LOADING' });
+    dispatch({ type: LOADING });
   }
   if (silent) {
-    dispatch({ type: 'SILENT_LOADING' });
+    dispatch({ type: SILENT_LOADING });
   }
   const fetchUrl = async () => {
     try {
@@ -152,13 +163,13 @@ const useFetch = (dispatch, url, options, functionOptions) => {
       if (!response.ok) {
         throw new Error(data.message);
       }
-      dispatch({ type: 'RESPONSE', payload: { response: data } });
+      dispatch({ type: RESPONSE, payload: { response: data } });
       return data;
     } catch (error) {
       if (auth) {
         return error;
       }
-      dispatch({ type: 'ERROR', payload: { error } });
+      dispatch({ type: ERROR, payload: { error } });
       return error;
     }
   };

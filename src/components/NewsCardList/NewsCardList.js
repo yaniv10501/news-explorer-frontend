@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import './NewsCardList.css';
 import NewsCard from '../NewsCard/NewsCard';
@@ -17,11 +17,13 @@ function NewsCardList({
   result,
 }) {
   let loadingImages = [];
+  const newsCardListButtonOverlayRef = useRef();
   const [isLoadingMore, setIsLoadingMore] = useState(false);
   const [articles, setArticles] = useState([]);
   const [isShowMoreVisible, setIsShowMoreVisible] = useState(true);
   const [cardAmount, setCardAmount] = useState(2);
-  const handleShowMoreClick = () => handleShowMore(setIsLoadingMore, setCardAmount, cardAmount);
+  const handleShowMoreClick = () =>
+    handleShowMore(newsCardListButtonOverlayRef, setIsLoadingMore, setCardAmount, cardAmount);
   const handleArticleSave = (event, article) => {
     if (loggedIn) {
       const saveButton = event.target;
@@ -54,6 +56,7 @@ function NewsCardList({
   };
   const handleImageLoading = () => {
     loadingImages = handleImageLoad(
+      newsCardListButtonOverlayRef,
       articles.length,
       loadingImages,
       thunkDispatch,
@@ -172,6 +175,7 @@ function NewsCardList({
             ? 'news-card-list__button-overlay'
             : 'news-card-list__button-overlay news-card-list__button-overlay_hidden'
         }
+        ref={newsCardListButtonOverlayRef}
       >
         <Preloader isLoading={isLoadingMore} />
         <button

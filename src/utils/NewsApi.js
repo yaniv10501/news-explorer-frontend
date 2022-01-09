@@ -1,6 +1,7 @@
 import newsBaseUrl from '../assets/newsBaseUrl';
 import { useFetch } from './fetch';
 import getSearchDates from './getSearchDates';
+import { NEW_SEARCH, NOTHING_FOUND } from '../assets/reducerActions';
 
 class NewsApi {
   constructor(baseUrl) {
@@ -10,11 +11,11 @@ class NewsApi {
   }
 
   searchArticles = (dispatch, query) => {
-    dispatch({ type: 'NEW_SEARCH', payload: { keyword: query } });
+    dispatch({ type: NEW_SEARCH, payload: { keyword: query } });
     useFetch(dispatch, `${this.baseUrl + query}&from=${this.from}&to=${this.to}`).then(
       (response) => {
         if (response.articles && response.articles.length === 0) {
-          dispatch({ type: 'NOTHING_FOUND' });
+          dispatch({ type: NOTHING_FOUND });
         }
         return response;
       }

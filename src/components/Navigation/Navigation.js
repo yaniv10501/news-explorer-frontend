@@ -5,6 +5,7 @@ import { useMediaQuery } from 'react-responsive';
 import './Navigation.css';
 import CurrentUserContext from '../../contexts/CurrentUserContext';
 import mainApi from '../../utils/MainApi';
+import { LOADING } from '../../assets/reducerActions';
 
 function Navigation({
   loggedIn,
@@ -26,7 +27,7 @@ function Navigation({
   };
   const handleHomeClick = () => {
     if (isHome) return;
-    thunkDispatch({ type: 'LOADING' });
+    thunkDispatch({ type: LOADING });
     setMenuOpen(false);
     navigate('/');
   };

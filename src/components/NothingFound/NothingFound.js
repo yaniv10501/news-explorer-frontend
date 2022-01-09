@@ -3,9 +3,10 @@ import PropTypes from 'prop-types';
 import './NothingFound.css';
 import nothingFound from '../../images/nothing-found.svg';
 import Preloader from '../Preloader/Preloader';
+import { IMAGES_LOADED } from '../../assets/reducerActions';
 
 function NothingFound({ isLoadingSearch, thunkDispatch }) {
-  const handleImageLoad = () => thunkDispatch({ type: 'IMAGES_LOADED' });
+  const handleImageLoad = () => thunkDispatch({ type: IMAGES_LOADED });
   return (
     <section className="nothing-found">
       <Preloader isLoading={isLoadingSearch}>

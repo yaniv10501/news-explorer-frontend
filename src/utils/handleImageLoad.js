@@ -1,4 +1,7 @@
+import { IMAGES_LOADED } from '../assets/reducerActions';
+
 const handleImageLoad = (
+  buttonOverlayRef,
   resultLength,
   loadingImages,
   thunkDispatch,
@@ -21,10 +24,10 @@ const handleImageLoad = (
     }
   }
   if (loadingImages.length === arrLength) {
-    thunkDispatch({ type: 'IMAGES_LOADED' });
+    thunkDispatch({ type: IMAGES_LOADED });
     if (resultLength < cardAmount) setIsShowMoreVisible(false);
     if (isLoadingMore) {
-      const bottomOverlay = document.querySelector('.news-card-list__button-overlay');
+      const bottomOverlay = buttonOverlayRef.current;
       bottomOverlay.classList.remove('news-card-list__button-overlay_loading');
       if (cardAmount + 1 >= resultLength) setIsShowMoreVisible(false);
       setIsLoadingMore(false);
