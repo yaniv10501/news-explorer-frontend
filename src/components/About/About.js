@@ -9,12 +9,12 @@ function About() {
       <div className="about__text">
         <h2 className="about__title">About the author</h2>
         <p className="about__brief">
-          My name is Yaniv Schweitzer, i am a full-stack web developer with deep knowledge about
-          javascript, react and node.js.
+          My name is Yaniv Schweitzer, i am a full-stack web developer with extensive knowledge
+          about javascript, react and node.js.
         </p>
         <p className="about__brief">
-          During my work with the practicum team i expanded my knowledge about coding and learned
-          how to build a secure and responsive web application.
+          My work with the practicum team expanded my knowledge about coding and learned me how to
+          build a secure and responsive web application.
         </p>
       </div>
     </section>
