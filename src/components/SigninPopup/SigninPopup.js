@@ -27,7 +27,8 @@ function SigninPopup({
         setFormError('Incorrect email or password');
         return;
       }
-      setCurrentUser(response);
+      const currentUser = await mainApi.getUserMe(thunkDispatch);
+      setCurrentUser(currentUser);
       closeAllPopups();
       setLoggedIn(true);
       resetForm();
