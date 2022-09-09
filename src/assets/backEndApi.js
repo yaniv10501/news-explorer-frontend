@@ -1,1 +1,1 @@
-export default 'https://yaniv-web-api.students.nomoreparties.sbs/api';
+export default 'https://news-explorer.yanivportfolio.com/api';
